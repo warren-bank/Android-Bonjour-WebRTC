@@ -52,7 +52,6 @@ public class SettingsActivity extends Activity implements OnSharedPreferenceChan
   private String keyprefDisableWebRtcAGCAndHPF;
   private String keyprefSpeakerphone;
 
-//private String keyPrefRoomServerUrl;
   private String keyPrefDisplayHud;
   private String keyPrefTracing;
   private String keyprefEnabledRtcEventLog;
@@ -103,7 +102,6 @@ public class SettingsActivity extends Activity implements OnSharedPreferenceChan
     keyprefNegotiated = getString(R.string.pref_negotiated_key);
     keyprefDataId = getString(R.string.pref_data_id_key);
 
-  //keyPrefRoomServerUrl = getString(R.string.pref_room_server_url_key);
     keyPrefDisplayHud = getString(R.string.pref_displayhud_key);
     keyPrefTracing = getString(R.string.pref_tracing_key);
     keyprefEnabledRtcEventLog = getString(R.string.pref_enable_rtceventlog_key);
@@ -160,7 +158,6 @@ public class SettingsActivity extends Activity implements OnSharedPreferenceChan
     updateSummary(sharedPreferences, keyprefDataId);
     setDataChannelEnable(sharedPreferences);
 
-  //updateSummary(sharedPreferences, keyPrefRoomServerUrl);
     updateSummaryB(sharedPreferences, keyPrefDisplayHud);
     updateSummaryB(sharedPreferences, keyPrefTracing);
     updateSummaryB(sharedPreferences, keyprefEnabledRtcEventLog);
@@ -212,7 +209,6 @@ public class SettingsActivity extends Activity implements OnSharedPreferenceChan
         || key.equals(keyPrefVideoCodec)
         || key.equals(keyprefStartAudioBitrateType)
         || key.equals(keyPrefAudioCodec)
-    //  || key.equals(keyPrefRoomServerUrl)
         || key.equals(keyprefMaxRetransmitTimeMs)
         || key.equals(keyprefMaxRetransmits)
         || key.equals(keyprefDataProtocol)
