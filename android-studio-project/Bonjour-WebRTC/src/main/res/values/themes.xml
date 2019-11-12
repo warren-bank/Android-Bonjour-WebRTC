@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="app_theme" parent="@android:style/Theme.Light">
+        <item name="android:windowNoTitle">false</item>
+        <item name="android:windowActionBar">true</item>
+    </style>
+
+    <style name="call_activity_theme" parent="@android:style/Theme.Black">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+</resources>

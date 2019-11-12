@@ -1,0 +1,10 @@
+launcher.png
+============
+https://freeicons.io/profile/730
+https://freeicons.io/social-media-icons/video-call-icon-12959
+https://freeicons.io/icon/download?icon_id=12959&type=original&size=256
+    attribution: Icon made by Anu Rocks from www.freeicons.io
+
+menu_update_server_alias.png
+============================
+http://free-icon-rainbow.com/anonymous-mask-icon-1/

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_toggle_server"
+        android:icon="@drawable/menu_toggle_server"
+        android:title="@string/menu_toggle_server"
+        android:showAsAction="always" />
+    <item
+        android:id="@+id/menu_update_server_alias"
+        android:icon="@drawable/menu_update_server_alias"
+        android:title="@string/menu_update_server_alias"
+        android:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menu_open_webrtc_settings"
+        android:icon="@drawable/menu_open_webrtc_settings"
+        android:title="@string/menu_open_webrtc_settings"
+        android:showAsAction="ifRoom" />
+</menu>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+
+    <!-- actionbar menu -->
+    <string name="menu_toggle_server">Toggle Server On/Off</string>
+    <string name="menu_update_server_alias">Update Server Alias..</string>
+    <string name="menu_open_webrtc_settings">WebRTC Settings..</string>
+
+    <!-- dialog: update server alias -->
+    <string name="dialog_update_server_alias_title">Server Alias</string>
+    <string name="dialog_update_server_alias_positive">SAVE</string>
+    <string name="dialog_update_server_alias_negative">CANCEL</string>
+
+    <!-- notifications -->
+    <string name="notification_service_ticker">Bonjour WebRTC: server is running and discoverable on LAN</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">Click to open. Dismiss to stop.</string>
+    -->
+    <string name="notification_service_content_line2">Click to open.</string>
+
+    <!-- shared preferences -->
+    <string name="prefs_filename">PREFS</string>
+    <string name="pref_server_alias">server_alias</string>
+
+    <!-- toasts -->
+    <string name="error_invalid_room_name">ERROR: Cannot connect to invalid IP address</string>
+</resources>
