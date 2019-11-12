@@ -41,7 +41,8 @@ public final class OrgAppspotApprtcGlue {
               ? value
               : defaultValue
             ;
-        } else {
+        }
+        else {
             return SharedPrefs.getString(sharedPreferences, context, attributeId, defaultValue);
         }
     }
@@ -56,12 +57,23 @@ public final class OrgAppspotApprtcGlue {
     }
 
     private static int sharedPrefGetInteger(SharedPreferences sharedPreferences, Context context, int attributeId, String intentName, int defaultId, boolean useFromIntent, Intent intent) {
-        int defaultValue = Integer.parseInt(context.getString(defaultId));
+        String defaultStr = context.getString(defaultId);
+        int    defaultInt = Integer.parseInt(defaultStr);
 
-        return (useFromIntent)
-          ? intent.getIntExtra(intentName, defaultValue)
-          : SharedPrefs.getInt(sharedPreferences, context, attributeId, defaultValue)
-        ;
+        if (useFromIntent) {
+            return intent.getIntExtra(intentName, defaultInt);
+        }
+        else {
+            String valueStr = SharedPrefs.getString(sharedPreferences, context, attributeId, defaultStr);
+
+            try {
+                int valueInt = Integer.parseInt(valueStr);
+                return valueInt;
+            }
+            catch(Exception e) {
+                return defaultInt;
+            }
+        }
     }
 
     public static Intent getCallActivityIntent(Context context, String serverIpAddress) {
