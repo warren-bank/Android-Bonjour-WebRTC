@@ -282,6 +282,7 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
       }
     }
 
+    /*
     Uri roomUri = intent.getData();
     if (!isInboundCall && (roomUri == null)) {
       logAndToast(getString(R.string.missing_url));
@@ -290,6 +291,7 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
       finish();
       return;
     }
+    */
 
     // Get Intent parameters.
     Log.d(TAG, "Room ID: " + roomId);
@@ -343,7 +345,7 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
     // Create connection parameters.
     String urlParameters = intent.getStringExtra(EXTRA_URLPARAMETERS);
     roomConnectionParameters =
-        new RoomConnectionParameters(roomUri.toString(), roomId, loopback, urlParameters);
+        new RoomConnectionParameters(/*roomUri.toString()*/ null, roomId, loopback, urlParameters);
 
     // Create CPU monitor
     if (CpuMonitor.isSupported()) {
@@ -568,7 +570,7 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
     callStartedTimeMs = System.currentTimeMillis();
 
     if (!isInboundCall) {
-        logAndToast(getString(R.string.connecting_to, roomConnectionParameters.roomUrl));
+        logAndToast(getString(R.string.connecting_to, roomConnectionParameters.roomId));
 
         // Start room connection.
         appRtcClient.connectToRoom(roomConnectionParameters);

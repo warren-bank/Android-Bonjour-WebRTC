@@ -15,7 +15,7 @@ import org.webrtc.PeerConnectionFactory;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
+//import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
@@ -77,7 +77,7 @@ public final class OrgAppspotApprtcGlue {
             roomId = Integer.toString((new Random()).nextInt(100000000));
         }
 
-        String roomUrl = SharedPrefs.getString(sharedPreferences, context, R.string.pref_room_server_url_key, context.getString(R.string.pref_room_server_url_default));
+      //String roomUrl = SharedPrefs.getString(sharedPreferences, context, R.string.pref_room_server_url_key, context.getString(R.string.pref_room_server_url_default));
 
         // Video call enabled flag.
         boolean videoCallEnabled = sharedPrefGetBoolean(sharedPreferences, context, R.string.pref_videocall_key,
@@ -236,9 +236,9 @@ public final class OrgAppspotApprtcGlue {
         String protocol = sharedPrefGetString(sharedPreferences, context, R.string.pref_data_protocol_key,
                 CallActivity.EXTRA_PROTOCOL, R.string.pref_data_protocol_default, useValuesFromIntent, intentIn);
 
-        Uri uri = Uri.parse(roomUrl);
+      //Uri uri = Uri.parse(roomUrl);
         Intent intentOut = new Intent(context, CallActivity.class);
-        intentOut.setData(uri);
+      //intentOut.setData(uri);
         intentOut.putExtra(CallActivity.EXTRA_ROOMID, roomId);
         intentOut.putExtra(CallActivity.EXTRA_LOOPBACK, loopback);
         intentOut.putExtra(CallActivity.EXTRA_VIDEO_CALL, videoCallEnabled);
