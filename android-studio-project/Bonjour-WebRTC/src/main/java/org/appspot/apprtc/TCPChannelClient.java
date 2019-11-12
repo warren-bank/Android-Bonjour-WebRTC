@@ -84,6 +84,13 @@ public class TCPChannelClient {
     socket.start();
   }
 
+  private void execute(Runnable command) {
+    if ((executor == null) || executor.isShutdown() || executor.isTerminated())
+      return;
+
+    executor.execute(command);
+  }
+
   /**
    * Disconnects the client if not already disconnected. This will fire the onTCPClose event.
    */
@@ -109,7 +116,7 @@ public class TCPChannelClient {
    */
   private void reportError(final String message) {
     Log.e(TAG, "TCP Error: " + message);
-    executor.execute(new Runnable() {
+    execute(new Runnable() {
       @Override
       public void run() {
         eventListener.onTCPError(message);
@@ -181,7 +188,7 @@ public class TCPChannelClient {
       }
 
       Log.v(TAG, "Execute onTCPConnected");
-      executor.execute(new Runnable() {
+      execute(new Runnable() {
         @Override
         public void run() {
           Log.v(TAG, "Run onTCPConnected");
@@ -210,7 +217,7 @@ public class TCPChannelClient {
           break;
         }
 
-        executor.execute(new Runnable() {
+        execute(new Runnable() {
           @Override
           public void run() {
             Log.v(TAG, "Receive: " + message);
@@ -234,7 +241,7 @@ public class TCPChannelClient {
             rawSocket = null;
             out = null;
 
-            executor.execute(new Runnable() {
+            execute(new Runnable() {
               @Override
               public void run() {
                 eventListener.onTCPClose();

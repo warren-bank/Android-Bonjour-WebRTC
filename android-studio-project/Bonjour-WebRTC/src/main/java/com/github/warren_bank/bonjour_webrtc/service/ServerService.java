@@ -176,11 +176,11 @@ public class ServerService extends Service {
     }
 
     private void stopTCPSocketServer() {
-        appRTCClientSignalingEvents.disconnect();
-        peerConnectionClientPeerConnectionEvents.disconnect();
-
         appRtcClient.disconnectFromRoom();
         peerConnectionClient.close();
+
+        appRTCClientSignalingEvents.disconnect();
+        peerConnectionClientPeerConnectionEvents.disconnect();
 
         appRTCClientSignalingEvents              = null;
         appRtcClient                             = null;

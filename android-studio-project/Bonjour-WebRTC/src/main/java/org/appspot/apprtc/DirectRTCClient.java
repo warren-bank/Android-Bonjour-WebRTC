@@ -68,6 +68,13 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
     roomState = ConnectionState.NEW;
   }
 
+  private void execute(Runnable command) {
+    if ((executor == null) || executor.isShutdown() || executor.isTerminated())
+      return;
+
+    executor.execute(command);
+  }
+
   /**
    * Connects to the room, roomId in connectionsParameters is required. roomId must be a valid
    * IP address matching IP_PATTERN.
@@ -80,7 +87,7 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
       reportError("Loopback connections aren't supported by DirectRTCClient.");
     }
 
-    executor.execute(new Runnable() {
+    execute(new Runnable() {
       @Override
       public void run() {
         connectToRoomInternal();
@@ -90,7 +97,7 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
 
   @Override
   public void disconnectFromRoom() {
-    executor.execute(new Runnable() {
+    execute(new Runnable() {
       @Override
       public void run() {
         disconnectFromRoomInternal();
@@ -149,7 +156,7 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
 
   @Override
   public void sendOfferSdp(final SessionDescription sdp) {
-    executor.execute(new Runnable() {
+    execute(new Runnable() {
       @Override
       public void run() {
         if (roomState != ConnectionState.CONNECTED) {
@@ -166,7 +173,7 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
 
   @Override
   public void sendAnswerSdp(final SessionDescription sdp) {
-    executor.execute(new Runnable() {
+    execute(new Runnable() {
       @Override
       public void run() {
         JSONObject json = new JSONObject();
@@ -179,7 +186,7 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
 
   @Override
   public void sendLocalIceCandidate(final IceCandidate candidate) {
-    executor.execute(new Runnable() {
+    execute(new Runnable() {
       @Override
       public void run() {
         JSONObject json = new JSONObject();
@@ -200,7 +207,7 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
   /** Send removed Ice candidates to the other participant. */
   @Override
   public void sendLocalIceCandidateRemovals(final IceCandidate[] candidates) {
-    executor.execute(new Runnable() {
+    execute(new Runnable() {
       @Override
       public void run() {
         JSONObject json = new JSONObject();
@@ -301,7 +308,7 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
   // Helper functions.
   private void reportError(final String errorMessage) {
     Log.e(TAG, errorMessage);
-    executor.execute(new Runnable() {
+    execute(new Runnable() {
       @Override
       public void run() {
         if (roomState != ConnectionState.ERROR) {
@@ -313,7 +320,7 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
   }
 
   private void sendMessage(final String message) {
-    executor.execute(new Runnable() {
+    execute(new Runnable() {
       @Override
       public void run() {
         tcpClient.send(message);
