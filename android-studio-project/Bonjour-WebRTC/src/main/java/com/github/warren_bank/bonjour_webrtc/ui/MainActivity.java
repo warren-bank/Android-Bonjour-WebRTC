@@ -6,6 +6,7 @@ import com.github.warren_bank.bonjour_webrtc.data_model.SharedPrefs;
 import com.github.warren_bank.bonjour_webrtc.security_model.RuntimePermissions;
 import com.github.warren_bank.bonjour_webrtc.service.ServerService;
 import com.github.warren_bank.bonjour_webrtc.util.OrgAppspotApprtcGlue;
+import com.github.warren_bank.bonjour_webrtc.util.Util;
 
 import org.appspot.apprtc.SettingsActivity;
 
@@ -26,7 +27,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.net.Inet4Address;
-import java.net.InetAddress;
 import java.util.ArrayList;
 
 import javax.jmdns.impl.util.ByteWrangler;
@@ -157,7 +157,7 @@ public class MainActivity extends RuntimePermissionsActivity {
         });
 
         try {
-            bonjour = JmDNS.create(InetAddress.getLocalHost());
+            bonjour = JmDNS.create(Util.getWlanIpAddress_InetAddress(MainActivity.this));
 
             bonjour.addServiceListener("_http._tcp.local.", new BonjourServiceListener());
         }

@@ -6,6 +6,7 @@ import com.github.warren_bank.bonjour_webrtc.service.glue.ServerPeerConnectionEv
 import com.github.warren_bank.bonjour_webrtc.service.glue.ServerSignalingEvents;
 import com.github.warren_bank.bonjour_webrtc.ui.MainActivity;
 import com.github.warren_bank.bonjour_webrtc.util.OrgAppspotApprtcGlue;
+import com.github.warren_bank.bonjour_webrtc.util.Util;
 
 import org.appspot.apprtc.AppRTCClient.RoomConnectionParameters;
 import org.appspot.apprtc.DirectRTCClient;
@@ -20,8 +21,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
 import android.widget.RemoteViews;
-
-import java.net.InetAddress;
 
 import javax.jmdns.JmDNS;
 import javax.jmdns.ServiceInfo;
@@ -193,7 +192,7 @@ public class ServerService extends Service {
 
     private void bonjourRegister() {
         try {
-            bonjour = JmDNS.create(InetAddress.getLocalHost());
+            bonjour = JmDNS.create(Util.getWlanIpAddress_InetAddress(ServerService.this));
 
             String serverAlias = SharedPrefs.getServerAlias(ServerService.this);
             ServiceInfo serviceInfo = ServiceInfo.create("_http._tcp.local.", serverAlias, 8887, "com.github.warren_bank.bonjour_webrtc.service");

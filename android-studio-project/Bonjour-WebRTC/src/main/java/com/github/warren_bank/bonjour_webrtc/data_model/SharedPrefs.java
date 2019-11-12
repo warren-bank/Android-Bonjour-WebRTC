@@ -1,11 +1,10 @@
 package com.github.warren_bank.bonjour_webrtc.data_model;
 
 import com.github.warren_bank.bonjour_webrtc.R;
+import com.github.warren_bank.bonjour_webrtc.util.Util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-
-import java.net.InetAddress;
 
 public final class SharedPrefs {
 
@@ -248,7 +247,7 @@ public final class SharedPrefs {
         int pref_key_id = R.string.pref_server_alias;
         String defValue = null;
         try {
-            defValue = InetAddress.getLocalHost().getHostAddress();
+            defValue = Util.getWlanIpAddress_String(context);
         }
         catch(Exception e) {}
         return getString(sharedPreferences, context, pref_key_id, defValue);
