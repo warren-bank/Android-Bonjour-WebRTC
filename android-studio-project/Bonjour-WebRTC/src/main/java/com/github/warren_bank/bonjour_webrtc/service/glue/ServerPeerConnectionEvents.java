@@ -25,6 +25,13 @@ public class ServerPeerConnectionEvents implements PeerConnectionClient.PeerConn
         callActivity = null;
     }
 
+    public void disconnectFromRoom() {
+        callActivity = null;
+
+        if (appRtcClient != null)
+            appRtcClient.disconnectFromRoom();
+    }
+
     @Override
     public void onLocalDescription(final SessionDescription sdp) {
         if (callActivity != null) {

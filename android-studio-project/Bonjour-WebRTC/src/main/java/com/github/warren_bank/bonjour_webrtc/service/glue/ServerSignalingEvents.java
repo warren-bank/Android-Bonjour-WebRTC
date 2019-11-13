@@ -36,6 +36,11 @@ public class ServerSignalingEvents implements AppRTCClient.SignalingEvents {
         signalingParams = null;
     }
 
+    public void disconnectFromRoom() {
+        callActivity    = null;
+        signalingParams = null;
+    }
+
     @Override
     public void onConnectedToRoom(final SignalingParameters params) {
         if (callActivity != null) {

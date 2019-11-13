@@ -609,6 +609,10 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
     activityRunning = false;
     remoteProxyRenderer.setTarget(null);
     localProxyVideoSink.setTarget(null);
+    if (isInboundCall) {
+        ServerService.getServerPeerConnectionEvents().disconnectFromRoom();
+        ServerService.getServerSignalingEvents().disconnectFromRoom();
+    }
     if (appRtcClient != null) {
       appRtcClient.disconnectFromRoom();
       appRtcClient = null;
