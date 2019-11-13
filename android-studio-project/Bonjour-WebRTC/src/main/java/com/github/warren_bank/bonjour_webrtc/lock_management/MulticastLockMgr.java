@@ -15,6 +15,7 @@ public final class MulticastLockMgr {
         multicastLock = wifiMgr.createMulticastLock(
             "MulticastLock"
         );
+        multicastLock.setReferenceCounted(false);
         multicastLock.acquire();
     }
 

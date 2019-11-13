@@ -37,8 +37,7 @@ import javax.jmdns.ServiceInfo;
 import javax.jmdns.ServiceListener;
 
 public class MainActivity extends RuntimePermissionsActivity {
-    private static final String TAG          = "MainActivity";
-    private static final String BONJOUR_TYPE = "_http._tcp.local.";
+    private static final String TAG = "MainActivity";
 
     private ListView                      listView;
     private ArrayList<ServerListItem>     listItems;
@@ -46,8 +45,9 @@ public class MainActivity extends RuntimePermissionsActivity {
 
     private ServerListItem selectedServerListItem;
 
-    private JmDNS bonjour;
+    private String BONJOUR_SERVICE_TYPE;
     private BonjourServiceListener bonjourServiceListener;
+    private JmDNS bonjour;
 
     private class BonjourServiceListener implements ServiceListener {
         @Override
@@ -102,7 +102,7 @@ public class MainActivity extends RuntimePermissionsActivity {
             return false;
 
         String text = ByteWrangler.readUTF(info.getTextBytes());
-        return text.equals("com.github.warren_bank.bonjour_webrtc");
+        return text.equals(getPackageName());
     }
 
     private ServerListItem getServerListItem(ServiceEvent event) {
@@ -146,6 +146,7 @@ public class MainActivity extends RuntimePermissionsActivity {
         listView.setAdapter(listAdapter);
 
         selectedServerListItem = null;
+        BONJOUR_SERVICE_TYPE   = getString(R.string.constant_bonjour_service_type);
         bonjourServiceListener = new BonjourServiceListener();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -170,9 +171,9 @@ public class MainActivity extends RuntimePermissionsActivity {
             if (!ServerService.isStarted())
                 MulticastLockMgr.acquire(MainActivity.this);
 
-            bonjour = JmDNS.create(Util.getWlanIpAddress_InetAddress(MainActivity.this));
+            bonjour = JmDNS.create(Util.getWlanIpAddress_InetAddress(MainActivity.this), getPackageName());
 
-            bonjour.addServiceListener(BONJOUR_TYPE, bonjourServiceListener);
+            bonjour.addServiceListener(BONJOUR_SERVICE_TYPE, bonjourServiceListener);
         }
         catch(Exception e) {}
     }
@@ -185,7 +186,7 @@ public class MainActivity extends RuntimePermissionsActivity {
                 MulticastLockMgr.release();
 
             if (bonjour != null) {
-                bonjour.removeServiceListener(BONJOUR_TYPE, bonjourServiceListener);
+                bonjour.removeServiceListener(BONJOUR_SERVICE_TYPE, bonjourServiceListener);
                 bonjour = null;
             }
         }

@@ -27,4 +27,7 @@
 
     <!-- toasts -->
     <string name="error_invalid_room_name">ERROR: Cannot connect to invalid IP address</string>
+
+    <!-- constants -->
+    <string translatable="false" name="constant_bonjour_service_type">_http._tcp.local.</string>
 </resources>

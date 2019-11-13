@@ -197,10 +197,12 @@ public class ServerService extends Service {
 
     private void bonjourRegister() {
         try {
-            bonjour = JmDNS.create(Util.getWlanIpAddress_InetAddress(ServerService.this));
+            String PACKAGE_NAME         = getPackageName();
+            String BONJOUR_SERVICE_TYPE = getString(R.string.constant_bonjour_service_type);
+            String serverAlias          = SharedPrefs.getServerAlias(ServerService.this);
+            bonjour                     = JmDNS.create(Util.getWlanIpAddress_InetAddress(ServerService.this), PACKAGE_NAME);
+            ServiceInfo serviceInfo     = ServiceInfo.create(BONJOUR_SERVICE_TYPE, serverAlias, 8887, PACKAGE_NAME);
 
-            String serverAlias = SharedPrefs.getServerAlias(ServerService.this);
-            ServiceInfo serviceInfo = ServiceInfo.create("_http._tcp.local.", serverAlias, 8887, "com.github.warren_bank.bonjour_webrtc.service");
             bonjour.registerService(serviceInfo);
         }
         catch(Exception e) {
