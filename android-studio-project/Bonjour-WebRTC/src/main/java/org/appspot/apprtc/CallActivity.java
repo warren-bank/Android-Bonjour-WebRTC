@@ -612,6 +612,7 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
     if (isInboundCall) {
         ServerService.getServerPeerConnectionEvents().disconnectFromRoom();
         ServerService.getServerSignalingEvents().disconnectFromRoom();
+        ServerService.getPeerConnectionClient().getEglBase().releaseSurface();
     }
     if (appRtcClient != null) {
       appRtcClient.disconnectFromRoom();
