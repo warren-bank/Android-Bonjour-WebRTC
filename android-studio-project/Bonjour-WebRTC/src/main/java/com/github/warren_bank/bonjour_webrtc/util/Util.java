@@ -11,8 +11,16 @@ import java.nio.ByteBuffer;
 
 public final class Util {
 
-    public static int getWlanIpAddress_int(Context context) {
+    public static WifiManager getWifiManager(Context context) {
         WifiManager wifiMgr = (WifiManager) context.getSystemService(context.WIFI_SERVICE);
+        return wifiMgr;
+    }
+
+    public static int getWlanIpAddress_int(Context context) {
+        return getWlanIpAddress_int(context, getWifiManager(context));
+    }
+
+    public static int getWlanIpAddress_int(Context context, WifiManager wifiMgr) {
         WifiInfo wifiInfo = wifiMgr.getConnectionInfo();
         int ip = (wifiInfo != null)
           ? wifiInfo.getIpAddress()
@@ -21,13 +29,19 @@ public final class Util {
     }
 
     public static String getWlanIpAddress_String(Context context) {
-        int ip = getWlanIpAddress_int(context);
+        return getWlanIpAddress_String(context, getWlanIpAddress_int(context));
+    }
+
+    public static String getWlanIpAddress_String(Context context, int ip) {
         String ipAddress = Formatter.formatIpAddress(ip);
         return ipAddress;
     }
 
     public static InetAddress getWlanIpAddress_InetAddress(Context context) throws UnknownHostException {
-        int ip = getWlanIpAddress_int(context);
+        return getWlanIpAddress_InetAddress(context, getWlanIpAddress_int(context));
+    }
+
+    public static InetAddress getWlanIpAddress_InetAddress(Context context, int ip) throws UnknownHostException {
         ByteBuffer buffer = ByteBuffer.allocate(32);
         buffer.putInt(ip);
         buffer.position(0);

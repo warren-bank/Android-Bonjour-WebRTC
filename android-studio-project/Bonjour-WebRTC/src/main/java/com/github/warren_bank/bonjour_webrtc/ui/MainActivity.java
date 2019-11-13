@@ -3,6 +3,7 @@ package com.github.warren_bank.bonjour_webrtc.ui;
 import com.github.warren_bank.bonjour_webrtc.R;
 import com.github.warren_bank.bonjour_webrtc.data_model.ServerListItem;
 import com.github.warren_bank.bonjour_webrtc.data_model.SharedPrefs;
+import com.github.warren_bank.bonjour_webrtc.lock_management.MulticastLockMgr;
 import com.github.warren_bank.bonjour_webrtc.security_model.RuntimePermissions;
 import com.github.warren_bank.bonjour_webrtc.service.ServerService;
 import com.github.warren_bank.bonjour_webrtc.util.OrgAppspotApprtcGlue;
@@ -36,7 +37,8 @@ import javax.jmdns.ServiceInfo;
 import javax.jmdns.ServiceListener;
 
 public class MainActivity extends RuntimePermissionsActivity {
-    private static final String TAG = "MainActivity";
+    private static final String TAG          = "MainActivity";
+    private static final String BONJOUR_TYPE = "_http._tcp.local.";
 
     private ListView                      listView;
     private ArrayList<ServerListItem>     listItems;
@@ -45,6 +47,7 @@ public class MainActivity extends RuntimePermissionsActivity {
     private ServerListItem selectedServerListItem;
 
     private JmDNS bonjour;
+    private BonjourServiceListener bonjourServiceListener;
 
     private class BonjourServiceListener implements ServiceListener {
         @Override
@@ -143,6 +146,7 @@ public class MainActivity extends RuntimePermissionsActivity {
         listView.setAdapter(listAdapter);
 
         selectedServerListItem = null;
+        bonjourServiceListener = new BonjourServiceListener();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -156,14 +160,36 @@ public class MainActivity extends RuntimePermissionsActivity {
             }
         });
 
+        OrgAppspotApprtcGlue.setDefaultPreferenceValues(MainActivity.this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         try {
+            if (!ServerService.isStarted())
+                MulticastLockMgr.acquire(MainActivity.this);
+
             bonjour = JmDNS.create(Util.getWlanIpAddress_InetAddress(MainActivity.this));
 
-            bonjour.addServiceListener("_http._tcp.local.", new BonjourServiceListener());
+            bonjour.addServiceListener(BONJOUR_TYPE, bonjourServiceListener);
         }
         catch(Exception e) {}
+    }
 
-        OrgAppspotApprtcGlue.setDefaultPreferenceValues(MainActivity.this);
+    @Override
+    protected void onPause() {
+        super.onPause();
+        try {
+            if (!ServerService.isStarted())
+                MulticastLockMgr.release();
+
+            if (bonjour != null) {
+                bonjour.removeServiceListener(BONJOUR_TYPE, bonjourServiceListener);
+                bonjour = null;
+            }
+        }
+        catch(Exception e) {}
     }
 
     // ---------------------------------------------------------------------------------------------

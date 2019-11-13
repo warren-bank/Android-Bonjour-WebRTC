@@ -2,6 +2,9 @@ package com.github.warren_bank.bonjour_webrtc.service;
 
 import com.github.warren_bank.bonjour_webrtc.R;
 import com.github.warren_bank.bonjour_webrtc.data_model.SharedPrefs;
+import com.github.warren_bank.bonjour_webrtc.lock_management.MulticastLockMgr;
+import com.github.warren_bank.bonjour_webrtc.lock_management.WakeLockMgr;
+import com.github.warren_bank.bonjour_webrtc.lock_management.WifiLockMgr;
 import com.github.warren_bank.bonjour_webrtc.service.glue.ServerPeerConnectionEvents;
 import com.github.warren_bank.bonjour_webrtc.service.glue.ServerSignalingEvents;
 import com.github.warren_bank.bonjour_webrtc.ui.MainActivity;
@@ -146,14 +149,16 @@ public class ServerService extends Service {
         switch (action) {
             case ACTION_START: {
                 running = true;
+                acquireLocks();
                 startTCPSocketServer();
                 bonjourRegister();
                 break;
             }
             case ACTION_STOP: {
-                running = false;
-                stopTCPSocketServer();
                 bonjourUnregister();
+                stopTCPSocketServer();
+                releaseLocks();
+                running = false;
                 stopSelf();
                 break;
             }
@@ -212,6 +217,21 @@ public class ServerService extends Service {
         finally {
             bonjour = null;
         }
+    }
+
+    // -------------------------------------------------------------------------
+    // resource locks
+
+    private void acquireLocks() {
+        WakeLockMgr.acquire(ServerService.this);
+        WifiLockMgr.acquire(ServerService.this);
+        MulticastLockMgr.acquire(ServerService.this);
+    }
+
+    private void releaseLocks() {
+        WakeLockMgr.release();
+        WifiLockMgr.release();
+        MulticastLockMgr.release();
     }
 
     // -------------------------------------------------------------------------
