@@ -612,11 +612,15 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
     if (isInboundCall) {
         ServerService.getServerPeerConnectionEvents().disconnectFromRoom();
         ServerService.getServerSignalingEvents().disconnectFromRoom();
-        ServerService.getPeerConnectionClient().getEglBase().releaseSurface();
     }
     if (appRtcClient != null) {
       appRtcClient.disconnectFromRoom();
       appRtcClient = null;
+    }
+    if (peerConnectionClient != null) {
+      if (!isInboundCall)
+        peerConnectionClient.close();
+      peerConnectionClient = null;
     }
     if (pipRenderer != null) {
       pipRenderer.release();
@@ -629,10 +633,6 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
     if (fullscreenRenderer != null) {
       fullscreenRenderer.release();
       fullscreenRenderer = null;
-    }
-    if (peerConnectionClient != null) {
-      peerConnectionClient.close();
-      peerConnectionClient = null;
     }
     if (audioManager != null) {
       audioManager.stop();
