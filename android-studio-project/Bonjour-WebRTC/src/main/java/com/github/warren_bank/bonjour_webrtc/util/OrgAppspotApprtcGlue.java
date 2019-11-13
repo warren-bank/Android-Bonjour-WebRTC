@@ -401,6 +401,7 @@ public final class OrgAppspotApprtcGlue {
 
     public static void startInboundCallActivity(Context context) {
         Intent intent = getInboundCallActivityIntent(context);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         context.startActivity(intent);
     }
 }
