@@ -71,12 +71,8 @@ public class MainActivity extends RuntimePermissionsActivity {
             if (position >= 0)
                 return;
 
-            MainActivity.this.runOnUiThread(new Runnable() {
-                public void run() {
-                    listItems.add(item);
-                    listAdapter.notifyDataSetChanged();
-                }
-            });
+            listItems.add(item);
+            updateUiThread();
         }
 
         @Override
@@ -90,12 +86,12 @@ public class MainActivity extends RuntimePermissionsActivity {
             if (position == -1)
                 return;
 
-            MainActivity.this.runOnUiThread(new Runnable() {
-                public void run() {
-                    listItems.remove(position);
-                    listAdapter.notifyDataSetChanged();
-                }
-            });
+            while (position != -1) {
+                listItems.remove(position);
+                position = listItems.indexOf(item);
+            }
+
+            updateUiThread();
         }
     }
 
@@ -104,20 +100,32 @@ public class MainActivity extends RuntimePermissionsActivity {
     // ---------------------------------------------------------------------------------------------
 
     private ServerListItem getServerListItem(ServiceEvent event) {
-        ServerListItem item = null;
-
         ServiceInfo info = event.getInfo();
         if (info == null)
-            return item;
+            return null;
 
         String title = ByteWrangler.readUTF(info.getTextBytes());
         String ip    = event.getName();
 
-        if ((title != null) && (ip != null) && !title.isEmpty() && !ip.isEmpty()) {
-            item = new ServerListItem(title, ip);
-        }
+        if ((title == null) || (ip == null))
+            return null;
 
+        title = title.trim();
+        ip    = ip.trim();
+
+        if (title.isEmpty() || ip.isEmpty())
+            return null;
+
+        ServerListItem item = new ServerListItem(title, ip);
         return item;
+    }
+
+    private void updateUiThread() {
+        MainActivity.this.runOnUiThread(new Runnable() {
+            public void run() {
+                listAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
     // ---------------------------------------------------------------------------------------------
