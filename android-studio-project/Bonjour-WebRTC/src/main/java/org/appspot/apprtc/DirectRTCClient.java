@@ -145,13 +145,24 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
    * Runs on the looper thread.
    */
   private void disconnectFromRoomInternal() {
-    roomState = ConnectionState.CLOSED;
+    if (
+         (roomState == ConnectionState.CONNECTED)
+      && (tcpClient != null)
+      && (tcpClient.isServer())
+    ) {
+      roomState = ConnectionState.NEW;
 
-    if (tcpClient != null) {
-      tcpClient.disconnect();
-      tcpClient = null;
+      tcpClient.restartServer();
     }
-    executor.shutdown();
+    else {
+      roomState = ConnectionState.CLOSED;
+
+      if (tcpClient != null) {
+        tcpClient.disconnect();
+        tcpClient = null;
+      }
+      executor.shutdown();
+    }
   }
 
   @Override

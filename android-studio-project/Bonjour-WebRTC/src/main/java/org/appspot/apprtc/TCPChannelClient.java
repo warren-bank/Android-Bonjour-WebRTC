@@ -39,6 +39,9 @@ public class TCPChannelClient {
   private final ExecutorService executor;
   private final ThreadUtils.ThreadChecker executorThreadCheck;
   private final TCPChannelEvents eventListener;
+
+  private InetAddress address;
+  private int port;
   private TCPSocket socket;
 
   /**
@@ -67,21 +70,43 @@ public class TCPChannelClient {
     executorThreadCheck.detachThread();
     this.eventListener = eventListener;
 
-    InetAddress address;
     try {
-      address = InetAddress.getByName(ip);
+      InetAddress tempAddress = InetAddress.getByName(ip);
+
+      this.address = tempAddress;
+      this.port    = port;
     } catch (UnknownHostException e) {
+      this.address = null;
+      this.port    = -1;
+
       reportError("Invalid IP address.");
       return;
     }
 
     if (address.isAnyLocalAddress()) {
-      socket = new TCPSocketServer(address, port);
+      socket = new TCPSocketServer(this.address, this.port);
     } else {
-      socket = new TCPSocketClient(address, port);
+      socket = new TCPSocketClient(this.address, this.port);
     }
 
     socket.start();
+  }
+
+  public boolean isServer() {
+    return socket.isServer();
+  }
+
+  public void restartServer() {
+    executorThreadCheck.checkIsOnValidThread();
+
+    if (socket.isServer()) {
+      // closes old socket and stops Thread
+      socket.disconnect();
+
+      // starts new Thread with new socket
+      socket = new TCPSocketServer(this.address, this.port);
+      socket.start();
+    }
   }
 
   private void execute(Runnable command) {
@@ -328,7 +353,6 @@ public class TCPChannelClient {
       } catch (IOException e) {
         reportError("Failed to close server socket: " + e.getMessage());
       }
-
       super.disconnect();
     }
 
