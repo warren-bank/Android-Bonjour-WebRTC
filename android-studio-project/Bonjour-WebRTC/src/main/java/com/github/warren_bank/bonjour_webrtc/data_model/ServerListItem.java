@@ -14,7 +14,19 @@ public final class ServerListItem {
         return title;
     }
 
-    public boolean equals(ServerListItem that) {
-        return (title.equals(that.title) && ip.equals(that.ip));
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+
+        if (!(o instanceof ServerListItem))
+            return false;
+
+        ServerListItem that = (ServerListItem) o;
+
+        return (
+            ((title == null) || title.equals(that.title)) &&
+            ip.equals(that.ip)
+        );
     }
 }

@@ -26,6 +26,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.net.Inet4Address;
 import java.util.ArrayList;
@@ -82,9 +83,8 @@ public class MainActivity extends RuntimePermissionsActivity {
         public void serviceRemoved(ServiceEvent event) {
             Log.d(TAG, "Service removed: " + event.getName());
 
-            ServerListItem item = getServerListItem(event);
-            if (item == null)
-                return;
+            String         ip   = event.getName();
+            ServerListItem item = new ServerListItem(null, ip);
 
             int position = listItems.indexOf(item);
             if (position == -1)
@@ -110,19 +110,10 @@ public class MainActivity extends RuntimePermissionsActivity {
         if (info == null)
             return item;
 
-        String title = info.getName();
-        String ip    = null;
+        String title = ByteWrangler.readUTF(info.getTextBytes());
+        String ip    = event.getName();
 
-        int port = info.getPort();
-        Inet4Address[] ipv4Addresses = info.getInet4Addresses();
-        for (Inet4Address address : ipv4Addresses) {
-            if (!address.isAnyLocalAddress() && !address.isLinkLocalAddress() && !address.isLoopbackAddress()) {
-                ip = String.format("%1$s:%2$s", address.getHostAddress(), port);
-                break;
-            }
-        }
-
-        if ((title != null) && (ip != null) && !title.isEmpty()) {
+        if ((title != null) && (ip != null) && !title.isEmpty() && !ip.isEmpty()) {
             item = new ServerListItem(title, ip);
         }
 
@@ -159,6 +150,15 @@ public class MainActivity extends RuntimePermissionsActivity {
             }
         });
 
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                String ip = listItems.get(position).ip;
+                Toast.makeText(MainActivity.this, ip, Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
+
         OrgAppspotApprtcGlue.setDefaultPreferenceValues(MainActivity.this);
     }
 
@@ -172,7 +172,7 @@ public class MainActivity extends RuntimePermissionsActivity {
                     if (!ServerService.isStarted())
                         MulticastLockMgr.acquire(MainActivity.this);
 
-                    bonjour = JmDNS.create(Util.getWlanIpAddress_InetAddress(MainActivity.this), getPackageName());
+                    bonjour = JmDNS.create(Util.getWlanIpAddress_InetAddress(MainActivity.this));
 
                     bonjour.addServiceListener(BONJOUR_SERVICE_TYPE, bonjourServiceListener);
                 }

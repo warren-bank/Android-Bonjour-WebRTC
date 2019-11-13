@@ -25,6 +25,8 @@ import android.os.Build;
 import android.os.IBinder;
 import android.widget.RemoteViews;
 
+import java.net.InetAddress;
+
 import javax.jmdns.JmDNS;
 import javax.jmdns.ServiceInfo;
 
@@ -202,12 +204,16 @@ public class ServerService extends Service {
 
     private void bonjourRegister() {
         try {
-            String PACKAGE_NAME         = getPackageName();
+            int         ip_int          = Util.getWlanIpAddress_int(ServerService.this);
+            String      ip_String       = Util.getWlanIpAddress_String(ServerService.this, ip_int);
+            InetAddress ip_InetAddress  = Util.getWlanIpAddress_InetAddress(ServerService.this, ip_int);
+
             String serverAlias          = SharedPrefs.getServerAlias(ServerService.this);
             String BONJOUR_SERVICE_TYPE = getString(R.string.constant_bonjour_service_type);
             int    BONJOUR_SERVICE_PORT = Integer.parseInt(getString(R.string.constant_bonjour_service_port), 10);
-            bonjour                     = JmDNS.create(Util.getWlanIpAddress_InetAddress(ServerService.this), PACKAGE_NAME);
-            ServiceInfo serviceInfo     = ServiceInfo.create(BONJOUR_SERVICE_TYPE, serverAlias, BONJOUR_SERVICE_PORT, PACKAGE_NAME);
+
+            bonjour                     = JmDNS.create(ip_InetAddress);
+            ServiceInfo serviceInfo     = ServiceInfo.create(BONJOUR_SERVICE_TYPE, ip_String, BONJOUR_SERVICE_PORT, serverAlias);
 
             bonjour.registerService(serviceInfo);
         }
