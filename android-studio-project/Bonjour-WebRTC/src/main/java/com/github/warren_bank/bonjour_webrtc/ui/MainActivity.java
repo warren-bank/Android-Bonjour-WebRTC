@@ -52,58 +52,56 @@ public class MainActivity extends RuntimePermissionsActivity {
     private class BonjourServiceListener implements ServiceListener {
         @Override
         public void serviceAdded(ServiceEvent event) {
-            if (!isMatchingBonjourService(event))
-                return;
-
             Log.d(TAG, "Service added: " + event.getName());
+
+            // request that service be resolved
+            bonjour.requestServiceInfo(event.getType(), event.getName(), 1);
         }
 
         @Override
         public void serviceResolved(ServiceEvent event) {
-            if (!isMatchingBonjourService(event))
-                return;
-
-            ServerListItem item = getServerListItem(event);
-            if (item == null)
-                return;
-
-            listItems.add(item);
-            listAdapter.notifyDataSetChanged();
-
             Log.d(TAG, "Service resolved: " + event.getName());
-        }
-
-        @Override
-        public void serviceRemoved(ServiceEvent event) {
-            if (!isMatchingBonjourService(event))
-                return;
 
             ServerListItem item = getServerListItem(event);
             if (item == null)
                 return;
 
             int position = listItems.indexOf(item);
-            if (position >= 0) {
-                listItems.remove(position);
-                listAdapter.notifyDataSetChanged();
+            if (position >= 0)
+                return;
 
-                Log.d(TAG, "Service removed: " + event.getName());
-            }
+            MainActivity.this.runOnUiThread(new Runnable() {
+                public void run() {
+                    listItems.add(item);
+                    listAdapter.notifyDataSetChanged();
+                }
+            });
+        }
+
+        @Override
+        public void serviceRemoved(ServiceEvent event) {
+            Log.d(TAG, "Service removed: " + event.getName());
+
+            ServerListItem item = getServerListItem(event);
+            if (item == null)
+                return;
+
+            int position = listItems.indexOf(item);
+            if (position == -1)
+                return;
+
+            MainActivity.this.runOnUiThread(new Runnable() {
+                public void run() {
+                    listItems.remove(position);
+                    listAdapter.notifyDataSetChanged();
+                }
+            });
         }
     }
 
     // ---------------------------------------------------------------------------------------------
     // Bonjour events helper:
     // ---------------------------------------------------------------------------------------------
-
-    private boolean isMatchingBonjourService(ServiceEvent event) {
-        ServiceInfo info = event.getInfo();
-        if (info == null)
-            return false;
-
-        String text = ByteWrangler.readUTF(info.getTextBytes());
-        return text.equals(getPackageName());
-    }
 
     private ServerListItem getServerListItem(ServiceEvent event) {
         ServerListItem item = null;
@@ -167,20 +165,26 @@ public class MainActivity extends RuntimePermissionsActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        try {
-            if (!ServerService.isStarted())
-                MulticastLockMgr.acquire(MainActivity.this);
 
-            bonjour = JmDNS.create(Util.getWlanIpAddress_InetAddress(MainActivity.this), getPackageName());
+        new Thread(){
+            public void run() {
+                try {
+                    if (!ServerService.isStarted())
+                        MulticastLockMgr.acquire(MainActivity.this);
 
-            bonjour.addServiceListener(BONJOUR_SERVICE_TYPE, bonjourServiceListener);
-        }
-        catch(Exception e) {}
+                    bonjour = JmDNS.create(Util.getWlanIpAddress_InetAddress(MainActivity.this), getPackageName());
+
+                    bonjour.addServiceListener(BONJOUR_SERVICE_TYPE, bonjourServiceListener);
+                }
+                catch(Exception e) {}
+            }
+        }.start();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+
         try {
             if (!ServerService.isStarted())
                 MulticastLockMgr.release();

@@ -146,23 +146,28 @@ public class ServerService extends Service {
         if (action == null)
             return;
 
-        switch (action) {
-            case ACTION_START: {
-                running = true;
-                acquireLocks();
-                startTCPSocketServer();
-                bonjourRegister();
-                break;
+
+        new Thread(){
+            public void run() {
+                switch (action) {
+                    case ACTION_START: {
+                        running = true;
+                        acquireLocks();
+                        startTCPSocketServer();
+                        bonjourRegister();
+                        break;
+                    }
+                    case ACTION_STOP: {
+                        bonjourUnregister();
+                        stopTCPSocketServer();
+                        releaseLocks();
+                        running = false;
+                        stopSelf();
+                        break;
+                    }
+                }
             }
-            case ACTION_STOP: {
-                bonjourUnregister();
-                stopTCPSocketServer();
-                releaseLocks();
-                running = false;
-                stopSelf();
-                break;
-            }
-        }
+        }.start();
     }
 
     // -------------------------------------------------------------------------
@@ -198,10 +203,11 @@ public class ServerService extends Service {
     private void bonjourRegister() {
         try {
             String PACKAGE_NAME         = getPackageName();
-            String BONJOUR_SERVICE_TYPE = getString(R.string.constant_bonjour_service_type);
             String serverAlias          = SharedPrefs.getServerAlias(ServerService.this);
+            String BONJOUR_SERVICE_TYPE = getString(R.string.constant_bonjour_service_type);
+            int    BONJOUR_SERVICE_PORT = Integer.parseInt(getString(R.string.constant_bonjour_service_port), 10);
             bonjour                     = JmDNS.create(Util.getWlanIpAddress_InetAddress(ServerService.this), PACKAGE_NAME);
-            ServiceInfo serviceInfo     = ServiceInfo.create(BONJOUR_SERVICE_TYPE, serverAlias, 8887, PACKAGE_NAME);
+            ServiceInfo serviceInfo     = ServiceInfo.create(BONJOUR_SERVICE_TYPE, serverAlias, BONJOUR_SERVICE_PORT, PACKAGE_NAME);
 
             bonjour.registerService(serviceInfo);
         }
