@@ -115,6 +115,11 @@ public interface AppRTCClient {
     void onRemoteDescription(final SessionDescription sdp);
 
     /**
+     * Callback fired once alias of remote peer is received.
+     */
+    void onRemotePeerAlias(final String alias);
+
+    /**
      * Callback fired once remote Ice candidate is received.
      */
     void onRemoteIceCandidate(final IceCandidate candidate);

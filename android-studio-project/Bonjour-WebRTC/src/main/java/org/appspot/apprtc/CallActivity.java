@@ -325,7 +325,7 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
         }
         else {
             Log.i(TAG, "Using DirectRTCClient because room name looks like an IP.");
-            appRtcClient = new DirectRTCClient(CallActivity.this);
+            appRtcClient = new DirectRTCClient(CallActivity.this, CallActivity.this);
         }
     }
 
@@ -792,6 +792,18 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
           // Create answer. Answer SDP will be sent to offering client in
           // PeerConnectionEvents.onLocalDescription event.
           peerConnectionClient.createAnswer();
+        }
+      }
+    });
+  }
+
+  @Override
+  public void onRemotePeerAlias(final String alias) {
+    runOnUiThread(new Runnable() {
+      @Override
+      public void run() {
+        if (callFragment != null) {
+          callFragment.updateContactName(alias);
         }
       }
     });

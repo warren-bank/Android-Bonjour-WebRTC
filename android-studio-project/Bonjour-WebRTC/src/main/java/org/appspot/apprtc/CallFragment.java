@@ -136,4 +136,9 @@ public class CallFragment extends Fragment {
     super.onAttach(activity);
     callEvents = (OnCallEvents) activity;
   }
+
+  public void updateContactName(String contactName) {
+    if ((contactName != null) && !contactName.isEmpty())
+      contactView.setText(contactName);
+  }
 }

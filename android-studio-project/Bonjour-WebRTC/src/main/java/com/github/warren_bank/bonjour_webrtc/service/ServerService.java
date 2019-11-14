@@ -183,7 +183,7 @@ public class ServerService extends Service {
 
     private void startTCPSocketServer() {
         appRTCClientSignalingEvents              = new ServerSignalingEvents(ServerService.this);
-        appRtcClient                             = new DirectRTCClient(appRTCClientSignalingEvents);
+        appRtcClient                             = new DirectRTCClient(ServerService.this, appRTCClientSignalingEvents);
 
         peerConnectionClientPeerConnectionEvents = new ServerPeerConnectionEvents(appRtcClient);
         peerConnectionClient                     = OrgAppspotApprtcGlue.getPeerConnectionClient(ServerService.this, null, peerConnectionClientPeerConnectionEvents, null);

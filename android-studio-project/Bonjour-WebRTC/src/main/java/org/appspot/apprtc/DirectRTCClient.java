@@ -10,6 +10,9 @@
 
 package org.appspot.apprtc;
 
+import com.github.warren_bank.bonjour_webrtc.data_model.SharedPrefs;
+
+import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import java.util.ArrayList;
@@ -50,8 +53,9 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
       // Optional port number
       + "(:(\\d+))?");
 
-  private final ExecutorService executor;
+  private final Context         context;
   private final SignalingEvents events;
+  private final ExecutorService executor;
   @Nullable
   private TCPChannelClient tcpClient;
   private RoomConnectionParameters connectionParameters;
@@ -61,8 +65,9 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
   // All alterations of the room state should be done from inside the looper thread.
   private ConnectionState roomState;
 
-  public DirectRTCClient(SignalingEvents events) {
-    this.events = events;
+  public DirectRTCClient(Context context, SignalingEvents events) {
+    this.context = context;
+    this.events  = events;
 
     executor = Executors.newSingleThreadExecutor();
     roomState = ConnectionState.NEW;
@@ -179,13 +184,21 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
     execute(new Runnable() {
       @Override
       public void run() {
+        JSONObject json;
+
         if (roomState != ConnectionState.CONNECTED) {
           reportError("Sending offer SDP in non connected state.");
           return;
         }
-        JSONObject json = new JSONObject();
+
+        json = new JSONObject();
         jsonPut(json, "sdp", sdp.description);
         jsonPut(json, "type", "offer");
+        sendMessage(json.toString());
+
+        json = new JSONObject();
+        jsonPut(json, "type", "peer-alias");
+        jsonPut(json, "name", SharedPrefs.getServerAlias(context));
         sendMessage(json.toString());
       }
     });
@@ -196,9 +209,16 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
     execute(new Runnable() {
       @Override
       public void run() {
-        JSONObject json = new JSONObject();
+        JSONObject json;
+
+        json = new JSONObject();
         jsonPut(json, "sdp", sdp.description);
         jsonPut(json, "type", "answer");
+        sendMessage(json.toString());
+
+        json = new JSONObject();
+        jsonPut(json, "type", "peer-alias");
+        jsonPut(json, "name", SharedPrefs.getServerAlias(context));
         sendMessage(json.toString());
       }
     });
@@ -306,6 +326,8 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
             );
         roomState = ConnectionState.CONNECTED;
         events.onConnectedToRoom(parameters);
+      } else if (type.equals("peer-alias")) {
+        events.onRemotePeerAlias(json.getString("name"));
       } else {
         reportError("Unexpected TCP message: " + msg);
       }

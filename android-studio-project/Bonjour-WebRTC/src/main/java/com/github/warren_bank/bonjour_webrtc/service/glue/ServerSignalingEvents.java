@@ -67,6 +67,12 @@ public class ServerSignalingEvents implements AppRTCClient.SignalingEvents {
     }
 
     @Override
+    public void onRemotePeerAlias(final String alias) {
+        if (callActivity != null)
+            callActivity.onRemotePeerAlias(alias);
+    }
+
+    @Override
     public void onRemoteIceCandidate(final IceCandidate candidate) {
         if (callActivity != null)
             callActivity.onRemoteIceCandidate(candidate);
