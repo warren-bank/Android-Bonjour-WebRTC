@@ -22,7 +22,9 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
 import android.widget.RemoteViews;
 
 import java.net.InetAddress;
@@ -36,6 +38,8 @@ public class ServerService extends Service {
     private final static String ACTION_HANGUP = "HANGUP";
     private final static String ACTION_STOP   = "STOP";
 
+    private static Handler                    mainThreadHandler                        = null;
+
     private static boolean                    running                                  = false;
     private static String                     local_IP                                 = null;
     private static ServerSignalingEvents      appRTCClientSignalingEvents              = null;
@@ -47,8 +51,8 @@ public class ServerService extends Service {
 
     @Override
     public void onCreate() {
-        appRtcClient = null;
-        bonjour      = null;
+        mainThreadHandler = new Handler(Looper.getMainLooper());
+        bonjour           = null;
 
         showNotification();
     }
@@ -71,6 +75,8 @@ public class ServerService extends Service {
 
     @Override
     public void onDestroy() {
+        mainThreadHandler = null;
+
         hideNotification();
     }
 
@@ -339,5 +345,9 @@ public class ServerService extends Service {
 
     public static PeerConnectionClient getPeerConnectionClient() {
         return peerConnectionClient;
+    }
+
+    public static Handler getMainThreadHandler() {
+        return mainThreadHandler;
     }
 }

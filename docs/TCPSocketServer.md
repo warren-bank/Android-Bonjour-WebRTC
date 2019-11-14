@@ -26,6 +26,11 @@
      ```
    * immediately starts:
      ```java
+       InboundCallNotificationDialog
+     ```
+3. when the user chooses to accept the call:
+   * immediately starts:
+     ```java
        CallActivity
      ```
    * immediately calls:
@@ -55,7 +60,7 @@
        TCPChannelClient.TCPSocketServer.send(String message)
          -> format: JSON
      ```
-3. when `TCPChannelClient.TCPSocketServer` receives a message from connected `TCPChannelClient.TCPSocketClient`:
+4. when `TCPChannelClient.TCPSocketServer` receives a message from connected `TCPChannelClient.TCPSocketClient`:
    * immediately calls:
      ```java
        DirectRTCClient.onTCPMessage(String message)

@@ -1,6 +1,7 @@
 package com.github.warren_bank.bonjour_webrtc.service.glue;
 
-import com.github.warren_bank.bonjour_webrtc.util.OrgAppspotApprtcGlue;
+import com.github.warren_bank.bonjour_webrtc.service.ServerService;
+import com.github.warren_bank.bonjour_webrtc.ui.InboundCallNotificationDialog;
 
 import org.appspot.apprtc.AppRTCClient;
 import org.appspot.apprtc.AppRTCClient.SignalingParameters;
@@ -49,14 +50,18 @@ public class ServerSignalingEvents implements AppRTCClient.SignalingEvents {
         else if (params.initiator) {
             // when:
             //   - not already in a video call
-            //   - remote client had previously connected to local server
-            //   - server had previously sent an sdp offer to client
-            //   - client has accepted
+            //   - remote client has connected to local server
             // what:
-            //   - start CallActivity
-            //   - add extras to intent that will signal that it is an inbound call
+            //   - play an audio ringtone and display an accept/reject dialog
             signalingParams = params;
-            OrgAppspotApprtcGlue.startInboundCallActivity(context);
+
+            ServerService.getMainThreadHandler().post(
+                new Runnable() {
+                    public void run() {
+                        InboundCallNotificationDialog.show(context, null);
+                    }
+                }
+            );
         }
     }
 
