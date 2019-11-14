@@ -30,7 +30,7 @@ import org.webrtc.SessionDescription;
  * Uses the client<->server specifics of the apprtc AppEngine webapp.
  *
  * <p>To use: create an instance of this object (registering a message handler) and
- * call connectToRoom().  Once room connection is established
+ * call connect().  Once room connection is established
  * onConnectedToRoom() callback with room parameters is invoked.
  * Messages to other party (with local Ice candidates and answer SDP) can
  * be sent after WebSocket connection is established.
@@ -67,29 +67,29 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
   // Asynchronously connect to an AppRTC room URL using supplied connection
   // parameters, retrieves room parameters and connect to WebSocket server.
   @Override
-  public void connectToRoom(RoomConnectionParameters connectionParameters) {
+  public void connect(RoomConnectionParameters connectionParameters) {
     this.connectionParameters = connectionParameters;
     handler.post(new Runnable() {
       @Override
       public void run() {
-        connectToRoomInternal();
+        connectInternal();
       }
     });
   }
 
   @Override
-  public void disconnectFromRoom() {
+  public void disconnect() {
     handler.post(new Runnable() {
       @Override
       public void run() {
-        disconnectFromRoomInternal();
+        disconnectInternal();
         handler.getLooper().quit();
       }
     });
   }
 
   // Connects to room - function runs on a local looper thread.
-  private void connectToRoomInternal() {
+  private void connectInternal() {
     String connectionUrl = getConnectionUrl(connectionParameters);
     Log.d(TAG, "Connect to room: " + connectionUrl);
     roomState = ConnectionState.NEW;
@@ -116,7 +116,7 @@ public class WebSocketRTCClient implements AppRTCClient, WebSocketChannelEvents 
   }
 
   // Disconnect from room and send bye messages - runs on a local looper thread.
-  private void disconnectFromRoomInternal() {
+  private void disconnectInternal() {
     Log.d(TAG, "Disconnect. Room state: " + roomState);
     if (roomState == ConnectionState.CONNECTED) {
       Log.d(TAG, "Closing room.");

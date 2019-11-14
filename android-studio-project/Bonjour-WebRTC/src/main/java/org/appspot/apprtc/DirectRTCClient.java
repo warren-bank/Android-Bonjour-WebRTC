@@ -80,7 +80,7 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
    * IP address matching IP_PATTERN.
    */
   @Override
-  public void connectToRoom(RoomConnectionParameters connectionParameters) {
+  public void connect(RoomConnectionParameters connectionParameters) {
     this.connectionParameters = connectionParameters;
 
     if (connectionParameters.loopback) {
@@ -90,17 +90,17 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
     execute(new Runnable() {
       @Override
       public void run() {
-        connectToRoomInternal();
+        connectInternal();
       }
     });
   }
 
   @Override
-  public void disconnectFromRoom() {
+  public void disconnect() {
     execute(new Runnable() {
       @Override
       public void run() {
-        disconnectFromRoomInternal(false);
+        disconnectInternal(false);
       }
     });
   }
@@ -110,7 +110,7 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
       execute(new Runnable() {
         @Override
         public void run() {
-          disconnectFromRoomInternal(true);
+          disconnectInternal(true);
         }
       });
     }
@@ -121,7 +121,7 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
    *
    * Runs on the looper thread.
    */
-  private void connectToRoomInternal() {
+  private void connectInternal() {
     this.roomState = ConnectionState.NEW;
 
     String endpoint = connectionParameters.roomId;
@@ -155,22 +155,22 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
    *
    * Runs on the looper thread.
    */
-  private void disconnectFromRoomInternal(boolean restartServer) {
+  private void disconnectInternal(boolean restartServer) {
     if ((tcpClient != null) && tcpClient.isServer() && restartServer) {
       if (roomState != ConnectionState.NEW) {
         roomState = ConnectionState.NEW;
 
-        tcpClient.restartServer();
+        tcpClient.reconnect();
       }
     }
     else {
       roomState = ConnectionState.CLOSED;
-
       if (tcpClient != null) {
         tcpClient.disconnect();
         tcpClient = null;
       }
-      executor.shutdown();
+      if ((executor != null) && !executor.isShutdown() && !executor.isTerminated())
+        executor.shutdown();
     }
   }
 

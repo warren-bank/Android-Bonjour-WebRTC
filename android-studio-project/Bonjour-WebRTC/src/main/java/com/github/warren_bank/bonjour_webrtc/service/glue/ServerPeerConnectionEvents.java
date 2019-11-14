@@ -20,14 +20,17 @@ public class ServerPeerConnectionEvents implements PeerConnectionClient.PeerConn
         callActivity = events;
     }
 
-    public void onDisconnect() {
-        callActivity = null;
-
+    public void onHangup() {
         if (appRtcClient != null)
             appRtcClient.restartServer();
+
+        callActivity = null;
     }
 
     public void onStop() {
+        if (appRtcClient != null)
+            appRtcClient.disconnect();
+
         appRtcClient = null;
         callActivity = null;
     }

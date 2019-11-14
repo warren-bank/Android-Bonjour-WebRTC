@@ -45,7 +45,7 @@ public interface AppRTCClient {
    * parameters. Once connection is established onConnectedToRoom()
    * callback with room parameters is invoked.
    */
-  void connectToRoom(RoomConnectionParameters connectionParameters);
+  void connect(RoomConnectionParameters connectionParameters);
 
   /**
    * Send offer SDP to the other participant.
@@ -70,7 +70,7 @@ public interface AppRTCClient {
   /**
    * Disconnect from room.
    */
-  void disconnectFromRoom();
+  void disconnect();
 
   /**
    * Struct holding the signaling parameters of an AppRTC room.

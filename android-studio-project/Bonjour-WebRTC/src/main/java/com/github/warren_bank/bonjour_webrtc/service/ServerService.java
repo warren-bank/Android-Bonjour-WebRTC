@@ -31,10 +31,10 @@ import javax.jmdns.JmDNS;
 import javax.jmdns.ServiceInfo;
 
 public class ServerService extends Service {
-    private final static int NOTIFICATION_ID      = 1;
-    private final static String ACTION_START      = "START";
-    private final static String ACTION_DISCONNECT = "DISCONNECT";
-    private final static String ACTION_STOP       = "STOP";
+    private final static int NOTIFICATION_ID  = 1;
+    private final static String ACTION_START  = "START";
+    private final static String ACTION_HANGUP = "HANGUP";
+    private final static String ACTION_STOP   = "STOP";
 
     private static boolean                    running                                  = false;
     private static ServerSignalingEvents      appRTCClientSignalingEvents              = null;
@@ -160,8 +160,8 @@ public class ServerService extends Service {
                         bonjourRegister();
                         break;
                     }
-                    case ACTION_DISCONNECT: {
-                        disconnectTCPSocketServer();
+                    case ACTION_HANGUP: {
+                        hangupTCPSocketServer();
                         break;
                     }
                     case ACTION_STOP: {
@@ -188,23 +188,23 @@ public class ServerService extends Service {
         peerConnectionClient                     = OrgAppspotApprtcGlue.getPeerConnectionClient(ServerService.this, null, peerConnectionClientPeerConnectionEvents, null);
 
         RoomConnectionParameters connectionParameters = new RoomConnectionParameters(null, "0.0.0.0:8888", false, null);
-        appRtcClient.connectToRoom(connectionParameters);
+        appRtcClient.connect(connectionParameters);
     }
 
-    private void disconnectTCPSocketServer() {
+    private void hangupTCPSocketServer() {
         if (!running)
             return;
 
-        appRTCClientSignalingEvents.onDisconnect();
+        appRTCClientSignalingEvents.onHangup();
         appRtcClient.restartServer();
 
-        peerConnectionClientPeerConnectionEvents.onDisconnect();
+        peerConnectionClientPeerConnectionEvents.onHangup();
         peerConnectionClient.close();
         peerConnectionClient                     = OrgAppspotApprtcGlue.getPeerConnectionClient(ServerService.this, null, peerConnectionClientPeerConnectionEvents, null);
     }
 
     private void stopTCPSocketServer() {
-        appRtcClient.disconnectFromRoom();
+        appRtcClient.disconnect();
         peerConnectionClient.close();
 
         appRTCClientSignalingEvents.onStop();
@@ -288,13 +288,13 @@ public class ServerService extends Service {
         return doAction(context, intent, ACTION_START, (broadcast && !running));
     }
 
-    public static Intent doDisconnect(Context context) {
-        return doDisconnect(context, true);
+    public static Intent doHangup(Context context) {
+        return doHangup(context, true);
     }
 
-    public static Intent doDisconnect(Context context, boolean broadcast) {
+    public static Intent doHangup(Context context, boolean broadcast) {
         Intent intent = new Intent(context, ServerService.class);
-        return doAction(context, intent, ACTION_DISCONNECT, (broadcast && running));
+        return doAction(context, intent, ACTION_HANGUP, (broadcast && running));
     }
 
     public static Intent doStop(Context context) {

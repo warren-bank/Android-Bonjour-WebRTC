@@ -562,7 +562,7 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
         logAndToast(getString(R.string.connecting_to, roomConnectionParameters.roomId));
 
         // Start room connection.
-        appRtcClient.connectToRoom(roomConnectionParameters);
+        appRtcClient.connect(roomConnectionParameters);
     }
 
     // Create and audio manager that will take care of audio routing,
@@ -611,11 +611,11 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
     localProxyVideoSink.setTarget(null);
 
     if (isInboundCall) {
-        ServerService.doDisconnect(CallActivity.this);
+        ServerService.doHangup(CallActivity.this);
     }
     else {
       if (appRtcClient != null)
-        appRtcClient.disconnectFromRoom();
+        appRtcClient.disconnect();
       if (peerConnectionClient != null)
         peerConnectionClient.close();
     }

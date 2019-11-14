@@ -30,7 +30,7 @@ public class ServerSignalingEvents implements AppRTCClient.SignalingEvents {
         }
     }
 
-    public void onDisconnect() {
+    public void onHangup() {
         callActivity    = null;
         signalingParams = null;
     }

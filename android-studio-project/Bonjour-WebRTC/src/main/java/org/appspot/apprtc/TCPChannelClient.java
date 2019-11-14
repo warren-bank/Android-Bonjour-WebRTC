@@ -92,11 +92,18 @@ public class TCPChannelClient {
     socket.start();
   }
 
+  private void execute(Runnable command) {
+    if ((executor == null) || executor.isShutdown() || executor.isTerminated())
+      return;
+
+    executor.execute(command);
+  }
+
   public boolean isServer() {
     return socket.isServer();
   }
 
-  public void restartServer() {
+  public void reconnect() {
     executorThreadCheck.checkIsOnValidThread();
 
     if (socket.isServer()) {
@@ -107,13 +114,6 @@ public class TCPChannelClient {
       socket = new TCPSocketServer(this.address, this.port);
       socket.start();
     }
-  }
-
-  private void execute(Runnable command) {
-    if ((executor == null) || executor.isShutdown() || executor.isTerminated())
-      return;
-
-    executor.execute(command);
   }
 
   /**
