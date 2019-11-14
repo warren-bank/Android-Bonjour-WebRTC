@@ -37,6 +37,7 @@ public class ServerService extends Service {
     private final static String ACTION_STOP   = "STOP";
 
     private static boolean                    running                                  = false;
+    private static String                     local_IP                                 = null;
     private static ServerSignalingEvents      appRTCClientSignalingEvents              = null;
     private static DirectRTCClient            appRtcClient                             = null;
     private static ServerPeerConnectionEvents peerConnectionClientPeerConnectionEvents = null;
@@ -229,6 +230,7 @@ public class ServerService extends Service {
             String BONJOUR_SERVICE_TYPE = getString(R.string.constant_bonjour_service_type);
             int    BONJOUR_SERVICE_PORT = Integer.parseInt(getString(R.string.constant_bonjour_service_port), 10);
 
+            local_IP                    = ip_String;
             bonjour                     = JmDNS.create(ip_InetAddress);
             ServiceInfo serviceInfo     = ServiceInfo.create(BONJOUR_SERVICE_TYPE, ip_String, BONJOUR_SERVICE_PORT, serverAlias);
 
@@ -317,6 +319,10 @@ public class ServerService extends Service {
 
     public static boolean isStarted() {
         return running;
+    }
+
+    public static String getLocalIp() {
+        return local_IP;
     }
 
     public static ServerSignalingEvents getServerSignalingEvents() {

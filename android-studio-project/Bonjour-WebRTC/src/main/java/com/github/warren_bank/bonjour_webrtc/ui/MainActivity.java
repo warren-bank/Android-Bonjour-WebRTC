@@ -71,6 +71,10 @@ public class MainActivity extends RuntimePermissionsActivity {
             if (position >= 0)
                 return;
 
+            String local_IP = ServerService.getLocalIp();
+            if ((local_IP != null) && (local_IP.equals(item.ip)))
+                return;
+
             listItems.add(item);
             updateUiThread();
         }
