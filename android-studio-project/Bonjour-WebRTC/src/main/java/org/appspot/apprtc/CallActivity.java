@@ -609,35 +609,33 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
     activityRunning = false;
     remoteProxyRenderer.setTarget(null);
     localProxyVideoSink.setTarget(null);
+
     if (isInboundCall) {
-        ServerService.getServerPeerConnectionEvents().disconnectFromRoom();
-        ServerService.getServerSignalingEvents().disconnectFromRoom();
+        ServerService.doDisconnect(CallActivity.this);
     }
-    if (appRtcClient != null) {
-      appRtcClient.disconnectFromRoom();
-      appRtcClient = null;
-    }
-    if (peerConnectionClient != null) {
-      if (!isInboundCall)
+    else {
+      if (appRtcClient != null)
+        appRtcClient.disconnectFromRoom();
+      if (peerConnectionClient != null)
         peerConnectionClient.close();
-      peerConnectionClient = null;
     }
-    if (pipRenderer != null) {
+
+    if (pipRenderer != null)
       pipRenderer.release();
-      pipRenderer = null;
-    }
-    if (videoFileRenderer != null) {
+    if (videoFileRenderer != null)
       videoFileRenderer.release();
-      videoFileRenderer = null;
-    }
-    if (fullscreenRenderer != null) {
+    if (fullscreenRenderer != null)
       fullscreenRenderer.release();
-      fullscreenRenderer = null;
-    }
-    if (audioManager != null) {
+    if (audioManager != null)
       audioManager.stop();
-      audioManager = null;
-    }
+
+    appRtcClient         = null;
+    peerConnectionClient = null;
+    pipRenderer          = null;
+    videoFileRenderer    = null;
+    fullscreenRenderer   = null;
+    audioManager         = null;
+
     if (connected && !isError) {
       setResult(RESULT_OK);
     } else {

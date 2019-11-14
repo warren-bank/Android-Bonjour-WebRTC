@@ -31,9 +31,10 @@ import javax.jmdns.JmDNS;
 import javax.jmdns.ServiceInfo;
 
 public class ServerService extends Service {
-    private final static int NOTIFICATION_ID = 1;
-    private final static String ACTION_START = "START";
-    private final static String ACTION_STOP  = "STOP";
+    private final static int NOTIFICATION_ID      = 1;
+    private final static String ACTION_START      = "START";
+    private final static String ACTION_DISCONNECT = "DISCONNECT";
+    private final static String ACTION_STOP       = "STOP";
 
     private static boolean                    running                                  = false;
     private static ServerSignalingEvents      appRTCClientSignalingEvents              = null;
@@ -159,6 +160,10 @@ public class ServerService extends Service {
                         bonjourRegister();
                         break;
                     }
+                    case ACTION_DISCONNECT: {
+                        disconnectTCPSocketServer();
+                        break;
+                    }
                     case ACTION_STOP: {
                         bonjourUnregister();
                         stopTCPSocketServer();
@@ -186,12 +191,24 @@ public class ServerService extends Service {
         appRtcClient.connectToRoom(connectionParameters);
     }
 
+    private void disconnectTCPSocketServer() {
+        if (!running)
+            return;
+
+        appRTCClientSignalingEvents.onDisconnect();
+        appRtcClient.restartServer();
+
+        peerConnectionClientPeerConnectionEvents.onDisconnect();
+        peerConnectionClient.close();
+        peerConnectionClient                     = OrgAppspotApprtcGlue.getPeerConnectionClient(ServerService.this, null, peerConnectionClientPeerConnectionEvents, null);
+    }
+
     private void stopTCPSocketServer() {
         appRtcClient.disconnectFromRoom();
         peerConnectionClient.close();
 
-        appRTCClientSignalingEvents.disconnect();
-        peerConnectionClientPeerConnectionEvents.disconnect();
+        appRTCClientSignalingEvents.onStop();
+        peerConnectionClientPeerConnectionEvents.onStop();
 
         appRTCClientSignalingEvents              = null;
         appRtcClient                             = null;
@@ -269,6 +286,15 @@ public class ServerService extends Service {
     public static Intent doStart(Context context, boolean broadcast) {
         Intent intent = new Intent(context, ServerService.class);
         return doAction(context, intent, ACTION_START, (broadcast && !running));
+    }
+
+    public static Intent doDisconnect(Context context) {
+        return doDisconnect(context, true);
+    }
+
+    public static Intent doDisconnect(Context context, boolean broadcast) {
+        Intent intent = new Intent(context, ServerService.class);
+        return doAction(context, intent, ACTION_DISCONNECT, (broadcast && running));
     }
 
     public static Intent doStop(Context context) {

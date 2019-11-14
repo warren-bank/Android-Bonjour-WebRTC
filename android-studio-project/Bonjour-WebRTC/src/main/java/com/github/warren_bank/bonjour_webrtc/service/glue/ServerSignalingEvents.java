@@ -30,13 +30,13 @@ public class ServerSignalingEvents implements AppRTCClient.SignalingEvents {
         }
     }
 
-    public void disconnect() {
-        context         = null;
+    public void onDisconnect() {
         callActivity    = null;
         signalingParams = null;
     }
 
-    public void disconnectFromRoom() {
+    public void onStop() {
+        context         = null;
         callActivity    = null;
         signalingParams = null;
     }

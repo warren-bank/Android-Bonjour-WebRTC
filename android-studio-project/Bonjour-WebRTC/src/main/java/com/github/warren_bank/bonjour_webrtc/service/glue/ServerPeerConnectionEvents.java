@@ -20,16 +20,16 @@ public class ServerPeerConnectionEvents implements PeerConnectionClient.PeerConn
         callActivity = events;
     }
 
-    public void disconnect() {
-        appRtcClient = null;
-        callActivity = null;
-    }
-
-    public void disconnectFromRoom() {
+    public void onDisconnect() {
         callActivity = null;
 
         if (appRtcClient != null)
-            appRtcClient.disconnectFromRoom();
+            appRtcClient.restartServer();
+    }
+
+    public void onStop() {
+        appRtcClient = null;
+        callActivity = null;
     }
 
     @Override
