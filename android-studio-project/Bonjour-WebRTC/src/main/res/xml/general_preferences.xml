@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:key="@string/pref_generalsettings_callalert_category_key"
+        android:title="@string/pref_generalsettings_callalert_category_title">
+
+        <CheckBoxPreference
+            android:key="@string/pref_generalsettings_callalert_enabled_key"
+            android:title="@string/pref_generalsettings_callalert_enabled_title"
+            android:dialogTitle="@string/pref_generalsettings_callalert_enabled_dlg"
+            android:defaultValue="@string/pref_generalsettings_callalert_enabled_default" />
+
+        <com.github.warren_bank.bonjour_webrtc.ui.components.FloatPreference
+            android:inputType="number"
+            android:key="@string/pref_generalsettings_callalert_timeout_key"
+            android:title="@string/pref_generalsettings_callalert_timeout_title"
+            android:dialogTitle="@string/pref_generalsettings_callalert_timeout_dlg"
+            android:defaultValue="@string/pref_generalsettings_callalert_timeout_default" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="@string/pref_generalsettings_socketserver_category_key"
+        android:title="@string/pref_generalsettings_socketserver_category_title">
+
+        <com.github.warren_bank.bonjour_webrtc.ui.components.IntegerPreference
+            android:inputType="number"
+            android:key="@string/pref_generalsettings_socketserver_port_key"
+            android:title="@string/pref_generalsettings_socketserver_port_title"
+            android:dialogTitle="@string/pref_generalsettings_socketserver_port_dlg"
+            android:defaultValue="@string/pref_generalsettings_socketserver_port_default" />
+
+    </PreferenceCategory>
+</PreferenceScreen>

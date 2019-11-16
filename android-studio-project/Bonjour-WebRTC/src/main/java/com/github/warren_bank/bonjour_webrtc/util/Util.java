@@ -1,5 +1,7 @@
 package com.github.warren_bank.bonjour_webrtc.util;
 
+import com.github.warren_bank.bonjour_webrtc.data_model.SharedPrefs;
+
 import android.content.Context;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -48,5 +50,24 @@ public final class Util {
         byte[] bytes = new byte[4];
         buffer.get(bytes);
         return InetAddress.getByAddress(bytes);
+    }
+
+    // =============================================================================================
+
+    public static String formatIpAddress(String ip, int port) {
+        return String.format("%1$s:%2$s", ip, port);
+    }
+
+    public static String getSocketServerIpAddress(Context context) {
+        String ip = "0.0.0.0";
+        return getSocketServerIpAddress(context, ip);
+    }
+
+    public static String getSocketServerIpAddress(Context context, String ip) {
+        int port  = SharedPrefs.getSocketServerPort(context);
+        return (port > 1024)
+          ? formatIpAddress(ip, port)
+          : ip
+        ;
     }
 }

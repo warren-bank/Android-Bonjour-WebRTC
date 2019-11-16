@@ -396,7 +396,7 @@ public final class OrgAppspotApprtcGlue {
     // =============================================================================================
 
     private static Intent getInboundCallActivityIntent(Context context) {
-        return getCallActivityIntent(context, "0.0.0.0:8888", false, false, 0, false, null);
+        return getCallActivityIntent(context, Util.getSocketServerIpAddress(context), false, false, 0, false, null);
     }
 
     public static void startInboundCallActivity(Context context) {

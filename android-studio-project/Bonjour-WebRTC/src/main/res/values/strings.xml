@@ -6,12 +6,17 @@
     <!-- actionbar menu -->
     <string name="menu_toggle_server">Toggle Server On/Off</string>
     <string name="menu_update_server_alias">Update Server Alias..</string>
-    <string name="menu_open_webrtc_settings">WebRTC Settings..</string>
+    <string name="menu_open_settings">Settings..</string>
 
     <!-- dialog: update server alias -->
-    <string name="dialog_update_server_alias_title">Server Alias</string>
+    <string name="dialog_update_server_alias_title">Server Alias:</string>
     <string name="dialog_update_server_alias_positive">SAVE</string>
     <string name="dialog_update_server_alias_negative">CANCEL</string>
+
+    <!-- dialog: open settings -->
+    <string name="dialog_open_settings_menu_title">Settings:</string>
+    <string name="dialog_open_settings_menu_option_general">General</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
 
     <!-- dialog: inbound call -->
     <string name="dialog_inbound_call_title">Inbound Call</string>
@@ -26,14 +31,12 @@
     -->
     <string name="notification_service_content_line2">Click to open.</string>
 
-    <!-- shared preferences -->
-    <string name="prefs_filename">PREFS</string>
-    <string name="pref_server_alias">server_alias</string>
-
     <!-- toasts -->
     <string name="error_invalid_room_name">ERROR: Cannot connect to invalid IP address</string>
 
     <!-- constants -->
     <string translatable="false" name="constant_bonjour_service_type">_bonjour_webrtc._http._tcp.local.</string>
-    <string translatable="false" name="constant_bonjour_service_port">7654</string>
+
+    <!-- constants: shared preferences -->
+    <string translatable="false" name="pref_server_alias">server_alias</string>
 </resources>

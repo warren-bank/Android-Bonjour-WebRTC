@@ -33,8 +33,9 @@ import org.webrtc.SessionDescription;
  * connections.
  */
 public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChannelEvents {
+  public static final int DEFAULT_PORT = 8888;
+
   private static final String TAG = "DirectRTCClient";
-  private static final int DEFAULT_PORT = 8888;
 
   // Regex pattern used for checking if room id looks like an IP.
   static final Pattern IP_PATTERN = Pattern.compile("("

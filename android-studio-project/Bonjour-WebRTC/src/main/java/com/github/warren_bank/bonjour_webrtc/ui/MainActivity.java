@@ -171,6 +171,7 @@ public class MainActivity extends RuntimePermissionsActivity {
             }
         });
 
+        SharedPrefs.setDefaultPreferenceValues(MainActivity.this);
         OrgAppspotApprtcGlue.setDefaultPreferenceValues(MainActivity.this);
     }
 
@@ -231,9 +232,8 @@ public class MainActivity extends RuntimePermissionsActivity {
                 openUpdateServerAliasDialog();
                 return true;
             }
-            case R.id.menu_open_webrtc_settings: {
-                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-                startActivity(intent);
+            case R.id.menu_open_settings: {
+                openSettingsDialog();
                 return true;
             }
             default: {
@@ -279,7 +279,7 @@ public class MainActivity extends RuntimePermissionsActivity {
     }
 
     // ---------------------------------------------------------------------------------------------
-    // open Server Alias dialog:
+    // open dialog: Update Server Alias
     // ---------------------------------------------------------------------------------------------
 
     private void openUpdateServerAliasDialog() {
@@ -311,6 +311,40 @@ public class MainActivity extends RuntimePermissionsActivity {
             }
         });
 
+        builder.show();
+    }
+
+    // ---------------------------------------------------------------------------------------------
+    // open dialog: Settings
+    // ---------------------------------------------------------------------------------------------
+
+    private void openSettingsDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle(R.string.dialog_open_settings_menu_title);
+        builder.setItems(R.array.dialog_open_settings_menu_options, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent;
+
+                switch (which + 1) {
+                    case 1:
+                        // General
+                        dialog.dismiss();
+                        intent = new Intent(MainActivity.this, GeneralSettingsActivity.class);
+                        startActivity(intent);
+                        break;
+                    case 2:
+                        // WebRTC
+                        dialog.dismiss();
+                        intent = new Intent(MainActivity.this, SettingsActivity.class);
+                        startActivity(intent);
+                        break;
+                    default:
+                        dialog.cancel();
+                        break;
+                }
+            }
+        });
         builder.show();
     }
 }

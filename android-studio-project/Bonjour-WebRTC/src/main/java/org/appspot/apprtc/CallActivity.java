@@ -13,6 +13,7 @@ package org.appspot.apprtc;
 import com.github.warren_bank.bonjour_webrtc.R;
 import com.github.warren_bank.bonjour_webrtc.service.ServerService;
 import com.github.warren_bank.bonjour_webrtc.util.OrgAppspotApprtcGlue;
+import com.github.warren_bank.bonjour_webrtc.util.Util;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -239,7 +240,7 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
     final Intent intent = getIntent();
 
     final String roomId = intent.getStringExtra(EXTRA_ROOMID);
-    isInboundCall = (roomId != null) && !roomId.isEmpty() && roomId.equals("0.0.0.0:8888") && ServerService.isStarted();
+    isInboundCall = (roomId != null) && !roomId.isEmpty() && roomId.equals(Util.getSocketServerIpAddress(CallActivity.this)) && ServerService.isStarted();
 
     final EglBase eglBase = (isInboundCall)
       ? ServerService.getPeerConnectionClient().getEglBase()

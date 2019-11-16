@@ -43,8 +43,15 @@
         </activity>
 
         <activity
+            android:name=".ui.GeneralSettingsActivity"
+            android:label="@string/general_settings_name"
+            android:theme="@style/app_theme"
+            android:configChanges="colorMode|density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|mcc|mnc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode"
+            android:launchMode="standard" />
+
+        <activity
             android:name="org.appspot.apprtc.SettingsActivity"
-            android:label="@string/settings_name"
+            android:label="@string/webrtc_settings_name"
             android:theme="@style/app_theme"
             android:configChanges="colorMode|density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|mcc|mnc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode"
             android:launchMode="standard" />

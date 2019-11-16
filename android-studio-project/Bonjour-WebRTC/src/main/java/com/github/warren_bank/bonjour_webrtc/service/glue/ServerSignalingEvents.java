@@ -1,7 +1,9 @@
 package com.github.warren_bank.bonjour_webrtc.service.glue;
 
+import com.github.warren_bank.bonjour_webrtc.data_model.SharedPrefs;
 import com.github.warren_bank.bonjour_webrtc.service.ServerService;
 import com.github.warren_bank.bonjour_webrtc.ui.InboundCallNotificationDialog;
+import com.github.warren_bank.bonjour_webrtc.util.OrgAppspotApprtcGlue;
 
 import org.appspot.apprtc.AppRTCClient;
 import org.appspot.apprtc.AppRTCClient.SignalingParameters;
@@ -58,7 +60,12 @@ public class ServerSignalingEvents implements AppRTCClient.SignalingEvents {
             ServerService.getMainThreadHandler().post(
                 new Runnable() {
                     public void run() {
-                        InboundCallNotificationDialog.show(context, null);
+                        if (SharedPrefs.getCallAlertEnabled(context)) {
+                            InboundCallNotificationDialog.show(context, null);
+                        }
+                        else {
+                            OrgAppspotApprtcGlue.startInboundCallActivity(context);
+                        }
                     }
                 }
             );

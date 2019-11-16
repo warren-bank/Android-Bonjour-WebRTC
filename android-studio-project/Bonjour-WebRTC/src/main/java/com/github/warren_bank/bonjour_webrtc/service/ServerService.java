@@ -194,7 +194,7 @@ public class ServerService extends Service {
         peerConnectionClientPeerConnectionEvents = new ServerPeerConnectionEvents(appRtcClient);
         peerConnectionClient                     = OrgAppspotApprtcGlue.getPeerConnectionClient(ServerService.this, null, peerConnectionClientPeerConnectionEvents, null);
 
-        RoomConnectionParameters connectionParameters = new RoomConnectionParameters(null, "0.0.0.0:8888", false, null);
+        RoomConnectionParameters connectionParameters = new RoomConnectionParameters(null, Util.getSocketServerIpAddress(ServerService.this), false, null);
         appRtcClient.connect(connectionParameters);
     }
 
@@ -234,11 +234,15 @@ public class ServerService extends Service {
 
             String serverAlias          = SharedPrefs.getServerAlias(ServerService.this);
             String BONJOUR_SERVICE_TYPE = getString(R.string.constant_bonjour_service_type);
-            int    BONJOUR_SERVICE_PORT = Integer.parseInt(getString(R.string.constant_bonjour_service_port), 10);
+            int    BONJOUR_SERVICE_PORT = SharedPrefs.getSocketServerPort(ServerService.this);
 
-            local_IP                    = ip_String;
+            // not used: the socket server port number is included in `local_IP`, so `MainActivity` doesn't need to inspect this field in the resolved `ServiceInfo`
+            if (BONJOUR_SERVICE_PORT   <= 1024)
+                BONJOUR_SERVICE_PORT    = DirectRTCClient.DEFAULT_PORT;
+
+            local_IP                    = Util.getSocketServerIpAddress(ServerService.this, ip_String);
             bonjour                     = JmDNS.create(ip_InetAddress);
-            ServiceInfo serviceInfo     = ServiceInfo.create(BONJOUR_SERVICE_TYPE, ip_String, BONJOUR_SERVICE_PORT, serverAlias);
+            ServiceInfo serviceInfo     = ServiceInfo.create(BONJOUR_SERVICE_TYPE, local_IP, BONJOUR_SERVICE_PORT, serverAlias);
 
             bonjour.registerService(serviceInfo);
         }

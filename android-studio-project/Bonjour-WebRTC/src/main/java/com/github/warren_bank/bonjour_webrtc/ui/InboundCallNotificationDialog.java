@@ -1,6 +1,7 @@
 package com.github.warren_bank.bonjour_webrtc.ui;
 
 import com.github.warren_bank.bonjour_webrtc.R;
+import com.github.warren_bank.bonjour_webrtc.data_model.SharedPrefs;
 import com.github.warren_bank.bonjour_webrtc.service.ServerService;
 import com.github.warren_bank.bonjour_webrtc.util.OrgAppspotApprtcGlue;
 
@@ -36,7 +37,7 @@ public final class InboundCallNotificationDialog {
             }
         };
 
-        milliseconds = 15000;  // timeout after 15 seconds
+        milliseconds = (int) (SharedPrefs.getCallAlertTimeout(context) * 1000);
         handler.postDelayed(runnable, milliseconds);
 
         alert.setTitle(context.getString(R.string.dialog_inbound_call_title));

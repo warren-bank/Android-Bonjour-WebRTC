@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="dialog_open_settings_menu_options">
+        <item>@string/dialog_open_settings_menu_option_general</item>
+        <item>@string/dialog_open_settings_menu_option_webrtc</item>
+    </string-array>
+
+</resources>

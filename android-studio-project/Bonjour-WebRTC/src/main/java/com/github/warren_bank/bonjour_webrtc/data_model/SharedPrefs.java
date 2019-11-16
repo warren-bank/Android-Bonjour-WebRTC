@@ -5,14 +5,20 @@ import com.github.warren_bank.bonjour_webrtc.util.Util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 public final class SharedPrefs {
 
     // ---------------------------------------------------------------------------------------------
 
+    public static void setDefaultPreferenceValues(Context context) {
+        PreferenceManager.setDefaultValues(context, R.xml.general_preferences, false);
+    }
+
+    // ---------------------------------------------------------------------------------------------
+
     public static SharedPreferences getSharedPreferences(Context context) {
-        String PREFS_FILENAME = context.getString(R.string.prefs_filename);
-        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_FILENAME, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         return sharedPreferences;
     }
 
@@ -271,6 +277,81 @@ public final class SharedPrefs {
         }
         catch(Exception e) {}
         return getString(sharedPreferences, context, pref_key_id, defValue);
+    }
+
+    // --------------------------------------------------------------------------------------------- putCallAlertEnabled()
+
+    public static boolean putCallAlertEnabled(Context context, boolean callAlertEnabled) {
+        SharedPreferences.Editor editor = getSharedPreferencesEditor(context);
+        return putCallAlertEnabled(editor, context, callAlertEnabled, true);
+    }
+
+    public static boolean putCallAlertEnabled(SharedPreferences.Editor editor, Context context, boolean callAlertEnabled, boolean flush) {
+        int pref_key_id = R.string.pref_generalsettings_callalert_enabled_key;
+        return putBoolean(editor, context, pref_key_id, callAlertEnabled, flush);
+    }
+
+    // --------------------------------------------------------------------------------------------- getCallAlertEnabled()
+
+    public static boolean getCallAlertEnabled(Context context) {
+        SharedPreferences sharedPreferences = getSharedPreferences(context);
+        return getCallAlertEnabled(sharedPreferences, context);
+    }
+
+    public static boolean getCallAlertEnabled(SharedPreferences sharedPreferences, Context context) {
+        int pref_key_id  = R.string.pref_generalsettings_callalert_enabled_key;
+        boolean defValue = Boolean.parseBoolean(context.getString(R.string.pref_generalsettings_callalert_enabled_default));
+        return getBoolean(sharedPreferences, context, pref_key_id, defValue);
+    }
+
+    // --------------------------------------------------------------------------------------------- putCallAlertTimeout()
+
+    public static boolean putCallAlertTimeout(Context context, float callAlertTimeout) {
+        SharedPreferences.Editor editor = getSharedPreferencesEditor(context);
+        return putCallAlertTimeout(editor, context, callAlertTimeout, true);
+    }
+
+    public static boolean putCallAlertTimeout(SharedPreferences.Editor editor, Context context, float callAlertTimeout, boolean flush) {
+        int pref_key_id = R.string.pref_generalsettings_callalert_timeout_key;
+        return putFloat(editor, context, pref_key_id, callAlertTimeout, flush);
+    }
+
+    // --------------------------------------------------------------------------------------------- getCallAlertTimeout()
+
+    public static float getCallAlertTimeout(Context context) {
+        SharedPreferences sharedPreferences = getSharedPreferences(context);
+        return getCallAlertTimeout(sharedPreferences, context);
+    }
+
+    public static float getCallAlertTimeout(SharedPreferences sharedPreferences, Context context) {
+        int pref_key_id = R.string.pref_generalsettings_callalert_timeout_key;
+        float defValue  = Float.parseFloat(context.getString(R.string.pref_generalsettings_callalert_timeout_default));
+        return getFloat(sharedPreferences, context, pref_key_id, defValue);
+    }
+
+    // --------------------------------------------------------------------------------------------- putSocketServerPort()
+
+    public static boolean putSocketServerPort(Context context, int socketServerPort) {
+        SharedPreferences.Editor editor = getSharedPreferencesEditor(context);
+        return putSocketServerPort(editor, context, socketServerPort, true);
+    }
+
+    public static boolean putSocketServerPort(SharedPreferences.Editor editor, Context context, int socketServerPort, boolean flush) {
+        int pref_key_id = R.string.pref_generalsettings_socketserver_port_key;
+        return putInt(editor, context, pref_key_id, socketServerPort, flush);
+    }
+
+    // --------------------------------------------------------------------------------------------- getSocketServerPort()
+
+    public static int getSocketServerPort(Context context) {
+        SharedPreferences sharedPreferences = getSharedPreferences(context);
+        return getSocketServerPort(sharedPreferences, context);
+    }
+
+    public static int getSocketServerPort(SharedPreferences sharedPreferences, Context context) {
+        int pref_key_id = R.string.pref_generalsettings_socketserver_port_key;
+        int defValue    = Integer.parseInt(context.getString(R.string.pref_generalsettings_socketserver_port_default), 10);
+        return getInt(sharedPreferences, context, pref_key_id, defValue);
     }
 
     // ---------------------------------------------------------------------------------------------
