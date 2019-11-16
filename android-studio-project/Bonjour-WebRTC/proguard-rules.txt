@@ -1,5 +1,4 @@
 -keep class com.github.warren_bank.bonjour_webrtc.** { *; }
--keep class de.tavendo.autobahn.** { *; }
 -keep class javax.jmdns.** { *; }
 -keep class org.appspot.apprtc.** { *; }
 -keep class org.webrtc.** { *; }

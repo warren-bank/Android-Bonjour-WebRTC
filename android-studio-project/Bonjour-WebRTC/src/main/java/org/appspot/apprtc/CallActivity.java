@@ -311,12 +311,8 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
 
         // Create connection client.
         // Use DirectRTCClient if room name is an IP.
-        // Otherwise:
-        //   - OLD: use the standard WebSocketRTCClient.
-        //   - NEW: show toast and finish.
+        // Otherwise, show error message and finish.
         if (loopback || !DirectRTCClient.IP_PATTERN.matcher(roomId).matches()) {
-            //appRtcClient = new WebSocketRTCClient(CallActivity.this);
-
             logAndToast(getString(R.string.error_invalid_room_name));
             Log.e(TAG, "Room name is incorrect! Value should be an IP address on the LAN (ex: 192.168.1.100:8888). Value is: '" + roomId + "'.");
             setResult(RESULT_CANCELED);

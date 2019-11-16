@@ -49,8 +49,6 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
     implementation      'org.jmdns:jmdns:'                         + project.ext.libVersionJmDNS       // (209.0 KB) https://mvnrepository.com/artifact/org.jmdns/jmdns
     implementation      'org.webrtc:google-webrtc:'                + project.ext.libVersionWebRTC      // ( 26.7 MB) https://mvnrepository.com/artifact/org.webrtc/google-webrtc
 
