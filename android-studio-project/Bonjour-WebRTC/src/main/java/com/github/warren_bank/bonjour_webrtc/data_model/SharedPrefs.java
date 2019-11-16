@@ -22,6 +22,23 @@ public final class SharedPrefs {
         return editor;
     }
 
+    // --------------------------------------------------------------------------------------------- remove()
+
+    public static boolean remove(Context context, int pref_key_id) {
+        SharedPreferences.Editor editor = getSharedPreferencesEditor(context);
+        return remove(editor, context, pref_key_id, true);
+    }
+
+    public static boolean remove(SharedPreferences.Editor editor, Context context, int pref_key_id, boolean flush) {
+        String key = context.getString(pref_key_id);
+        return remove(editor, key, flush);
+    }
+
+    public static boolean remove(SharedPreferences.Editor editor, String key, boolean flush) {
+        editor.remove(key);
+        return flush && editor.commit();
+    }
+
     // --------------------------------------------------------------------------------------------- putString()
 
     public static boolean putString(Context context, int pref_key_id, String value) {
@@ -233,7 +250,10 @@ public final class SharedPrefs {
 
     public static boolean putServerAlias(SharedPreferences.Editor editor, Context context, String serverAlias, boolean flush) {
         int pref_key_id = R.string.pref_server_alias;
-        return putString(editor, context, pref_key_id, serverAlias, flush);
+        return ((serverAlias == null) || serverAlias.isEmpty())
+          ? remove(editor, context, pref_key_id, flush)
+          : putString(editor, context, pref_key_id, serverAlias, flush)
+        ;
     }
 
     // --------------------------------------------------------------------------------------------- getServerAlias()

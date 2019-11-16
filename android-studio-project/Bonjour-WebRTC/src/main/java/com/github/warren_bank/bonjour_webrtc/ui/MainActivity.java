@@ -296,8 +296,8 @@ public class MainActivity extends RuntimePermissionsActivity {
         builder.setPositiveButton(R.string.dialog_update_server_alias_positive, new DialogInterface.OnClickListener() { 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String newServerAlias = input_server_alias.getText().toString();
-                if (!newServerAlias.isEmpty() && !newServerAlias.equals(oldServerAlias)) {
+                String newServerAlias = input_server_alias.getText().toString().trim();
+                if (!newServerAlias.equals(oldServerAlias)) {
                     SharedPrefs.putServerAlias(MainActivity.this, newServerAlias);
                 }
                 dialog.dismiss();
