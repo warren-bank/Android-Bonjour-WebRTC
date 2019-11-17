@@ -68,6 +68,7 @@ public final class InboundCallNotificationDialog {
             }
         );
         alert.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+        alert.setCancelable(false);
         alert.show();
     }
 
