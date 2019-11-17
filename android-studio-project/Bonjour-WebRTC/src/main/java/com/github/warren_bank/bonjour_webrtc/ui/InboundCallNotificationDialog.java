@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Handler;
 import android.view.WindowManager;
 
@@ -23,6 +24,7 @@ public final class InboundCallNotificationDialog {
         final Handler handler;
         final Runnable runnable;
         final int milliseconds;
+        final int windowType;
 
         mediaPlayer = getRingtoneMediaPlayer(context);
 
@@ -39,6 +41,8 @@ public final class InboundCallNotificationDialog {
 
         milliseconds = (int) (SharedPrefs.getCallAlertTimeout(context) * 1000);
         handler.postDelayed(runnable, milliseconds);
+
+        windowType = (Build.VERSION.SDK_INT < 26) ? WindowManager.LayoutParams.TYPE_SYSTEM_ALERT : WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
 
         alert.setTitle(context.getString(R.string.dialog_inbound_call_title));
         if ((contactName != null) && !contactName.isEmpty())
@@ -67,7 +71,7 @@ public final class InboundCallNotificationDialog {
                 }
             }
         );
-        alert.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+        alert.getWindow().setType(windowType);
         alert.setCancelable(false);
         alert.show();
     }

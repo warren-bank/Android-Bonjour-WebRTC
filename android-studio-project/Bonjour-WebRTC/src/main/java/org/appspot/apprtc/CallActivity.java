@@ -11,6 +11,7 @@
 package org.appspot.apprtc;
 
 import com.github.warren_bank.bonjour_webrtc.R;
+import com.github.warren_bank.bonjour_webrtc.security_model.RuntimePermissions;
 import com.github.warren_bank.bonjour_webrtc.service.ServerService;
 import com.github.warren_bank.bonjour_webrtc.util.OrgAppspotApprtcGlue;
 import com.github.warren_bank.bonjour_webrtc.util.Util;
@@ -127,10 +128,6 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
   public static final String EXTRA_ENABLE_RTCEVENTLOG = "org.appspot.apprtc.ENABLE_RTCEVENTLOG";
 
   private static final int CAPTURE_PERMISSION_REQUEST_CODE = 1;
-
-  // List of mandatory application permissions.
-  private static final String[] MANDATORY_PERMISSIONS = {"android.permission.MODIFY_AUDIO_SETTINGS",
-      "android.permission.RECORD_AUDIO", "android.permission.INTERNET"};
 
   // Peer connection statistics callback period in ms.
   private static final int STAT_CALLBACK_PERIOD = 1000;
@@ -275,13 +272,10 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
     setSwappedFeeds(true /* isSwappedFeeds */);
 
     // Check for mandatory permissions.
-    for (String permission : MANDATORY_PERMISSIONS) {
-      if (checkCallingOrSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
-        logAndToast("Permission " + permission + " is not granted");
-        setResult(RESULT_CANCELED);
+    if (!RuntimePermissions.hasMandatoryPermissions(CallActivity.this)) {
+        logAndToast("Required permission(s) have been revoked since 'Bonjour WebRTC' was started.");
         finish();
         return;
-      }
     }
 
     // Get Intent parameters.
@@ -289,7 +283,6 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
     if (!isInboundCall && (roomId == null || roomId.length() == 0)) {
       logAndToast(getString(R.string.missing_url));
       Log.e(TAG, "Incorrect room ID in intent!");
-      setResult(RESULT_CANCELED);
       finish();
       return;
     }
@@ -317,7 +310,6 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
         if (loopback || !DirectRTCClient.IP_PATTERN.matcher(roomId).matches()) {
             logAndToast(getString(R.string.error_invalid_room_name));
             Log.e(TAG, "Room name is incorrect! Value should be an IP address on the LAN (ex: 192.168.1.100:8888). Value is: '" + roomId + "'.");
-            setResult(RESULT_CANCELED);
             finish();
             return;
         }
@@ -644,12 +636,8 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
     fullscreenRenderer   = null;
     audioManager         = null;
 
-    if (connected && !isError) {
-      setResult(RESULT_OK);
-    } else {
-      setResult(RESULT_CANCELED);
-    }
-    finish();
+    if (!isFinishing())
+      finish();
   }
 
   private void disconnectWithErrorMessage(final String errorMessage) {

@@ -17,6 +17,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -225,7 +226,11 @@ public class MainActivity extends RuntimePermissionsActivity {
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch(menuItem.getItemId()) {
             case R.id.menu_toggle_server: {
-                toggleServer();
+                selectedServerListItem = null;
+
+                if (RuntimePermissions.isEnabled(MainActivity.this)) {
+                    onPermissionsGranted();
+                }
                 return true;
             }
             case R.id.menu_update_server_alias: {
@@ -252,11 +257,26 @@ public class MainActivity extends RuntimePermissionsActivity {
     }
 
     @Override
-    public void onPermissionsGranted() {
-        connectToServer(selectedServerListItem);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        RuntimePermissions.onActivityResult(MainActivity.this, requestCode, resultCode, data);
+    }
 
-        selectedServerListItem = null;
-        finish();
+    @Override
+    public void onPermissionsGranted() {
+        if (selectedServerListItem == null) {
+            toggleServer();
+        }
+        else {
+            connectToServer(selectedServerListItem);
+            selectedServerListItem = null;
+            finish();
+        }
+    }
+
+    @Override
+    public void onPermissionsDenied(String[] permissions) {
+        String text = "The following list contains required permissions that are not yet granted:\n  " + TextUtils.join("\n  ", permissions);
+        Toast.makeText(MainActivity.this, text, Toast.LENGTH_LONG).show();
     }
 
     // ---------------------------------------------------------------------------------------------
