@@ -181,6 +181,7 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
   private boolean isError;
   private boolean callControlFragmentVisible = true;
   private long callStartedTimeMs;
+  private boolean pipEnabled = true;
   private boolean micEnabled = true;
   private boolean screencaptureEnabled;
   private static Intent mediaProjectionPermissionResultData;
@@ -518,6 +519,16 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
     if (peerConnectionClient != null) {
       peerConnectionClient.changeCaptureFormat(width, height, framerate);
     }
+  }
+
+  @Override
+  public boolean onTogglePip() {
+    if (peerConnectionClient != null) {
+      pipEnabled = !pipEnabled;
+      int visibility = (pipEnabled) ? View.VISIBLE : View.INVISIBLE;
+      pipRenderer.setVisibility(visibility);
+    }
+    return pipEnabled;
   }
 
   @Override

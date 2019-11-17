@@ -31,6 +31,7 @@ public class CallFragment extends Fragment {
   private TextView contactView;
   private ImageButton cameraSwitchButton;
   private ImageButton videoScalingButton;
+  private ImageButton togglePipButton;
   private ImageButton toggleMuteButton;
   private TextView captureFormatText;
   private SeekBar captureFormatSlider;
@@ -46,6 +47,7 @@ public class CallFragment extends Fragment {
     void onCameraSwitch();
     void onVideoScalingSwitch(ScalingType scalingType);
     void onCaptureFormatChange(int width, int height, int framerate);
+    boolean onTogglePip();
     boolean onToggleMic();
   }
 
@@ -59,6 +61,7 @@ public class CallFragment extends Fragment {
     ImageButton disconnectButton = controlView.findViewById(R.id.button_call_disconnect);
     cameraSwitchButton = controlView.findViewById(R.id.button_call_switch_camera);
     videoScalingButton = controlView.findViewById(R.id.button_call_scaling_mode);
+    togglePipButton = controlView.findViewById(R.id.button_call_toggle_pip);
     toggleMuteButton = controlView.findViewById(R.id.button_call_toggle_mic);
     captureFormatText = controlView.findViewById(R.id.capture_format_text_call);
     captureFormatSlider = controlView.findViewById(R.id.capture_format_slider_call);
@@ -92,6 +95,15 @@ public class CallFragment extends Fragment {
       }
     });
     scalingType = ScalingType.SCALE_ASPECT_FILL;
+
+    togglePipButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        boolean enabled = callEvents.onTogglePip();
+        int img = (enabled) ? R.drawable.ic_action_hide_pip : R.drawable.ic_action_show_pip;
+        togglePipButton.setBackgroundResource(img);
+      }
+    });
 
     toggleMuteButton.setOnClickListener(new View.OnClickListener() {
       @Override
