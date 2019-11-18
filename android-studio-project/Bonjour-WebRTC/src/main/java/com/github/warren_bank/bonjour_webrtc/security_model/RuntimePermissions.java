@@ -73,9 +73,15 @@ public final class RuntimePermissions {
             return;
 
         if (grantResults.length == 0) {
-            // request was cancelled. show the prompts again.
-            if (isEnabled(activity))
-                activity.onPermissionsGranted();
+            if (permissions.length == 0) {
+                // no "dangerous" permissions are needed
+                onPermissionsGranted(activity);
+            }
+            else {
+                // request was cancelled. show the prompts again.
+                if (isEnabled(activity))
+                    activity.onPermissionsGranted();
+            }
         }
         else {
             ArrayList<String> deniedPermissions = new ArrayList<>();
@@ -103,7 +109,7 @@ public final class RuntimePermissions {
 
     // =============================================================================================
 
-    private static void onPermissionsGranted(RuntimePermissionsActivity activity) {
+    public static void onPermissionsGranted(RuntimePermissionsActivity activity) {
         if (!SharedPrefs.getCallAlertEnabled(activity) || canDrawOverlays(activity))
             activity.onPermissionsGranted();
         else
