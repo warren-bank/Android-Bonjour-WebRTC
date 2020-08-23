@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.preference.PreferenceFragment;
 
 public class GeneralSettingsActivity extends Activity {
-    private static final class GeneralSettingsFragment extends PreferenceFragment {
+    public static final class GeneralSettingsFragment extends PreferenceFragment {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
