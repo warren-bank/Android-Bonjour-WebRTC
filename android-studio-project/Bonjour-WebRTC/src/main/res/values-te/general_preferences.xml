@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">సాదారణ అమరిక</string>
+    <string name="pref_generalsettings_callalert_category_title">ఇన్బింట్ కాల్స్.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">అలెర్ట్ను చూపుము.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">ఇన్బాయ్ కాల్స్ ను అంగీకరించడం లేదా నిరాకముచేయుటకు ఐచ్ఛికాలతో జాగ్య డైలాగ్.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">Alert Timeout.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">హెచ్చరిక సమయ సమయం (సెకన్లలో)).</string>
+    <string name="pref_generalsettings_socketserver_category_title">స్థానిక సాకెట్ సర్వర్.</string>
+    <string name="pref_generalsettings_socketserver_port_title">పోర్ట్ సంఖ్య.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">విండీ పోర్ట్ యొక్క సంఖ్యను ప్రవేశపెట్టుము (పైన 1024).</string>
+</resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">Lülita Server Sisse/Välja</string>
+    <string name="menu_update_server_alias">Uuenda serveri aliase..</string>
+    <string name="menu_open_settings">Seadistused..</string>
+    <string name="dialog_update_server_alias_title">Serveri alias:</string>
+    <string name="dialog_update_server_alias_positive">SAVE</string>
+    <string name="dialog_update_server_alias_negative">LOOBU</string>
+    <string name="dialog_open_settings_menu_title">Seadistused:</string>
+    <string name="dialog_open_settings_menu_option_general">Üldine</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">Seotud kõne</string>
+    <string name="dialog_inbound_call_positive">ACEPT</string>
+    <string name="dialog_inbound_call_negative">ELT</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: server töötab ja avastatav LAN</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">Klõpsa avamiseks. Jätta lõpetamiseni.</string>
+    -->
+    <string name="notification_service_content_line2">Klõpsa avamiseks.</string>
+    <string name="error_invalid_room_name">VIGA: ei saa ühenduda vigadega IP Aadress</string>
+</resources>

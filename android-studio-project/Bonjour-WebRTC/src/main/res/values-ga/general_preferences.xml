@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">Socruithe Ginearálta</string>
+    <string name="pref_generalsettings_callalert_category_title">Glaonna Neamhcheangaltach.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">Taispeáin an Albain.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">Cumasaigh dialóg aláraim le roghanna chun glaonna ar bith a ghlacadh nó a dhiúltú.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">Alert Timeout.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">Iontráil lá na haláraim (i soicind).</string>
+    <string name="pref_generalsettings_socketserver_category_title">Freastalaí soicéad logánta.</string>
+    <string name="pref_generalsettings_socketserver_port_title">Uimhir Phoirt.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">Iontráil líon na n-óstán (os cionn 1024).</string>
+</resources>

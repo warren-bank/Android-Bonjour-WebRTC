@@ -1,0 +1,14 @@
+{
+  "name": "@warren-bank/Android-Bonjour-WebRTC",
+  "private": true,
+  "license": "GPL-2.0",
+  "devDependencies": {
+    "@warren-bank/translate-android-strings": "^1.7.3"
+  },
+  "scripts": {
+    "translate_app":   "node_modules/.bin/translate-android-strings -i \"en\" -f \"android-studio-project/Bonjour-WebRTC/src/main/res/values/strings.xml\"                    -d \"android-studio-project/Bonjour-WebRTC/src/main/res\" -m --na --nc --nw -b \"WebRTC\" -b \"Bonjour WebRTC\" -b \"IP\"",
+    "translate_lib":   "node_modules/.bin/translate-android-strings -i \"en\" -f \"android-studio-project/Bonjour-WebRTC/src/main/res/values/org_appspot_apprtc_strings.xml\" -d \"android-studio-project/Bonjour-WebRTC/src/main/res\" -m --na --nc --nw -b \"WebRTC\" -b \"URL\" -b \"Camera2\" -b \"OpenSL ES\" -b \"RtcEventLog\"",
+    "translate_prefs": "node_modules/.bin/translate-android-strings -i \"en\" -f \"android-studio-project/Bonjour-WebRTC/src/main/res/values/general_preferences.xml\"        -d \"android-studio-project/Bonjour-WebRTC/src/main/res\" -m --na --nc --nw",
+    "translate":       "npm run translate_app && npm run translate_lib && npm run translate_prefs"
+  }
+}

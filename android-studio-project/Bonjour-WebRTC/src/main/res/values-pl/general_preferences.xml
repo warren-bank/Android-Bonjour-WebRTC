@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">Ustawienia ogólne</string>
+    <string name="pref_generalsettings_callalert_category_title">Wywołania przychodzące.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">Pokaż alert.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">Włącz okno dialogowe alertów z opcjami akceptowania lub odrzucania wywołań przychodzących.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">Limit czasu alertu.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">Wprowadź czas trwania limitu czasu alertu (w sekundach)).</string>
+    <string name="pref_generalsettings_socketserver_category_title">Lokalny serwer gniazd.</string>
+    <string name="pref_generalsettings_socketserver_port_title">Numer portu.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">Wprowadź numer portu nasłuchiwania (powyżej 1024).</string>
+</resources>

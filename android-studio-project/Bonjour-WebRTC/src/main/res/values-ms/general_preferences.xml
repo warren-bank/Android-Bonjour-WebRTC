@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">Tetapan Umum</string>
+    <string name="pref_generalsettings_callalert_category_title">Panggilan Inbound.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">Papar Amaran.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">Benarkan dialog amaran dengan pilihan untuk menerima atau menolak panggilan inbound.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">Masa Tamat Amaran.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">Masukkan tempoh masa tamat amaran (dalam saat).</string>
+    <string name="pref_generalsettings_socketserver_category_title">Pelayan soket setempat.</string>
+    <string name="pref_generalsettings_socketserver_port_title">Nombor Port.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">Masukkan nombor port mendengar (diatas 1024).</string>
+</resources>

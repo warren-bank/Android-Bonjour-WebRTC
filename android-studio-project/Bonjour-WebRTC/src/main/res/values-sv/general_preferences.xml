@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">Allmänna inställningar</string>
+    <string name="pref_generalsettings_callalert_category_title">Inkommande Calls.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">Visa varning.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">Aktivera varningsdialogruta med alternativ för att acceptera eller avvisa inkommande samtal.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">Varningstidsgräns.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">Ange tid för aviseringstimeout (i sekunder).</string>
+    <string name="pref_generalsettings_socketserver_category_title">Lokal socketserver.</string>
+    <string name="pref_generalsettings_socketserver_port_title">Portnummer.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">Ange antal lyssningsport (över 1024)).</string>
+</resources>

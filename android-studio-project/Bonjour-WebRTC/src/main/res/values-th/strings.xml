@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">เปิด/ปิดเซิร์ฟเวอร์</string>
+    <string name="menu_update_server_alias">อัพเดตนามแฝงของเซิร์ฟเวอร์..</string>
+    <string name="menu_open_settings">การตั้งค่า..</string>
+    <string name="dialog_update_server_alias_title">นามแฝงของเซิร์ฟเวอร์:</string>
+    <string name="dialog_update_server_alias_positive">บันทึก</string>
+    <string name="dialog_update_server_alias_negative">ยกเลิก</string>
+    <string name="dialog_open_settings_menu_title">การตั้งค่า:</string>
+    <string name="dialog_open_settings_menu_option_general">ทั่วไป</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">การโทรเข้า</string>
+    <string name="dialog_inbound_call_positive">ยอมรับ</string>
+    <string name="dialog_inbound_call_negative">ปฏิเสธ</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: เซิร์ฟเวอร์กำลังรันอยู่และสามารถค้นหาได้บน LAN</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">คลิกเพื่อเปิด ยกเลิกเพื่อหยุด.</string>
+    -->
+    <string name="notification_service_content_line2">คลิกเพื่อเปิด.</string>
+    <string name="error_invalid_room_name">ข้อผิดพลาด: ไม่สามารถเชื่อมต่อกับที่ไม่ถูกต้อง IP แอดเดรส</string>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">Общие параметры</string>
+    <string name="pref_generalsettings_callalert_category_title">Входящие вызовы.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">Показать оповещение.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">Включить окно предупреждений с опциями для приема или отклонения входящих вызовов.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">Срок ожидания оповещения.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">Введите продолжительность тайм-аута оповещения (в секундах)).</string>
+    <string name="pref_generalsettings_socketserver_category_title">Локальный сервер гнезд.</string>
+    <string name="pref_generalsettings_socketserver_port_title">Номер порта.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">Введите номер порта ожидания (выше 1024).</string>
+</resources>

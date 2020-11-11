@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">Preklopi strežnik vkloh/izklopa</string>
+    <string name="menu_update_server_alias">Posodobi Vzdevek Strežnika..</string>
+    <string name="menu_open_settings">Nastavitve..</string>
+    <string name="dialog_update_server_alias_title">Vzdevek Strežnika:</string>
+    <string name="dialog_update_server_alias_positive">SAVE</string>
+    <string name="dialog_update_server_alias_negative">CANCEL</string>
+    <string name="dialog_open_settings_menu_title">Nastavitve:</string>
+    <string name="dialog_open_settings_menu_option_general">Splošno</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">Vhodni klic</string>
+    <string name="dialog_inbound_call_positive">SPREJMI</string>
+    <string name="dialog_inbound_call_negative">ZAVRNI</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: strežnik se izvaja in ga v lokalnem omrežju ni mogoče izvajati</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">Kliknite, da odprete. Zavrni za zaustavitev.</string>
+    -->
+    <string name="notification_service_content_line2">Kliknite, če želite odpreti.</string>
+    <string name="error_invalid_room_name">NAPAKA: Ni mogoče vzpostaviti povezave z neveljavno IP naslov</string>
+</resources>

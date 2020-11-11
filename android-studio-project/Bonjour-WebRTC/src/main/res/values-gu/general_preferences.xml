@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">સામાન્ય સુયોજનો</string>
+    <string name="pref_generalsettings_callalert_category_title">ઈનબાઉન્ડ કોલ્સ.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">ચેતવણી બતાવો.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">બંધબેસતા કોલને સ્વીકારવા અથવા નકારવા માટે વિકલ્પો સાથે ચેતવણી સંવાદ સક્રિય કરો.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">ચેતવણી સમયસમાપ્તિ.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">ચેતવણી સમયસમાપ્તિ સમયગાળો દાખલ કરો (સેકંડમાં).</string>
+    <string name="pref_generalsettings_socketserver_category_title">સ્થાનિક સોકેટ સર્વર.</string>
+    <string name="pref_generalsettings_socketserver_port_title">પોર્ટ નંબર.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">સાંભળવાની પોર્ટની સંખ્યા દાખલ કરો (1024 ઉપર).</string>
+</resources>

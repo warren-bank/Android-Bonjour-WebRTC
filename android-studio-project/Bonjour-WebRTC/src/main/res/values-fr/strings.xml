@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">Activer / désactiver / désactiver le serveur</string>
+    <string name="menu_update_server_alias">Mettre à jour un alias serveur..</string>
+    <string name="menu_open_settings">Paramètres..</string>
+    <string name="dialog_update_server_alias_title">Alias du serveur:</string>
+    <string name="dialog_update_server_alias_positive">SAUVEGARDER</string>
+    <string name="dialog_update_server_alias_negative">ANNULER</string>
+    <string name="dialog_open_settings_menu_title">Paramètres:</string>
+    <string name="dialog_open_settings_menu_option_general">Général</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">Appel entrant</string>
+    <string name="dialog_inbound_call_positive">ACCEPTER</string>
+    <string name="dialog_inbound_call_negative">REJETER</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: Le serveur est en cours d\'exécution et peut être découvert sur le réseau local</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">Cliquez pour ouvrir. Arrêt de l\'arrêt.</string>
+    -->
+    <string name="notification_service_content_line2">Cliquez pour ouvrir.</string>
+    <string name="error_invalid_room_name">ERREUR: Impossible de se connecter à une connexion non valide IP Adresse</string>
+</resources>

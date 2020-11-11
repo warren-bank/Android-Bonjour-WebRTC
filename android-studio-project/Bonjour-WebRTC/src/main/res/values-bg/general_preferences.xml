@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">Общи настройки:</string>
+    <string name="pref_generalsettings_callalert_category_title">Входящи повиквания:.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">Тревога!.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">Активирайте диалоговия прозорец за предупреждение с опции за приемане или отхвърляне на входящи повиквания.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">Таймаут на тревога.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">Въведете продължителност на таймаут на сигнала (в секунди).</string>
+    <string name="pref_generalsettings_socketserver_category_title">Локален сокет сървър.</string>
+    <string name="pref_generalsettings_socketserver_port_title">Номер на порт.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">Въведете брой на слушането на порт (над 1024).</string>
+</resources>

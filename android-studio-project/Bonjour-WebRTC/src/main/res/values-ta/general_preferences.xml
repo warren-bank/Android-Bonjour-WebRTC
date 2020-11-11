@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">பொதுவான அமைப்புகள்</string>
+    <string name="pref_generalsettings_callalert_category_title">Inbound Calls.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">அலாரத்தை காட்டு.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">உள்ளீட்டு அழைப்புகளை ஏற்றுக்கொள்ளவும் அல்லது நிராகரிப்பதற்கு விருப்பங்களுடன் எச்சரிக்கை உரையாடல்.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">Alert Timeout.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">எச்சரிக்கை நேரம் இடைவெளியை உள்ளிடு (நொடிகளில்).</string>
+    <string name="pref_generalsettings_socketserver_category_title">உள்ளமை சோதனை சேவையகம்.</string>
+    <string name="pref_generalsettings_socketserver_port_title">துறை எண்.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">வார்த்தைகளின் எண்ணிக்கையை உள்ளிடு (1024 க்கு மேல்)).</string>
+</resources>

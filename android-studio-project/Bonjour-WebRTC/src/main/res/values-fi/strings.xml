@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">Ota yhteys IBM :n ohjelmistoihin.</string>
+    <string name="menu_update_server_alias">Päivitä palvelin..</string>
+    <string name="menu_open_settings">Asetukset..</string>
+    <string name="dialog_update_server_alias_title">Palvelimen nimi:</string>
+    <string name="dialog_update_server_alias_positive">TALLENNA</string>
+    <string name="dialog_update_server_alias_negative">PERUUTA</string>
+    <string name="dialog_open_settings_menu_title">Asetukset:</string>
+    <string name="dialog_open_settings_menu_option_general">Yleistä</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">Saapuva puhelu</string>
+    <string name="dialog_inbound_call_positive">HYVÄKSY</string>
+    <string name="dialog_inbound_call_negative">HYLKÄÄ</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: Palvelin on ajossa ja löydettävissä lähiverkossa</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">Klikkaa avata. Keskeytys lopettaa.</string>
+    -->
+    <string name="notification_service_content_line2">Avaa ovi.</string>
+    <string name="error_invalid_room_name">VIRHE: Yhteyden muodostus ei onnistu IP Osoite</string>
+</resources>

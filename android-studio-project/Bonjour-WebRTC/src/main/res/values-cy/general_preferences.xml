@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">Gosodiadau Cyffredinol</string>
+    <string name="pref_generalsettings_callalert_category_title">Galwadau heb ei rwymo.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">Dangos Rhybudd.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">Galluogi deialog rhybuddio gyda dewisiadau i dderbyn neu wrthod galwadau mewnrwymo.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">Terfyn Amser Hysbysu.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">Rhowch hyd terfyn amser rhybuddio (mewn eiliadau).</string>
+    <string name="pref_generalsettings_socketserver_category_title">Gweinydd soced lleol.</string>
+    <string name="pref_generalsettings_socketserver_port_title">Rhif Porth.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">Rhowch nifer o borth gwrando (uwchben 1024).</string>
+</resources>

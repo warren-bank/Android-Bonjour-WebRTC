@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">Togol Pelayan Pada/Off</string>
+    <string name="menu_update_server_alias">Kemaskini Pelayan Alias..</string>
+    <string name="menu_open_settings">Tetapan..</string>
+    <string name="dialog_update_server_alias_title">Alias Pelayan:</string>
+    <string name="dialog_update_server_alias_positive">SIMPAN</string>
+    <string name="dialog_update_server_alias_negative">BATAL</string>
+    <string name="dialog_open_settings_menu_title">Tetapan:</string>
+    <string name="dialog_open_settings_menu_option_general">&amp; Umum</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">Panggilan Inbound</string>
+    <string name="dialog_inbound_call_positive">TERIMA</string>
+    <string name="dialog_inbound_call_negative">TOLAK</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: pelayan berjalan dan discoverable pada LAN</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">Klik untuk dibuka. Lepaskan untuk berhenti..</string>
+    -->
+    <string name="notification_service_content_line2">Klik untuk dibuka.</string>
+    <string name="error_invalid_room_name">RALAT: Tidak dapat sambung ke tidak sah IP alamat</string>
+</resources>

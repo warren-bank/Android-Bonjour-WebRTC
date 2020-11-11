@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">Všeobecné nastavenia</string>
+    <string name="pref_generalsettings_callalert_category_title">Prichádzajúce volania.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">Zobraziť výstraha.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">Povoliť varovné dialógové okno s voľbami na prijatie alebo odmietnutie prichádzajúcich volaní.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">Časový limit výstrahy.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">Zadajte trvanie časového limitu výstrahy (v sekundách)).</string>
+    <string name="pref_generalsettings_socketserver_category_title">Lokálny soket server.</string>
+    <string name="pref_generalsettings_socketserver_port_title">Číslo portu.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">Zadajte číslo portu počúvania (nad 1024).</string>
+</resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">サーバーのオン/オフの切り替え</string>
+    <string name="menu_update_server_alias">サーバー別名の更新..</string>
+    <string name="menu_open_settings">設定..</string>
+    <string name="dialog_update_server_alias_title">サーバー別名:</string>
+    <string name="dialog_update_server_alias_positive">セーブ</string>
+    <string name="dialog_update_server_alias_negative">キャンセル</string>
+    <string name="dialog_open_settings_menu_title">設定:</string>
+    <string name="dialog_open_settings_menu_option_general">一般</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">インバウンド・コール</string>
+    <string name="dialog_inbound_call_positive">アクセプト</string>
+    <string name="dialog_inbound_call_negative">拒否</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: サーバーが稼働中で、 LAN 上で検出可能</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">クリックして開きます。 停止の却下.</string>
+    -->
+    <string name="notification_service_content_line2">クリックして開く.</string>
+    <string name="error_invalid_room_name">エラー: 無効な接続に接続できません IP アドレス</string>
+</resources>

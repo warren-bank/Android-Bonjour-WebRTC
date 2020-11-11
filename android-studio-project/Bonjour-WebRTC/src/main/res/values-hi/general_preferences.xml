@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">सामान्य विन्यास</string>
+    <string name="pref_generalsettings_callalert_category_title">इनबाउंड कॉल.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">चेतावनी दिखाएँ.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">इनबाउंड कॉल को स्वीकारने या अस्वीकार करने के लिए विकल्प के साथ सचेत संवाद सक्षम करें.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">चेतावनी टाइमआउट.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">चेतावनी टाइमआउट की अवधि भरें (सेकेंड में).</string>
+    <string name="pref_generalsettings_socketserver_category_title">स्थानीय सॉकेट सर्वर.</string>
+    <string name="pref_generalsettings_socketserver_port_title">पोर्ट संख्या.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">सुनने वाले पोर्ट की संख्या (1024 से ऊपर) दाखिल करें).</string>
+</resources>

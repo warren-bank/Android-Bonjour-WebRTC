@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">Thiết lập chung</string>
+    <string name="pref_generalsettings_callalert_category_title">Các lệnh gọi đến.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">Hiện cảnh báo.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">Bật hội thoại cảnh báo có tùy chọn chấp nhận hoặc tư ̀ chối lệnh gọi đến.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">Thời hạn báo động.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">Nhập thời gian chơ ̀ báo động (tính bằng giây).</string>
+    <string name="pref_generalsettings_socketserver_category_title">Máy chủ socket cục bộ.</string>
+    <string name="pref_generalsettings_socketserver_port_title">Số cổng.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">Nhập sô ́ cổng đang nghe (trên 1024).</string>
+</resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">打开 /关闭服务器</string>
+    <string name="menu_update_server_alias">更新服务器别名..</string>
+    <string name="menu_open_settings">设置..</string>
+    <string name="dialog_update_server_alias_title">服务器别名:</string>
+    <string name="dialog_update_server_alias_positive">Save</string>
+    <string name="dialog_update_server_alias_negative">取消</string>
+    <string name="dialog_open_settings_menu_title">设置:</string>
+    <string name="dialog_open_settings_menu_option_general">一般</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">入站呼叫</string>
+    <string name="dialog_inbound_call_positive">接受</string>
+    <string name="dialog_inbound_call_negative">拒绝</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: 服务器在 LAN 上正在运行和可发现</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">单击以打开。 拒绝停止.</string>
+    -->
+    <string name="notification_service_content_line2">单击以打开.</string>
+    <string name="error_invalid_room_name">错误: 无法连接到无效 IP 地址</string>
+</resources>

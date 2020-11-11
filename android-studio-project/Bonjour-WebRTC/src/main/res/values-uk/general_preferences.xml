@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">Загальні параметри</string>
+    <string name="pref_generalsettings_callalert_category_title">Вхідні виклики.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">Показати попередження.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">Увімкнути діалогове вікно попередження з пунктами для прийняття або відкидання вхідних викликів.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">Час очікування попередження.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">Введіть тривалість часу очікування сповіщень (у секундах)).</string>
+    <string name="pref_generalsettings_socketserver_category_title">Локальний сервер сокета.</string>
+    <string name="pref_generalsettings_socketserver_port_title">Номер порту.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">Введіть номер порту прослуховування (вище 1024).</string>
+</resources>

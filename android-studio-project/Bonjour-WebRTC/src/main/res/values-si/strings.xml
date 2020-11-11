@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">සේවාදායකය මත/Off</string>
+    <string name="menu_update_server_alias">සර්වර් අලියස් යාවත්කාලීන කරන්න..</string>
+    <string name="menu_open_settings">සැකසුම්..</string>
+    <string name="dialog_update_server_alias_title">සර්වර් අලියස්:</string>
+    <string name="dialog_update_server_alias_positive">සුරකින්න</string>
+    <string name="dialog_update_server_alias_negative">අවලංගු කරන්න</string>
+    <string name="dialog_open_settings_menu_title">සැකසුම්:</string>
+    <string name="dialog_open_settings_menu_option_general">සාමාන්ය</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">Inbound कॉल</string>
+    <string name="dialog_inbound_call_positive">පිළිගන්න</string>
+    <string name="dialog_inbound_call_negative">ප්රතික්ෂේප කරන්න</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: LAN මත සේවාදායකය ක්රියාත්මක වෙමින් පවතී.</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">විවෘත කිරීමට ක්ලික් කරන්න. නවත්වන්න..</string>
+    -->
+    <string name="notification_service_content_line2">විවෘත කිරීමට ක්ලික් කරන්න.</string>
+    <string name="error_invalid_room_name">ERROR: සාවද්ය ලෙස සම්බන්ධ විය නොහැක IP ලිපිනය</string>
+</resources>

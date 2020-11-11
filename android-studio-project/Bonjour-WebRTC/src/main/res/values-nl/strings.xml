@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">Server aan/uit-/uitschakelen</string>
+    <string name="menu_update_server_alias">Serveralias bijwerken..</string>
+    <string name="menu_open_settings">Instellingen..</string>
+    <string name="dialog_update_server_alias_title">Serveralias:</string>
+    <string name="dialog_update_server_alias_positive">OPSLAAN</string>
+    <string name="dialog_update_server_alias_negative">ANNULEREN</string>
+    <string name="dialog_open_settings_menu_title">Instellingen:</string>
+    <string name="dialog_open_settings_menu_option_general">Algemeen</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">Inkomende oproep</string>
+    <string name="dialog_inbound_call_positive">ACCEPTEREN</string>
+    <string name="dialog_inbound_call_negative">AFWIJZEN</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: server is actief en vindbaar op LAN</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">Klik om te openen. Afwijzen om te stoppen.</string>
+    -->
+    <string name="notification_service_content_line2">Klik om te openen.</string>
+    <string name="error_invalid_room_name">FOUT: Kan geen verbinding maken met ongeldige IP adres</string>
+</resources>

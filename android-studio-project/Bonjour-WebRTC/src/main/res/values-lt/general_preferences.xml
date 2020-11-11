@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">Bendrieji nustatymai</string>
+    <string name="pref_generalsettings_callalert_category_title">Skambučių skambučiai.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">Rodyti įspėjamąją.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">Įjungti perspėjimo dialogą su parinktis, kaip priimti arba atmesti įrištus skambučius.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">Įspėjimo laikas.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">Įveskite įspėjimo laiko trukmę (sekundmačiai)).</string>
+    <string name="pref_generalsettings_socketserver_category_title">Vietinis lizdas serveris.</string>
+    <string name="pref_generalsettings_socketserver_port_title">Uosto numeris.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">Įveskite klausymo prievado numerį (virš 1024)).</string>
+</resources>

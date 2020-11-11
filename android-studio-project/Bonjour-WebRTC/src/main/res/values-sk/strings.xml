@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">Prepnúť zapnúť/vypnúť server</string>
+    <string name="menu_update_server_alias">Aktualizovať alias servera..</string>
+    <string name="menu_open_settings">Nastavenia..</string>
+    <string name="dialog_update_server_alias_title">Alias servera:</string>
+    <string name="dialog_update_server_alias_positive">SAVE</string>
+    <string name="dialog_update_server_alias_negative">ZRUŠIŤ</string>
+    <string name="dialog_open_settings_menu_title">Nastavenia:</string>
+    <string name="dialog_open_settings_menu_option_general">Všeobecné</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">Prichádzať hovor</string>
+    <string name="dialog_inbound_call_positive">ACCEPT</string>
+    <string name="dialog_inbound_call_negative">ODMIETNUŤ</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: server je spustený a je možné ho nájsť v sieti LAN</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">Kliknite, ak chcete otvoriť. Zrušiť zastavenie.</string>
+    -->
+    <string name="notification_service_content_line2">Kliknutím otvoríte.</string>
+    <string name="error_invalid_room_name">CHYBA: Nedá sa pripojiť k neplatnému IP adresa</string>
+</resources>

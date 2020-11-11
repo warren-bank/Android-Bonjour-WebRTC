@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">സര്വര് ഓണ്/ഓഫ് ടോഗിള് ചെയ്യുക</string>
+    <string name="menu_update_server_alias">സര്വര് അലിയാസ് പുതുക്കുക..</string>
+    <string name="menu_open_settings">സജ്ജീകരണങ്ങള്..</string>
+    <string name="dialog_update_server_alias_title">സര്വര് അലിയാസ്:</string>
+    <string name="dialog_update_server_alias_positive">സൂക്ഷിക്കുക</string>
+    <string name="dialog_update_server_alias_negative">റദ്ദാക്കുക</string>
+    <string name="dialog_open_settings_menu_title">സജ്ജീകരണങ്ങള്:</string>
+    <string name="dialog_open_settings_menu_option_general">ജനറല്</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">ഇന്ബൌണ്ട് കോള്</string>
+    <string name="dialog_inbound_call_positive">സ്വീകരണം</string>
+    <string name="dialog_inbound_call_negative">പുറത്തെടുക്കുക</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: സര്വര് ലാനില് പ്രവര്ത്തനരഹിതമാക്കുകയും ചെയ്യും.</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">തുറക്കാന് ഞൊട്ടുക. നിര്ത്താന് പോകുന്നു.</string>
+    -->
+    <string name="notification_service_content_line2">തുറക്കാന് ഞൊട്ടുക.</string>
+    <string name="error_invalid_room_name">ERROR: അസാധുവിലേക്ക് കണക്ട് ചെയ്യുവാന് സാധ്യമല്ല IP വിലാസം</string>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">Genel Ayarlar</string>
+    <string name="pref_generalsettings_callalert_category_title">Gelen Çağrılar.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">Uyarıyı Göster.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">Gelen çağrıları kabul etmek ya da reddetmek için seçeneklerle uyarı iletişim kutusunu etkinleştir.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">Uyarı Zamanaşımı.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">Uyarı zamanaşımı süresini girin (saniye cinsinden)).</string>
+    <string name="pref_generalsettings_socketserver_category_title">Yerel yuva sunucusu.</string>
+    <string name="pref_generalsettings_socketserver_port_title">Kapı Numarası.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">Dinleme kapısı sayısını girin (1024 \'ün üzerinde)).</string>
+</resources>

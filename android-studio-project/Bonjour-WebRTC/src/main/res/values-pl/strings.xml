@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">Włącz/wyłącz serwer</string>
+    <string name="menu_update_server_alias">Aktualizuj alias serwera..</string>
+    <string name="menu_open_settings">Ustawienia..</string>
+    <string name="dialog_update_server_alias_title">Alias serwera:</string>
+    <string name="dialog_update_server_alias_positive">ZAPISZ</string>
+    <string name="dialog_update_server_alias_negative">ANULUJ</string>
+    <string name="dialog_open_settings_menu_title">Ustawienia:</string>
+    <string name="dialog_open_settings_menu_option_general">Ogólne</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">Połączenie przychodzące</string>
+    <string name="dialog_inbound_call_positive">AKCEPTUJ</string>
+    <string name="dialog_inbound_call_negative">ODRZUĆ</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: serwer działa i wykrywa w sieci LAN</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">Kliknij, aby otworzyć. Odrzuć do zatrzymania.</string>
+    -->
+    <string name="notification_service_content_line2">Kliknij, aby otworzyć.</string>
+    <string name="error_invalid_room_name">BŁĄD: Nie można nawiązać połączenia z niepoprawną IP adres</string>
+</resources>

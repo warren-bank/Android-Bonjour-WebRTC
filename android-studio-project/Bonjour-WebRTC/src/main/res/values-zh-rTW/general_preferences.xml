@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">一般設定</string>
+    <string name="pref_generalsettings_callalert_category_title">入埠呼叫.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">顯示警示.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">使用選項啟用警示對話框，以接受或拒絕入埠呼叫.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">警示逾時.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">輸入警示逾時的持續時間（以秒為單位）).</string>
+    <string name="pref_generalsettings_socketserver_category_title">本端 Socket 伺服器.</string>
+    <string name="pref_generalsettings_socketserver_port_title">埠號.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">輸入接聽埠的數目（高於 1024).</string>
+</resources>

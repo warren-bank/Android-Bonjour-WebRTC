@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">جنرل Settings</string>
+    <string name="pref_generalsettings_callalert_category_title">پابند سلاسل.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">دکھائیں الرٹ.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">کو قبول کرنے یا مسترد شدہ کالز کو مسترد کرنے کے اختیارات کے ساتھ انتہائی الرٹ ڈائیلاگ.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">الرٹ Timeout.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">الرٹ کا دورانیہ ٹائم آؤٹ (سیکنڈ میں).</string>
+    <string name="pref_generalsettings_socketserver_category_title">لوکل ساکٹ سرور.</string>
+    <string name="pref_generalsettings_socketserver_port_title">پورٹ نمبر.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">سن پورٹ (1024 سے اوپر) کا نمبر درج کریں).</string>
+</resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">Εναλλαγή εξυπηρετητή On/Off</string>
+    <string name="menu_update_server_alias">Ενημέρωση Alias Server..</string>
+    <string name="menu_open_settings">Ρυθμίσεις:..</string>
+    <string name="dialog_update_server_alias_title">Alias διακομιστή:</string>
+    <string name="dialog_update_server_alias_positive">ΑΠΟΘΉΚΕΥΣΗ:</string>
+    <string name="dialog_update_server_alias_negative">ΑΚΎΡΩΣΗ.</string>
+    <string name="dialog_open_settings_menu_title">Ρυθμίσεις::</string>
+    <string name="dialog_open_settings_menu_option_general">-Γενικά</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">Κλήση εισερχόμενου</string>
+    <string name="dialog_inbound_call_positive">ΔΕΚΤΉ.</string>
+    <string name="dialog_inbound_call_negative">ΑΠΌΡΡΙΨΗ</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: Ο διακομιστής λειτουργεί και ανιχνεύεται στο LAN</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">Πατήστε για άνοιγμα. Διακόψτε το..</string>
+    -->
+    <string name="notification_service_content_line2">Πατήστε για άνοιγμα..</string>
+    <string name="error_invalid_room_name">ΣΦΑΛΜΑ: Δεν είναι δυνατή η σύνδεση σε μη έγκυρο IP Διεύθυνση:</string>
+</resources>

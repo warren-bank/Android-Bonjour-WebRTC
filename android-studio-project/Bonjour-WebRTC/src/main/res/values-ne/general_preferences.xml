@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">साधारण सेटिङ</string>
+    <string name="pref_generalsettings_callalert_category_title">इनबाउन्ड काल्स.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">चेतावनी देखाउनुहोस्.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">इनबाउन्ड कलहरू स्वीकार वा अस्वीकार गर्ने विकल्पहरूसँग सचेत संवाद सक्षम पार्नुहोस्.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">चेतावनी टाइमआउट.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">चेतावनी टाइमआउट अवधि प्रविष्ट गर्नुहोस् (सेकेन्डमा).</string>
+    <string name="pref_generalsettings_socketserver_category_title">स्थानीय सकेट सर्भर.</string>
+    <string name="pref_generalsettings_socketserver_port_title">पोर्ट नम्बर.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">सुन्ने पोर्ट सङ्ख्या प्रविष्ट गर्नुहोस् (1024 भन्दा माथि).</string>
+</resources>

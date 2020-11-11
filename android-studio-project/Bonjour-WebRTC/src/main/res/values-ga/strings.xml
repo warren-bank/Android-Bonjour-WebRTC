@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">Scoránaigh Freastalaí Ar/Off</string>
+    <string name="menu_update_server_alias">Nuashonraigh An Freastalaí..</string>
+    <string name="menu_open_settings">Socruithe..</string>
+    <string name="dialog_update_server_alias_title">Freastalaí Alias:</string>
+    <string name="dialog_update_server_alias_positive">SAT</string>
+    <string name="dialog_update_server_alias_negative">CEALAITHE</string>
+    <string name="dialog_open_settings_menu_title">Socruithe:</string>
+    <string name="dialog_open_settings_menu_option_general">Ginearálta</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">Glaoch ar Incheangal</string>
+    <string name="dialog_inbound_call_positive">GLACADH</string>
+    <string name="dialog_inbound_call_negative">DIÚLTAITHE</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: Tá freastalaí ag rith agus díchóc ar LAN</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">Cliceáil chun oscailte. Díbhe chun stop a chur.</string>
+    -->
+    <string name="notification_service_content_line2">Cliceáil chun é a oscailt.</string>
+    <string name="error_invalid_room_name">EARRÁID: Ní féidir ceangal le neamhbhailí IP Seoladh</string>
+</resources>

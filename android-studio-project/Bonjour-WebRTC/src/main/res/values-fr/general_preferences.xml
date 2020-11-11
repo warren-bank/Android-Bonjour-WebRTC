@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">Paramètres généraux</string>
+    <string name="pref_generalsettings_callalert_category_title">Appels entrants.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">Afficher l\'alerte.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">Activer la boîte de dialogue d\'alerte avec les options d\'acceptation ou de rejet des appels entrants.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">Délai d\'alerte.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">Durée du délai d\'attente d\'alerte (en secondes)).</string>
+    <string name="pref_generalsettings_socketserver_category_title">Serveur socket local.</string>
+    <string name="pref_generalsettings_socketserver_port_title">Numéro de port.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">Entrez le numéro du port d\'écoute (au-dessus de 1024).</string>
+</resources>

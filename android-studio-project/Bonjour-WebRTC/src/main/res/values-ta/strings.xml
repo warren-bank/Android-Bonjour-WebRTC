@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">சேவையகத்தை மாற்று</string>
+    <string name="menu_update_server_alias">சேவையகத்தை புதுப்பி..</string>
+    <string name="menu_open_settings">அமைப்புகள்..</string>
+    <string name="dialog_update_server_alias_title">சேவையக அலங்காரம்:</string>
+    <string name="dialog_update_server_alias_positive">சேமி</string>
+    <string name="dialog_update_server_alias_negative">ரத்து செய்</string>
+    <string name="dialog_open_settings_menu_title">அமைப்புகள்:</string>
+    <string name="dialog_open_settings_menu_option_general">பொதுவான</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">உள்ளீடு அழைப்பு</string>
+    <string name="dialog_inbound_call_positive">ஏற்றுமதி செய்</string>
+    <string name="dialog_inbound_call_negative">வெளியேற்று</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: LAN இல் சேவையகம் இயங்கும்.</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">திறக்க க்ளிக் செய்யவும். நிறுத்த தவறு.</string>
+    -->
+    <string name="notification_service_content_line2">திறக்க க்ளிக் செய்யவும்.</string>
+    <string name="error_invalid_room_name">பிழை: தவறான இணைப்பை இணைக்க முடியவில்லை IP முகவரி</string>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">Yleiset asetukset</string>
+    <string name="pref_generalsettings_callalert_category_title">Saapuvat puhelut.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">Näytä hälytys.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">Ota käyttöön hälytysvalintaikkuna, jossa voi hyväksyä tai hylätä saapuvia puheluja.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">Varoitus Timeout.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">Ilmoituksen aikakatkaisun kesto (sekunteina)).</string>
+    <string name="pref_generalsettings_socketserver_category_title">Paikallinen vastakepalvelin.</string>
+    <string name="pref_generalsettings_socketserver_port_title">Portin numero.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">Anna kuunteluportin numero (yli 1024).</string>
+</resources>

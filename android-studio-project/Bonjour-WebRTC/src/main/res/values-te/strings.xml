@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">సెర్వర్ ఆన్/ఆఫ్</string>
+    <string name="menu_update_server_alias">సెర్వర్ అలైస్ ను నవీకరణ చేయుము..</string>
+    <string name="menu_open_settings">అమరిక..</string>
+    <string name="dialog_update_server_alias_title">సెర్వర్ అలియాస్:</string>
+    <string name="dialog_update_server_alias_positive">\@ ACTION: BUTTON</string>
+    <string name="dialog_update_server_alias_negative">రద్దు</string>
+    <string name="dialog_open_settings_menu_title">అమరిక:</string>
+    <string name="dialog_open_settings_menu_option_general">జనరల్</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">ఇన్బింట్ కాల్</string>
+    <string name="dialog_inbound_call_positive">అంగీకరించు</string>
+    <string name="dialog_inbound_call_negative">తిరస్కరించు</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: LAN మీద సర్వర్ నడుపుతుందిName</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">తెరుచుటకు నొక్కుము. నిలిపివేయుటకు విస్మయం.</string>
+    -->
+    <string name="notification_service_content_line2">తెరుచుటకు నొక్కుము.</string>
+    <string name="error_invalid_room_name">ERROR: చెల్లనితో అనుసంధానించలేకపొయాను IP చిరునామాను</string>
+</resources>

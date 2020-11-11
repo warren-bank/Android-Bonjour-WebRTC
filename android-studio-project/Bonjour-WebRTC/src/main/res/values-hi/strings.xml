@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">सर्वर को चालू/बंद करें</string>
+    <string name="menu_update_server_alias">अद्यतन सर्वर उर्फ..</string>
+    <string name="menu_open_settings">विन्यास..</string>
+    <string name="dialog_update_server_alias_title">सर्वर उर्फ:</string>
+    <string name="dialog_update_server_alias_positive">सहेजें</string>
+    <string name="dialog_update_server_alias_negative">रद्द करें</string>
+    <string name="dialog_open_settings_menu_title">विन्यास:</string>
+    <string name="dialog_open_settings_menu_option_general">सामान्य</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">इनबाउंड कॉल</string>
+    <string name="dialog_inbound_call_positive">स्वीकार करना</string>
+    <string name="dialog_inbound_call_negative">अस्वीकार करना</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: सर्वर चल रहा है और लैन पर डिस्कवर है</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">खोलने के लिए क्लिक करें. रोकने के लिए खारिज करें.</string>
+    -->
+    <string name="notification_service_content_line2">खोलने के लिए क्लिक करें.</string>
+    <string name="error_invalid_room_name">त्रुटिः अमान्य के लिए कनेक्ट नहीं कर सका IP पता</string>
+</resources>

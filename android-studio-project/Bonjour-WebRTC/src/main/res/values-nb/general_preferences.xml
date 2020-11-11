@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">Generelle innstillinger</string>
+    <string name="pref_generalsettings_callalert_category_title">Innkommende samtaler.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">Vis varsel.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">Aktiver varslingsdialog med alternativer for å akseptere eller avvise innkommende samtaler.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">Tidsavbrudd for varsel.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">Oppgi varighet for varsling av varsel (i sekunder).</string>
+    <string name="pref_generalsettings_socketserver_category_title">Lokal socket-server.</string>
+    <string name="pref_generalsettings_socketserver_port_title">Portnummer.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">Oppgi antall lytteport (over 1024).</string>
+</resources>

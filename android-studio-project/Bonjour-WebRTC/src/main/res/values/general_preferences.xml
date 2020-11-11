@@ -2,24 +2,24 @@
 <resources>
     <string name="general_settings_name">General Settings</string>
 
-    <string name="pref_generalsettings_callalert_category_key" translatable="false">generalsettings_callalert_category</string>
+    <string translatable="false" name="pref_generalsettings_callalert_category_key">generalsettings_callalert_category</string>
     <string name="pref_generalsettings_callalert_category_title">Inbound Calls.</string>
 
-    <string name="pref_generalsettings_callalert_enabled_key" translatable="false">generalsettings_callalert_enabled</string>
-    <string name="pref_generalsettings_callalert_enabled_default" translatable="false">true</string>
+    <string translatable="false" name="pref_generalsettings_callalert_enabled_key">generalsettings_callalert_enabled</string>
+    <string translatable="false" name="pref_generalsettings_callalert_enabled_default">true</string>
     <string name="pref_generalsettings_callalert_enabled_title">Show Alert.</string>
     <string name="pref_generalsettings_callalert_enabled_dlg">Enable alert dialog with options to accept or reject inbound calls.</string>
 
-    <string name="pref_generalsettings_callalert_timeout_key" translatable="false">generalsettings_callalert_timeout</string>
-    <string name="pref_generalsettings_callalert_timeout_default" translatable="false">15</string>
+    <string translatable="false" name="pref_generalsettings_callalert_timeout_key">generalsettings_callalert_timeout</string>
+    <string translatable="false" name="pref_generalsettings_callalert_timeout_default">15</string>
     <string name="pref_generalsettings_callalert_timeout_title">Alert Timeout.</string>
     <string name="pref_generalsettings_callalert_timeout_dlg">Enter duration of alert timeout (in seconds).</string>
 
-    <string name="pref_generalsettings_socketserver_category_key" translatable="false">generalsettings_socketserver_category</string>
+    <string translatable="false" name="pref_generalsettings_socketserver_category_key">generalsettings_socketserver_category</string>
     <string name="pref_generalsettings_socketserver_category_title">Local socket server.</string>
 
-    <string name="pref_generalsettings_socketserver_port_key" translatable="false">generalsettings_socketserver_port</string>
-    <string name="pref_generalsettings_socketserver_port_default" translatable="false">8888</string>
+    <string translatable="false" name="pref_generalsettings_socketserver_port_key">generalsettings_socketserver_port</string>
+    <string translatable="false" name="pref_generalsettings_socketserver_port_default">8888</string>
     <string name="pref_generalsettings_socketserver_port_title">Port Number.</string>
     <string name="pref_generalsettings_socketserver_port_dlg">Enter number of listening port (above 1024).</string>
 </resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">සාමාන්ය සැකසුම්</string>
+    <string name="pref_generalsettings_callalert_category_title">Inbound Calls.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">Alert පෙන්වන්න.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">නොබැඳි ඇමතුම් පිළිගැනීමට හෝ ප්රතික්ෂේප කිරීමට විකල්ප සමඟ සක්රීය සංවාද සක්රීය කරන්න.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">Alert Timeout.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">අනතුරු ඇගවීමේ කාලසීමාව ඇතුළත් කරන්න (තත්පර වලින්).</string>
+    <string name="pref_generalsettings_socketserver_category_title">ප්රාදේශීය සොකට් සර්වරය.</string>
+    <string name="pref_generalsettings_socketserver_port_title">පෝර්ට් අංකය.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">සවන් දෙන්න පෝර්ට් එකේ අංකය ඇතුලත් කරන්න (1024).</string>
+</resources>

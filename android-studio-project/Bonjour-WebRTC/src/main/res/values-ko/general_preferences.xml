@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">일반 설정</string>
+    <string name="pref_generalsettings_callalert_category_title">인바운드 호출.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">경보 표시.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">인바운드 호출을 승인하거나 거부하는 옵션이 있는 경보 대화 상자 사용.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">경보 시간 종료.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">경보 제한시간의 지속 기간 (초) 을 입력하십시오.).</string>
+    <string name="pref_generalsettings_socketserver_category_title">로컬 소켓 서버.</string>
+    <string name="pref_generalsettings_socketserver_port_title">포트 번호.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">청취 중인 포트 번호 입력 (1024초과)).</string>
+</resources>

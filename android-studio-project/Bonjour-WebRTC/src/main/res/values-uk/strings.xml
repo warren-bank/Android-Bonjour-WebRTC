@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">Перемкнути сервер</string>
+    <string name="menu_update_server_alias">Оновити прізвисько сервера..</string>
+    <string name="menu_open_settings">ПараметриName..</string>
+    <string name="dialog_update_server_alias_title">Псевдонім сервера:</string>
+    <string name="dialog_update_server_alias_positive">ЗБЕРЕГТИ</string>
+    <string name="dialog_update_server_alias_negative">СКАСУВАТИ</string>
+    <string name="dialog_open_settings_menu_title">ПараметриName:</string>
+    <string name="dialog_open_settings_menu_option_general">Загальний</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">Вхідний дзвінок</string>
+    <string name="dialog_inbound_call_positive">ПРИЙНЯТИ</string>
+    <string name="dialog_inbound_call_negative">ВІДКИНУТИ</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: сервер працює і відкриється на LAN</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">Клацніть, щоб відкрити. Вимкнути зупинку.</string>
+    -->
+    <string name="notification_service_content_line2">Клацніть, щоб відкрити.</string>
+    <string name="error_invalid_room_name">ПОМИЛКА: Не вдалося зв \' язатися з IP адрес</string>
+</resources>

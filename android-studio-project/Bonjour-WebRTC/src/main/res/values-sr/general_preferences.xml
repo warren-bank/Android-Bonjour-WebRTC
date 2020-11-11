@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">Општа подешавања</string>
+    <string name="pref_generalsettings_callalert_category_title">Долазни позиви.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">Прикажи упозорење.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">Укључи дијалог упозорења са опцијама да прихвати или одбије долазне позиве.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">Истек времена упозорења.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">Унесите трајање истека времена упозорења (у секундама).</string>
+    <string name="pref_generalsettings_socketserver_category_title">Локални сервер за сокет.</string>
+    <string name="pref_generalsettings_socketserver_port_title">Број порта.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">Унесите број порта за слушање (изнад 1024).</string>
+</resources>

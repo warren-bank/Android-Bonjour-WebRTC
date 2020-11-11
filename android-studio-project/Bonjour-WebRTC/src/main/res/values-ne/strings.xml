@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">सर्भर/बन्द टगल गर्नुहोस्</string>
+    <string name="menu_update_server_alias">सर्भर उपनाम अद्यावधिक गर्नुहोस्..</string>
+    <string name="menu_open_settings">सेटिङ..</string>
+    <string name="dialog_update_server_alias_title">सर्भर उपनाम:</string>
+    <string name="dialog_update_server_alias_positive">बचत गर्नुहोस्</string>
+    <string name="dialog_update_server_alias_negative">रद्द गर्नुहोस्</string>
+    <string name="dialog_open_settings_menu_title">सेटिङ:</string>
+    <string name="dialog_open_settings_menu_option_general">साधारण</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">इनबाउन्ड कल</string>
+    <string name="dialog_inbound_call_positive">स्वीकार गर्नुहोस्</string>
+    <string name="dialog_inbound_call_negative">अस्वीकार गर्नुहोस्</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: LAN मा सर्भर चलिरहेको छ र खोप्यो</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">खोल्न क्लिक गर्नुहोस्. रोक्नका लागि बन्द गर्नुहोस्.</string>
+    -->
+    <string name="notification_service_content_line2">खोल्न क्लिक गर्नुहोस्.</string>
+    <string name="error_invalid_room_name">त्रुटि: अवैध जडान गर्न सकिँदैन IP ठेगाना</string>
+</resources>

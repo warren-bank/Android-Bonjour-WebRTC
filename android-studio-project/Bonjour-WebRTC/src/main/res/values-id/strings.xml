@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">Jungkitkan Server On/Off</string>
+    <string name="menu_update_server_alias">Perbarui Server Alias Server..</string>
+    <string name="menu_open_settings">Pengaturan..</string>
+    <string name="dialog_update_server_alias_title">Alias Server:</string>
+    <string name="dialog_update_server_alias_positive">SAVE</string>
+    <string name="dialog_update_server_alias_negative">Batalkan</string>
+    <string name="dialog_open_settings_menu_title">Pengaturan:</string>
+    <string name="dialog_open_settings_menu_option_general">Jeneral</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">Panggilan Masuk</string>
+    <string name="dialog_inbound_call_positive">Terimalah</string>
+    <string name="dialog_inbound_call_negative">TOLAK</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: server sedang berjalan dan dapat ditemukan di LAN</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">Klik untuk membuka. Bubarkan untuk berhenti.</string>
+    -->
+    <string name="notification_service_content_line2">Klik untuk membuka.</string>
+    <string name="error_invalid_room_name">ERROR: Tidak dapat menyambung ke tidak valid IP alamat</string>
+</resources>

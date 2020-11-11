@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">Vispārīgie iestatījumi</string>
+    <string name="pref_generalsettings_callalert_category_title">Ienākošie Zvani.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">Rādīt brīdinājuma.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">Ieslēgt brīdinājuma logu ar iespējām pieņemt vai noraidīt ienākošos zvanus.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">Brīdinājuma timeout.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">Ievadiet brīdinājuma timeout ilgumu (sekundēs)).</string>
+    <string name="pref_generalsettings_socketserver_category_title">Lokālais ligzdas serveris.</string>
+    <string name="pref_generalsettings_socketserver_port_title">Ostas Nr..</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">Ievadiet klausīšanās portu skaitu (virs 1024).</string>
+</resources>

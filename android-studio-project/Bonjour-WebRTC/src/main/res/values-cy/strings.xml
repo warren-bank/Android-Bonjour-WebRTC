@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">Toglu Gweinydd Ymlaen/Diffodd</string>
+    <string name="menu_update_server_alias">Ffugenw:..</string>
+    <string name="menu_open_settings">Gosodiadau..</string>
+    <string name="dialog_update_server_alias_title">Ffugenw::</string>
+    <string name="dialog_update_server_alias_positive">CADW</string>
+    <string name="dialog_update_server_alias_negative">DIDDYMU</string>
+    <string name="dialog_open_settings_menu_title">Gosodiadau:</string>
+    <string name="dialog_open_settings_menu_option_general">Cyffredinol</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">Galwad heb ei rwymo</string>
+    <string name="dialog_inbound_call_positive">DERBYN</string>
+    <string name="dialog_inbound_call_negative">GWRTHOD</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: mae\'r gweinydd yn rhedeg ac yn darganfod mwy ar LAN</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">Cliciwch i agor. Gwrthod stopio.</string>
+    -->
+    <string name="notification_service_content_line2">Cliciwch i agor.</string>
+    <string name="error_invalid_room_name">GWALL: Methu cysylltu ag annilys IP cyfeiriad</string>
+</resources>

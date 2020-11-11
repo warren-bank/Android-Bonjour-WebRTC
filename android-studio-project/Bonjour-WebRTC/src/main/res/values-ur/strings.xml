@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">ٹوگل سرور پر/بند</string>
+    <string name="menu_update_server_alias">اپ ڈیٹ سرور عرف..</string>
+    <string name="menu_open_settings">سیٹنگز..</string>
+    <string name="dialog_update_server_alias_title">سرور عالم:</string>
+    <string name="dialog_update_server_alias_positive">بچائیں</string>
+    <string name="dialog_update_server_alias_negative">منسوخ</string>
+    <string name="dialog_open_settings_menu_title">سیٹنگز:</string>
+    <string name="dialog_open_settings_menu_option_general">جنرل</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">اباد کال</string>
+    <string name="dialog_inbound_call_positive">قبول کر</string>
+    <string name="dialog_inbound_call_negative">ریجیکٹ</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: معیل (server) کو چلا رہا ہے اور LAN پر تلاش</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">کھولنے کے لئے کلک کریں. روکنے کے لئے چھوٹ.</string>
+    -->
+    <string name="notification_service_content_line2">کھولنے کے لئے کلک.</string>
+    <string name="error_invalid_room_name">ERROR: ابطال باطل سے مربوط نہیں IP خطاب</string>
+</resources>

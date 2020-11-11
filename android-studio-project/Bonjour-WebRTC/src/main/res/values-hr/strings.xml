@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">Uključi / isključi poslužitelj / isključi</string>
+    <string name="menu_update_server_alias">Ažuriranje Zamjenskog Imena Poslužitelja..</string>
+    <string name="menu_open_settings">Postavke..</string>
+    <string name="dialog_update_server_alias_title">Zamjensko Ime Poslužitelja:</string>
+    <string name="dialog_update_server_alias_positive">SPREMI</string>
+    <string name="dialog_update_server_alias_negative">OPOZIV</string>
+    <string name="dialog_open_settings_menu_title">Postavke:</string>
+    <string name="dialog_open_settings_menu_option_general">Općenito</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">Ulazni poziv</string>
+    <string name="dialog_inbound_call_positive">PRIHVATI</string>
+    <string name="dialog_inbound_call_negative">ODBACI</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: poslužitelj se izvodi i može se otkriti na LAN-u</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">Kliknite za otvaranje. Odbacivanje za zaustavljanje.</string>
+    -->
+    <string name="notification_service_content_line2">Kliknite za otvaranje.</string>
+    <string name="error_invalid_room_name">ERROR: Ne može se povezati na nevažeće IP adresa</string>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">Setări generale</string>
+    <string name="pref_generalsettings_callalert_category_title">Apeluri de intrare.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">Afişare alertă.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">Activare dialog alertă cu opţiuni de acceptare sau respingere apeluri de intrare.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">Timeout alertă.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">Introduceţi durata timeout-ului de alertă (în secunde).</string>
+    <string name="pref_generalsettings_socketserver_category_title">Server socket local.</string>
+    <string name="pref_generalsettings_socketserver_port_title">Număr port.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">Introduceţi numărul de port de ascultare (peste 1024).</string>
+</resources>

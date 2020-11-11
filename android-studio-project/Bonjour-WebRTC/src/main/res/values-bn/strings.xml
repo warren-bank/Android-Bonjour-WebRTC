@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">সার্ভার অন-এ টগল করুন</string>
+    <string name="menu_update_server_alias">সার্ভার আলিস আপডেট করো..</string>
+    <string name="menu_open_settings">সেটিংস..</string>
+    <string name="dialog_update_server_alias_title">সার্ভার আলিস:</string>
+    <string name="dialog_update_server_alias_positive">সংরক্ষণ করো</string>
+    <string name="dialog_update_server_alias_negative">বাতিল করো</string>
+    <string name="dialog_open_settings_menu_title">সেটিংস:</string>
+    <string name="dialog_open_settings_menu_option_general">সাধারণ</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">আবদ্ধ কল</string>
+    <string name="dialog_inbound_call_positive">গ্রহণ করুন</string>
+    <string name="dialog_inbound_call_negative">প্রত্যাখ্যান করুন</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: সার্ভার ল্যানের উপর চালানো এবং আবিষ্কারযোগ্য</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">খোলার জন্য ক্লিক করুন. থামাতে অভাব.</string>
+    -->
+    <string name="notification_service_content_line2">খুলতে ক্লিক করুন.</string>
+    <string name="error_invalid_room_name">ত্রুটি: অকার্যকর থেকে সংযোগ করা যাচ্ছে না IP ঠিকানা</string>
+</resources>

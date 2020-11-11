@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">常规设置</string>
+    <string name="pref_generalsettings_callalert_category_title">入站呼叫.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">显示警报.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">启用带有选项的警报对话框以接受或拒绝入站呼叫.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">警报超时.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">输入警报超时持续时间 ( 秒 )).</string>
+    <string name="pref_generalsettings_socketserver_category_title">本地套接字服务器.</string>
+    <string name="pref_generalsettings_socketserver_port_title">端口号.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">输入侦听端口号 ( 1024 以上 )).</string>
+</resources>

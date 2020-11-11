@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">Toggle Server Fuq/Off</string>
+    <string name="menu_update_server_alias">Aġġornament Server Alias..</string>
+    <string name="menu_open_settings">Settings..</string>
+    <string name="dialog_update_server_alias_title">Server alias:</string>
+    <string name="dialog_update_server_alias_positive">SAVE</string>
+    <string name="dialog_update_server_alias_negative">CANCEL</string>
+    <string name="dialog_open_settings_menu_title">Settings:</string>
+    <string name="dialog_open_settings_menu_option_general">Ġenerali</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">Is-sejħa Dieħla</string>
+    <string name="dialog_inbound_call_positive">ACCEPT</string>
+    <string name="dialog_inbound_call_negative">REXJECT</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: server huwa running u disoverable fuq LAN</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">Ikklikkja biex tiftaħ. Tkeċċi biex tieqaf.</string>
+    -->
+    <string name="notification_service_content_line2">Ikklikkja biex tiftaħ.</string>
+    <string name="error_invalid_room_name">ŻBALL: Cannot qabbad ma \' invalidu IP indirizz</string>
+</resources>

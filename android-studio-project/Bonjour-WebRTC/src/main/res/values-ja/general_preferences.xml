@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">一般設定</string>
+    <string name="pref_generalsettings_callalert_category_title">インバウンド呼び出し.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">アラートの表示.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">インバウンド呼び出しを受け入れるか拒否するオプションを指定してアラート・ダイアログを有効に.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">アラート・タイムアウト.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">アラートのタイムアウト期間 ( 秒単位 ) を入力します).</string>
+    <string name="pref_generalsettings_socketserver_category_title">ローカルソケット・サーバー.</string>
+    <string name="pref_generalsettings_socketserver_port_title">ポート番号.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">リスニング・ポートの数 ( 1024 を超える )).</string>
+</resources>

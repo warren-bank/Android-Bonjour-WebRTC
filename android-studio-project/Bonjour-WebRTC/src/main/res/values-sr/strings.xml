@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">Укључи/искључи сервер на/искључи</string>
+    <string name="menu_update_server_alias">Ажурирај псеудоним сервера..</string>
+    <string name="menu_open_settings">Поставке..</string>
+    <string name="dialog_update_server_alias_title">Псеудоним сервера:</string>
+    <string name="dialog_update_server_alias_positive">САВЕ</string>
+    <string name="dialog_update_server_alias_negative">ОТКАЖИ</string>
+    <string name="dialog_open_settings_menu_title">Поставке:</string>
+    <string name="dialog_open_settings_menu_option_general">Општи</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">Долазни позив</string>
+    <string name="dialog_inbound_call_positive">Осим</string>
+    <string name="dialog_inbound_call_negative">ОДБИЈ</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: сервер је покренут и открио је LAN</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">Кликните да бисте отворили. Одбаци да би се зауставио.</string>
+    -->
+    <string name="notification_service_content_line2">Кликните да бисте отворили.</string>
+    <string name="error_invalid_room_name">ГРЕШКА: Није могуће повезати се са неважећим IP адреса</string>
+</resources>

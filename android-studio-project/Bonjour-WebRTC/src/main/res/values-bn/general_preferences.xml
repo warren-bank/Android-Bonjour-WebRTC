@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">সাধারণ বৈশিষ্ট্য</string>
+    <string name="pref_generalsettings_callalert_category_title">ইনবাউন্ড কল.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">অ্যালার্ট দেখাও.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">আবদ্ধ কল গ্রহণ বা প্রত্যাখ্যান করার অপশন দ্বারা সতর্ক ডায়ালগ সক্রিয় করুন.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">অ্যালার্ট টাইম-আউট.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">সতর্ক সময়ের দৈর্ঘ্য লিখুন (সেকেন্ডে).</string>
+    <string name="pref_generalsettings_socketserver_category_title">স্থানীয় সকেট সার্ভার.</string>
+    <string name="pref_generalsettings_socketserver_port_title">পোর্ট নম্বর.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">শুনানীর সংখ্যা লিখুন (১০২৪ এর উপরে).</string>
+</resources>

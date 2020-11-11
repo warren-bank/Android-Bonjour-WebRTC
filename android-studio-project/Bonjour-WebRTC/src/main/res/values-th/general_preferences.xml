@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">การตั้งค่าทั่วไป</string>
+    <string name="pref_generalsettings_callalert_category_title">การเรียกขาเข้า.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">แสดงการแจ้งเตือน.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">เปิดใช้งานไดอะล็อกการแจ้งเตือนที่มีอ็อพชันเพื่อยอมรับหรือปฏิเสธการเรียกขาเข้า.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">หมดเวลาการแจ้งเตือน.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">ป้อนระยะเวลาของการหมดเวลาใช้งานการแจ้งเตือน (ในหน่วยวินาที).</string>
+    <string name="pref_generalsettings_socketserver_category_title">โลคัลซ็อกเก็ตเซิร์ฟเวอร์.</string>
+    <string name="pref_generalsettings_socketserver_port_title">หมายเลขพอร์ต.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">ป้อนหมายเลขของพอร์ต listening (สูงกว่า 1024).</string>
+</resources>

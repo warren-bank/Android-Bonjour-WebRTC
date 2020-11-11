@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">Općenite postavke</string>
+    <string name="pref_generalsettings_callalert_category_title">Ulazni pozivi.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">Pokaži uzbunu.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">Omogući dijalog upozorenja sa opcijama za prihvat ili odbacivanje dolaznih poziva.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">Timeout uzbune.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">Unesite trajanje uzbune za vrijeme uzbune (u sekundama).</string>
+    <string name="pref_generalsettings_socketserver_category_title">Lokalni poslužitelj utičnica.</string>
+    <string name="pref_generalsettings_socketserver_port_title">Broj porta.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">Unesite broj porta za slušanje (iznad 1024).</string>
+</resources>

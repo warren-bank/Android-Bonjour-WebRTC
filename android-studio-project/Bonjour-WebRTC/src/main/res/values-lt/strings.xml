@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">Perjungti serverį/išjungtas</string>
+    <string name="menu_update_server_alias">Atnaujinti slapyvardįName..</string>
+    <string name="menu_open_settings">Nustatymai..</string>
+    <string name="dialog_update_server_alias_title">Serverio slapyvardė:</string>
+    <string name="dialog_update_server_alias_positive">SAVE</string>
+    <string name="dialog_update_server_alias_negative">CANEL</string>
+    <string name="dialog_open_settings_menu_title">Nustatymai:</string>
+    <string name="dialog_open_settings_menu_option_general">Bendrosios nuostatos</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">Įsijungia skambutis</string>
+    <string name="dialog_inbound_call_positive">IŠ KITŲ MEDŽIAGŲ</string>
+    <string name="dialog_inbound_call_negative">TIKSLAS</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: serveris veikia ir atranda ant LAN</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">Spustelėkite atidaryti. Nutraukti sustabdytą.</string>
+    -->
+    <string name="notification_service_content_line2">Spragtelkite norėdami atidaryti.</string>
+    <string name="error_invalid_room_name">KLAIDA: negali prisijungti prie negaliojančių IP adresas</string>
+</resources>

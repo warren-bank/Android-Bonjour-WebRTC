@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">Általános beállítások</string>
+    <string name="pref_generalsettings_callalert_category_title">Bejövő hívások.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">Riasztás megjelenítése.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">Riasztás párbeszédablak engedélyezése a bejövő hívások elfogadásához vagy elutasításához.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">Riasztási időkorlát.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">Adja meg a riasztási időkorlát időtartamát (másodpercben).</string>
+    <string name="pref_generalsettings_socketserver_category_title">Helyi socket szerver.</string>
+    <string name="pref_generalsettings_socketserver_port_title">Portszám.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">Adja meg a figyelő port számát (1024 felett).</string>
+</resources>

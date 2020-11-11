@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">Pengaturan Umum</string>
+    <string name="pref_generalsettings_callalert_category_title">Panggilan Masuk.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">Tampilkan Peringatan.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">Aktifkan dialog peringatan dengan opsi untuk menerima atau menolak panggilan masuk.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">Peringatan Waktu Peringatan.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">Masukkan durasi waktu peringatan (dalam detik)).</string>
+    <string name="pref_generalsettings_socketserver_category_title">Server soket lokal.</string>
+    <string name="pref_generalsettings_socketserver_port_title">Nomor Port.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">Masukkan nomor dari port mendengarkan (di atas 1024)).</string>
+</resources>

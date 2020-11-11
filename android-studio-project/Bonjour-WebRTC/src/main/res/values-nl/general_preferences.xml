@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">Algemene instellingen</string>
+    <string name="pref_generalsettings_callalert_category_title">Inkomende gesprekken.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">Waarschuwing afbeelden.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">Waarschuwingsvenster inschakelen met opties voor het accepteren of afwijzen van inkomende gesprekken.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">Timeout voor alert.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">Voer de duur van de alert-timeout in (in seconden).</string>
+    <string name="pref_generalsettings_socketserver_category_title">Lokale socketserver.</string>
+    <string name="pref_generalsettings_socketserver_port_title">Poortnummer.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">Geef het aantal ontvangstpoorten op (boven 1024)).</string>
+</resources>

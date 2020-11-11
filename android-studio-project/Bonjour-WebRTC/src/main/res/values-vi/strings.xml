@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">Bật/tắt máy chủ</string>
+    <string name="menu_update_server_alias">Cập nhật biệt hiệu máy chủ..</string>
+    <string name="menu_open_settings">Thiết lập..</string>
+    <string name="dialog_update_server_alias_title">Biệt hiệu máy chủ:</string>
+    <string name="dialog_update_server_alias_positive">SAVE</string>
+    <string name="dialog_update_server_alias_negative">HỦY</string>
+    <string name="dialog_open_settings_menu_title">Thiết lập:</string>
+    <string name="dialog_open_settings_menu_option_general">Tướng quân</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">Gọi đến</string>
+    <string name="dialog_inbound_call_positive">CHẤP NHẬN</string>
+    <string name="dialog_inbound_call_negative">TỪ CHỐI</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: máy chủ đang chạy và phát hiện qua mạng LAN</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">Nhấp để mở. Giải tán..</string>
+    -->
+    <string name="notification_service_content_line2">Nhấp để mở.</string>
+    <string name="error_invalid_room_name">LỖI: Không thể kết nối không hợp lệ IP địa chỉ</string>
+</resources>

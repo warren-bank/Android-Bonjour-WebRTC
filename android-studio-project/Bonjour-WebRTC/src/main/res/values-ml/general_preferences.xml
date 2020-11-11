@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">സാധാരണ സജ്ജീകരണങ്ങള്</string>
+    <string name="pref_generalsettings_callalert_category_title">ഇൻബൌണ്ട് കാള്സ്.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">അലെര്ട്ട് കാണിക്കുക.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">Inbound কল സ്വീകരിക്കണമോ അല്ലെങ്കില് നിഷേധിക്കുവാനുള്ള ഉപാധികള് ഉള്ക്കൊള്ളുന്ന ഡയലോഗ്.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">അലെര്ട്ട് ടൈംഔട്ട്.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">ജാഗ്രത സമയത്തിന്റെ സമയം നല്കുക (സെക്കന്ഡുകളില്).</string>
+    <string name="pref_generalsettings_socketserver_category_title">ലോക്കല് സോക്കറ്റ് സര്വര്.</string>
+    <string name="pref_generalsettings_socketserver_port_title">പോര്ട്ട് നംബര്.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">കേള്ക്കുന്ന തുറമുഖത്തിന്റെ നംബര് നല്കുക (1024 മുകളില്).</string>
+</resources>

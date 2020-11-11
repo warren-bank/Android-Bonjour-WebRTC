@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">서버 켜기/끄기 토글</string>
+    <string name="menu_update_server_alias">서버 별명 업데이트..</string>
+    <string name="menu_open_settings">설정..</string>
+    <string name="dialog_update_server_alias_title">서버 별명:</string>
+    <string name="dialog_update_server_alias_positive">저장</string>
+    <string name="dialog_update_server_alias_negative">취소</string>
+    <string name="dialog_open_settings_menu_title">설정:</string>
+    <string name="dialog_open_settings_menu_option_general">일반</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">인바운드 호출</string>
+    <string name="dialog_inbound_call_positive">승인</string>
+    <string name="dialog_inbound_call_negative">거부</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: 서버가 실행 중이고 LAN 에서 발견 가능</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">클릭하면 클릭한다. 멈추고 싶지 않다.</string>
+    -->
+    <string name="notification_service_content_line2">클릭하여 열기.</string>
+    <string name="error_invalid_room_name">오류: 올바르지 않게 연결할 수 없습니다. IP 주소</string>
+</resources>

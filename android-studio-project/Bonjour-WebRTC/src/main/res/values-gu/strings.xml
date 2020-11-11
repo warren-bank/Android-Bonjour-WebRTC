@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">ટોગલ સર્વર ચાલુ/બંધ</string>
+    <string name="menu_update_server_alias">સર્વર ઉપનામ સુધારો..</string>
+    <string name="menu_open_settings">સુયોજનો..</string>
+    <string name="dialog_update_server_alias_title">સર્વર ઉપનામ:</string>
+    <string name="dialog_update_server_alias_positive">સંગ્રહ કરો</string>
+    <string name="dialog_update_server_alias_negative">રદ કરો</string>
+    <string name="dialog_open_settings_menu_title">સુયોજનો:</string>
+    <string name="dialog_open_settings_menu_option_general">સામાન્ય</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">ઇનબાઉન્ડ કોલ</string>
+    <string name="dialog_inbound_call_positive">સ્વીકારો</string>
+    <string name="dialog_inbound_call_negative">રદ કરો</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: સર્વર ચાલી રહી છે અને LAN પર નિષ્ક્રિય છે</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">ખોલવા માટે ક્લિક કરો. બંધ કરવા માટે કાઢી નાંખો.</string>
+    -->
+    <string name="notification_service_content_line2">ખોલવા માટે ક્લિક કરો.</string>
+    <string name="error_invalid_room_name">ભૂલ: અયોગ્ય સાથે જોડાઈ શકતા નથી IP સરનામું</string>
+</resources>

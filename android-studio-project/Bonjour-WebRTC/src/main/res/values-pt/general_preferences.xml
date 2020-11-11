@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">Configurações Gerais</string>
+    <string name="pref_generalsettings_callalert_category_title">Chamadas de Entrada.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">Mostrar Alerta.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">Ativar diálogo de alerta com opções para aceitar ou rejeitar chamadas de entrada.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">Tempo Limite De Alerta.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">Digite duração do tempo limite de alerta (em segundos).</string>
+    <string name="pref_generalsettings_socketserver_category_title">Servidor de socket local.</string>
+    <string name="pref_generalsettings_socketserver_port_title">Número da Porta.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">Inserir número de porta de atendimento (acima de 1024).</string>
+</resources>

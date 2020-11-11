@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">Γενικές ρυθμίσεις:</string>
+    <string name="pref_generalsettings_callalert_category_title">Εισερχόμενες κλήσεις.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">Εμφάνιση προειδοποίησης.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">Ενεργοποίηση διαλόγου προειδοποίησης με επιλογές για αποδοχή ή απόρριψη εισερχόμενων κλήσεων.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">Προθεσμία προειδοποίησης.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">Καταχωρήστε τη διάρκεια της προθεσμίας προειδοποίησης (σε δευτερόλεπτα)).</string>
+    <string name="pref_generalsettings_socketserver_category_title">Τοπικός εξυπηρετητής socket.</string>
+    <string name="pref_generalsettings_socketserver_port_title">Αριθμός θύρας:.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">Καταχωρήστε τον αριθμό της θύρας ακρόασης (πάνω από 1024).</string>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">Impostazioni generali</string>
+    <string name="pref_generalsettings_callalert_category_title">Chiamate In Entrata.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">Mostra avviso.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">Abilitare la finestra di dialogo di alert con le opzioni per accettare o rifiutare le chiamate in entrata.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">Timeout Avvisi.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">Inserisce la durata del timeout di avviso (in secondi).</string>
+    <string name="pref_generalsettings_socketserver_category_title">Server socket locale.</string>
+    <string name="pref_generalsettings_socketserver_port_title">Numero di porta.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">Inserire il numero di porta di ascolto (sopra 1024).</string>
+</resources>

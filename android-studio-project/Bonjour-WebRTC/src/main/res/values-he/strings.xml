@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">מיתוג של שרת פעיל/מושבת</string>
+    <string name="menu_update_server_alias">עדכון כינוי שרת..</string>
+    <string name="menu_open_settings">הגדרות..</string>
+    <string name="dialog_update_server_alias_title">כינוי שרת:</string>
+    <string name="dialog_update_server_alias_positive">שמירה</string>
+    <string name="dialog_update_server_alias_negative">ביטול</string>
+    <string name="dialog_open_settings_menu_title">הגדרות:</string>
+    <string name="dialog_open_settings_menu_option_general">כללי</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">שיחה נכנסת</string>
+    <string name="dialog_inbound_call_positive">קבלה</string>
+    <string name="dialog_inbound_call_negative">פסילת</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: השרת רץ ומגלה את ה-LAN</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">לחצו כדי לפתוח. ביטול כדי לעצור.</string>
+    -->
+    <string name="notification_service_content_line2">לחצו כדי לפתוח.</string>
+    <string name="error_invalid_room_name">שגיאה: לא ניתן להתחבר אל לא חוקי IP כתובת</string>
+</resources>

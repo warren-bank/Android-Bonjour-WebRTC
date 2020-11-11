@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">تشغيل / ايقاف وحدة خدمة Toggle</string>
+    <string name="menu_update_server_alias">تعديل اسم وحدة الخدمة البديلة..</string>
+    <string name="menu_open_settings">المحددات..</string>
+    <string name="dialog_update_server_alias_title">اسم وحدة الخدمة البديلة:</string>
+    <string name="dialog_update_server_alias_positive">حفظ</string>
+    <string name="dialog_update_server_alias_negative">الغاء</string>
+    <string name="dialog_open_settings_menu_title">المحددات:</string>
+    <string name="dialog_open_settings_menu_option_general">عام</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">اتصال غير مقيد</string>
+    <string name="dialog_inbound_call_positive">قبول</string>
+    <string name="dialog_inbound_call_negative">رفض</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: وحدة الخدمة محل التشغيل ويمكن اكتشافها على LAN</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">اضغط للفتح. الغاء للايقاف.</string>
+    -->
+    <string name="notification_service_content_line2">اضغط للفتح.</string>
+    <string name="error_invalid_room_name">خطأ : لا يمكن الاتصال بغير صحيح IP العنوان</string>
+</resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">Växla server på / av</string>
+    <string name="menu_update_server_alias">Uppdatera serveraliasComment..</string>
+    <string name="menu_open_settings">Inställningar..</string>
+    <string name="dialog_update_server_alias_title">ServeraliasComment:</string>
+    <string name="dialog_update_server_alias_positive">SPARA</string>
+    <string name="dialog_update_server_alias_negative">AVBRYT</string>
+    <string name="dialog_open_settings_menu_title">Inställningar:</string>
+    <string name="dialog_open_settings_menu_option_general">Allmänna</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">Inkommande samtal</string>
+    <string name="dialog_inbound_call_positive">ACCEPTERA</string>
+    <string name="dialog_inbound_call_negative">AVVISA</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: servern är igång och upptäcksbar på LAN</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">Klicka för att öppna. Ignorera att stoppa.</string>
+    -->
+    <string name="notification_service_content_line2">Klicka för att öppna.</string>
+    <string name="error_invalid_room_name">FEL: Det går inte att ansluta till ogiltigt IP adress</string>
+</resources>

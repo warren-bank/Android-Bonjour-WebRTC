@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="general_settings_name">المحددات العامة</string>
+    <string name="pref_generalsettings_callalert_category_title">الاستدعاءات الواردة.</string>
+    <string name="pref_generalsettings_callalert_enabled_title">عرض التنبيه.</string>
+    <string name="pref_generalsettings_callalert_enabled_dlg">اتاحة حوار التنبيه مع اختيارات لقبول أو رفض الاتصالات الواردة.</string>
+    <string name="pref_generalsettings_callalert_timeout_title">انتهاء وقت التنبيه.</string>
+    <string name="pref_generalsettings_callalert_timeout_dlg">أدخل مدة انقضاء الوقت المحدد للتنبيه (بالثواني).</string>
+    <string name="pref_generalsettings_socketserver_category_title">وحدة خدمة Socket المحلية.</string>
+    <string name="pref_generalsettings_socketserver_port_title">رقم المنفذ.</string>
+    <string name="pref_generalsettings_socketserver_port_dlg">أدخل عدد منفذ الاستماع (أعلى 1024).</string>
+</resources>

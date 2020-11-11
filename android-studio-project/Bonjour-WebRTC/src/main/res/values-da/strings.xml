@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">Aktivér / deaktivér server</string>
+    <string name="menu_update_server_alias">Opdatér serveralias..</string>
+    <string name="menu_open_settings">Indstillinger..</string>
+    <string name="dialog_update_server_alias_title">Serveralias:</string>
+    <string name="dialog_update_server_alias_positive">GEM</string>
+    <string name="dialog_update_server_alias_negative">ANNULLÉR</string>
+    <string name="dialog_open_settings_menu_title">Indstillinger:</string>
+    <string name="dialog_open_settings_menu_option_general">Almindelige bestemmelser</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">Indgående opkald</string>
+    <string name="dialog_inbound_call_positive">ACCEPTÉR</string>
+    <string name="dialog_inbound_call_negative">AFVIS</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: Serveren kører og finder ud af det på LAN</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">Klik for at åbne. Afvige for at stoppe.</string>
+    -->
+    <string name="notification_service_content_line2">Klik for at åbne.</string>
+    <string name="error_invalid_room_name">Fejl: Kan ikke oprette forbindelse til ugyldigt IP adresse</string>
+</resources>

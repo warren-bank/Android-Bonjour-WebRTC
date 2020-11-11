@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bonjour WebRTC</string>
+    <string name="menu_toggle_server">Включить/выключить сервер</string>
+    <string name="menu_update_server_alias">Обновить алиас сервера..</string>
+    <string name="menu_open_settings">Параметры..</string>
+    <string name="dialog_update_server_alias_title">Алиас сервера:</string>
+    <string name="dialog_update_server_alias_positive">СОХРАНИТЬ</string>
+    <string name="dialog_update_server_alias_negative">ОТМЕНА</string>
+    <string name="dialog_open_settings_menu_title">Параметры:</string>
+    <string name="dialog_open_settings_menu_option_general">Общие сведения</string>
+    <string name="dialog_open_settings_menu_option_webrtc">WebRTC</string>
+    <string name="dialog_inbound_call_title">Входящий вызов</string>
+    <string name="dialog_inbound_call_positive">ПРИНЯТЬ</string>
+    <string name="dialog_inbound_call_negative">ОТКЛОНИТЬ</string>
+    <string name="notification_service_ticker">Bonjour WebRTC: сервер работает и обнаруживается в локальной сети</string>
+    <string name="notification_service_content_line1">Bonjour WebRTC</string>
+    <!--
+    <string name="notification_service_content_line2">Щелкните, чтобы открыть. Остановить для остановки.</string>
+    -->
+    <string name="notification_service_content_line2">Щелкните, чтобы открыть.</string>
+    <string name="error_invalid_room_name">ОШИБКА: Не удалось соединиться с недопустимым IP адрес</string>
+</resources>
