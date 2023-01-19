@@ -21,22 +21,33 @@ android {
         archivesBaseName += "-$versionName"
     }
 
-    lintOptions {
-        disable 'MissingTranslation'
-        abortOnError true
+    flavorDimensions "languageResources"
+
+    productFlavors {
+        withAllLanguageTranslations {
+            dimension "languageResources"
+        }
+        english {
+            dimension "languageResources"
+        }
     }
 
     buildTypes {
         release {
+            debuggable      false
+            jniDebuggable   false
+            minifyEnabled   true
             shrinkResources true
-            minifyEnabled true
             proguardFiles = [
                 "proguard-rules.txt",
                 getDefaultProguardFile('proguard-android.txt')
             ]
         }
         debug {
-            jniDebuggable = true
+            debuggable      true
+            jniDebuggable   true
+            minifyEnabled   false
+            shrinkResources false
         }
     }
 
@@ -45,8 +56,13 @@ android {
             enable true
             reset()
             include "arm64-v8a", "armeabi-v7a", "x86", "x86_64"
-            universalApk true
+            universalApk false
         }
+    }
+
+    lintOptions {
+        disable 'MissingTranslation'
+        abortOnError true
     }
 }
 
