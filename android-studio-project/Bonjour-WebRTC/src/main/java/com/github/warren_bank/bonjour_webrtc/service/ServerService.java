@@ -162,13 +162,21 @@ public class ServerService extends Service {
         Intent intent = new Intent(ServerService.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-        return PendingIntent.getActivity(ServerService.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        int flags = PendingIntent.FLAG_UPDATE_CURRENT;
+        if (Build.VERSION.SDK_INT >= 23)
+            flags |= PendingIntent.FLAG_IMMUTABLE;
+
+        return PendingIntent.getActivity(ServerService.this, 0, intent, flags);
     }
 
     private PendingIntent getPendingIntent_StopService() {
         Intent intent = doStop(ServerService.this, false);
 
-        return PendingIntent.getService(ServerService.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        int flags = PendingIntent.FLAG_UPDATE_CURRENT;
+        if (Build.VERSION.SDK_INT >= 23)
+            flags |= PendingIntent.FLAG_IMMUTABLE;
+
+        return PendingIntent.getService(ServerService.this, 0, intent, flags);
     }
 
     // -------------------------------------------------------------------------

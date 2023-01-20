@@ -13,15 +13,24 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public final class RuntimePermissions {
     private static final int REQUEST_CODE_PERMISSIONS  = 0;
     private static final int REQUEST_CODE_DRAWOVERLAYS = 1;
 
-    private static final ArrayList<String> MANDATORY_PERMISSIONS = new ArrayList<String>(
-        Arrays.asList("android.permission.MODIFY_AUDIO_SETTINGS", "android.permission.RECORD_AUDIO", "android.permission.INTERNET")
-    );
+    private static final ArrayList<String> MANDATORY_PERMISSIONS;
+
+    static {
+      MANDATORY_PERMISSIONS = new ArrayList<String>();
+
+      MANDATORY_PERMISSIONS.add("android.permission.INTERNET");
+      MANDATORY_PERMISSIONS.add("android.permission.MODIFY_AUDIO_SETTINGS");
+      MANDATORY_PERMISSIONS.add("android.permission.RECORD_AUDIO");
+
+      // Android 12+
+      if (Build.VERSION.SDK_INT >= 31)
+        MANDATORY_PERMISSIONS.add("android.permission.BLUETOOTH_CONNECT");
+    }
 
     public static String[] getMissingPermissions(Activity activity) {
         if (Build.VERSION.SDK_INT < 23)
