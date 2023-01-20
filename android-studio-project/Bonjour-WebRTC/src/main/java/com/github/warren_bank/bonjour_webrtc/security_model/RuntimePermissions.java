@@ -26,10 +26,6 @@ public final class RuntimePermissions {
       MANDATORY_PERMISSIONS.add("android.permission.INTERNET");
       MANDATORY_PERMISSIONS.add("android.permission.MODIFY_AUDIO_SETTINGS");
       MANDATORY_PERMISSIONS.add("android.permission.RECORD_AUDIO");
-
-      // Android 12+
-      if (Build.VERSION.SDK_INT >= 31)
-        MANDATORY_PERMISSIONS.add("android.permission.BLUETOOTH_CONNECT");
     }
 
     public static String[] getMissingPermissions(Activity activity) {
