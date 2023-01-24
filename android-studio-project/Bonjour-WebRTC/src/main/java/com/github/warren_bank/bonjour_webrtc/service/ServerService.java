@@ -129,8 +129,11 @@ public class ServerService extends Service {
         if (Build.VERSION.SDK_INT >= 26) {
             Notification.Builder builder = new Notification.Builder(/* context= */ ServerService.this, /* channelId= */ getNotificationChannelId());
 
-            if (Build.VERSION.SDK_INT >= 31)
+            if (Build.VERSION.SDK_INT >= 31) {
+                builder.setContentTitle(getString(R.string.notification_service_content_line1));
+                builder.setContentText (getString(R.string.notification_service_content_line2));
                 builder.setForegroundServiceBehavior(Notification.FOREGROUND_SERVICE_IMMEDIATE);
+            }
 
             notification = builder.build();
         }
@@ -162,7 +165,13 @@ public class ServerService extends Service {
         contentView.setImageViewResource(R.id.notification_icon, R.drawable.launcher);
         contentView.setTextViewText(R.id.notification_text_line1, getString(R.string.notification_service_content_line1));
         contentView.setTextViewText(R.id.notification_text_line2, getString(R.string.notification_service_content_line2));
-        notification.contentView   = contentView;
+
+        if (Build.VERSION.SDK_INT < 31)
+            notification.contentView = contentView;
+        if (Build.VERSION.SDK_INT >= 16)
+            notification.bigContentView = contentView;
+        if (Build.VERSION.SDK_INT >= 21)
+            notification.headsUpContentView = contentView;
 
         return notification;
     }
