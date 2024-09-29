@@ -39,6 +39,9 @@ public class TCPChannelClient {
   private final ExecutorService executor;
   private final ThreadUtils.ThreadChecker executorThreadCheck;
   private final TCPChannelEvents eventListener;
+
+  private InetAddress address;
+  private int port;
   private TCPSocket socket;
 
   /**
@@ -67,21 +70,50 @@ public class TCPChannelClient {
     executorThreadCheck.detachThread();
     this.eventListener = eventListener;
 
-    InetAddress address;
     try {
-      address = InetAddress.getByName(ip);
+      InetAddress tempAddress = InetAddress.getByName(ip);
+
+      this.address = tempAddress;
+      this.port    = port;
     } catch (UnknownHostException e) {
+      this.address = null;
+      this.port    = -1;
+
       reportError("Invalid IP address.");
       return;
     }
 
     if (address.isAnyLocalAddress()) {
-      socket = new TCPSocketServer(address, port);
+      socket = new TCPSocketServer(this.address, this.port);
     } else {
-      socket = new TCPSocketClient(address, port);
+      socket = new TCPSocketClient(this.address, this.port);
     }
 
     socket.start();
+  }
+
+  private void execute(Runnable command) {
+    if ((executor == null) || executor.isShutdown() || executor.isTerminated())
+      return;
+
+    executor.execute(command);
+  }
+
+  public boolean isServer() {
+    return socket.isServer();
+  }
+
+  public void reconnect() {
+    executorThreadCheck.checkIsOnValidThread();
+
+    if (socket.isServer()) {
+      // closes old socket and stops Thread
+      socket.disconnect();
+
+      // starts new Thread with new socket
+      socket = new TCPSocketServer(this.address, this.port);
+      socket.start();
+    }
   }
 
   /**
@@ -109,7 +141,7 @@ public class TCPChannelClient {
    */
   private void reportError(final String message) {
     Log.e(TAG, "TCP Error: " + message);
-    executor.execute(new Runnable() {
+    execute(new Runnable() {
       @Override
       public void run() {
         eventListener.onTCPError(message);
@@ -181,7 +213,7 @@ public class TCPChannelClient {
       }
 
       Log.v(TAG, "Execute onTCPConnected");
-      executor.execute(new Runnable() {
+      execute(new Runnable() {
         @Override
         public void run() {
           Log.v(TAG, "Run onTCPConnected");
@@ -210,7 +242,7 @@ public class TCPChannelClient {
           break;
         }
 
-        executor.execute(new Runnable() {
+        execute(new Runnable() {
           @Override
           public void run() {
             Log.v(TAG, "Receive: " + message);
@@ -234,7 +266,7 @@ public class TCPChannelClient {
             rawSocket = null;
             out = null;
 
-            executor.execute(new Runnable() {
+            execute(new Runnable() {
               @Override
               public void run() {
                 eventListener.onTCPClose();
@@ -321,7 +353,6 @@ public class TCPChannelClient {
       } catch (IOException e) {
         reportError("Failed to close server socket: " + e.getMessage());
       }
-
       super.disconnect();
     }
 

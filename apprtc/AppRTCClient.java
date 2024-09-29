@@ -45,7 +45,7 @@ public interface AppRTCClient {
    * parameters. Once connection is established onConnectedToRoom()
    * callback with room parameters is invoked.
    */
-  void connectToRoom(RoomConnectionParameters connectionParameters);
+  void connect(RoomConnectionParameters connectionParameters);
 
   /**
    * Send offer SDP to the other participant.
@@ -70,7 +70,7 @@ public interface AppRTCClient {
   /**
    * Disconnect from room.
    */
-  void disconnectFromRoom();
+  void disconnect();
 
   /**
    * Struct holding the signaling parameters of an AppRTC room.
@@ -113,6 +113,11 @@ public interface AppRTCClient {
      * Callback fired once remote SDP is received.
      */
     void onRemoteDescription(final SessionDescription sdp);
+
+    /**
+     * Callback fired once alias of remote peer is received.
+     */
+    void onRemotePeerAlias(final String alias);
 
     /**
      * Callback fired once remote Ice candidate is received.

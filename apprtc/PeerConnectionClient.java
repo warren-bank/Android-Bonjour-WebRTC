@@ -40,7 +40,6 @@ import org.webrtc.AddIceObserver;
 import org.webrtc.AudioSource;
 import org.webrtc.AudioTrack;
 import org.webrtc.CameraVideoCapturer;
-import org.webrtc.CandidatePairChangeEvent;
 import org.webrtc.DataChannel;
 import org.webrtc.DefaultVideoDecoderFactory;
 import org.webrtc.DefaultVideoEncoderFactory;
@@ -75,9 +74,7 @@ import org.webrtc.VideoTrack;
 import org.webrtc.audio.AudioDeviceModule;
 import org.webrtc.audio.JavaAudioDeviceModule;
 import org.webrtc.audio.JavaAudioDeviceModule.AudioRecordErrorCallback;
-import org.webrtc.audio.JavaAudioDeviceModule.AudioRecordStateCallback;
 import org.webrtc.audio.JavaAudioDeviceModule.AudioTrackErrorCallback;
-import org.webrtc.audio.JavaAudioDeviceModule.AudioTrackStateCallback;
 
 /**
  * Peer connection client implementation.
@@ -506,40 +503,12 @@ public class PeerConnectionClient {
       }
     };
 
-    // Set audio record state callbacks.
-    AudioRecordStateCallback audioRecordStateCallback = new AudioRecordStateCallback() {
-      @Override
-      public void onWebRtcAudioRecordStart() {
-        Log.i(TAG, "Audio recording starts");
-      }
-
-      @Override
-      public void onWebRtcAudioRecordStop() {
-        Log.i(TAG, "Audio recording stops");
-      }
-    };
-
-    // Set audio track state callbacks.
-    AudioTrackStateCallback audioTrackStateCallback = new AudioTrackStateCallback() {
-      @Override
-      public void onWebRtcAudioTrackStart() {
-        Log.i(TAG, "Audio playout starts");
-      }
-
-      @Override
-      public void onWebRtcAudioTrackStop() {
-        Log.i(TAG, "Audio playout stops");
-      }
-    };
-
     return JavaAudioDeviceModule.builder(appContext)
         .setSamplesReadyCallback(saveRecordedAudioToFile)
         .setUseHardwareAcousticEchoCanceler(!peerConnectionParameters.disableBuiltInAEC)
         .setUseHardwareNoiseSuppressor(!peerConnectionParameters.disableBuiltInNS)
         .setAudioRecordErrorCallback(audioRecordErrorCallback)
         .setAudioTrackErrorCallback(audioTrackErrorCallback)
-        .setAudioRecordStateCallback(audioRecordStateCallback)
-        .setAudioTrackStateCallback(audioTrackStateCallback)
         .createAudioDeviceModule();
   }
 
@@ -742,6 +711,14 @@ public class PeerConnectionClient {
     events.onPeerConnectionClosed();
     PeerConnectionFactory.stopInternalTracingCapture();
     PeerConnectionFactory.shutdownInternalTracer();
+  }
+
+  public EglBase getEglBase() {
+    return rootEglBase;
+  }
+
+  public PeerConnectionParameters getPeerConnectionParameters() {
+    return peerConnectionParameters;
   }
 
   public boolean isHDVideo() {
@@ -1265,11 +1242,6 @@ public class PeerConnectionClient {
     @Override
     public void onIceConnectionReceivingChange(boolean receiving) {
       Log.d(TAG, "IceConnectionReceiving changed to " + receiving);
-    }
-
-    @Override
-    public void onSelectedCandidatePairChanged(CandidatePairChangeEvent event) {
-      Log.d(TAG, "Selected candidate pair changed because: " + event);
     }
 
     @Override

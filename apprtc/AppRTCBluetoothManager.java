@@ -10,6 +10,10 @@
 
 package org.appspot.apprtc;
 
+import org.appspot.apprtc.util.AppRTCUtils;
+
+import org.webrtc.ThreadUtils;
+
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -21,6 +25,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Process;
@@ -28,8 +33,6 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import java.util.List;
 import java.util.Set;
-import org.appspot.apprtc.util.AppRTCUtils;
-import org.webrtc.ThreadUtils;
 
 /**
  * AppRTCProximitySensor manages functions related to Bluetoth devices in the
@@ -234,7 +237,7 @@ public class AppRTCBluetoothManager {
   public void start() {
     ThreadUtils.checkIsOnMainThread();
     Log.d(TAG, "start");
-    if (!hasPermission(apprtcContext, android.Manifest.permission.BLUETOOTH)) {
+    if (!hasBluetoothPermission(apprtcContext)) {
       Log.w(TAG, "Process (pid=" + Process.myPid() + ") lacks BLUETOOTH permission");
       return;
     }
@@ -413,8 +416,14 @@ public class AppRTCBluetoothManager {
     return bluetoothAdapter.getProfileProxy(context, listener, profile);
   }
 
+  private boolean hasBluetoothPermission(Context context) {
+    return (Build.VERSION.SDK_INT >= 31)
+      ? (hasPermission(context, android.Manifest.permission.BLUETOOTH) && hasPermission(context, android.Manifest.permission.BLUETOOTH_CONNECT))
+      :  hasPermission(context, android.Manifest.permission.BLUETOOTH);
+  }
+
   protected boolean hasPermission(Context context, String permission) {
-    return apprtcContext.checkPermission(permission, Process.myPid(), Process.myUid())
+    return context.checkPermission(permission, Process.myPid(), Process.myUid())
         == PackageManager.PERMISSION_GRANTED;
   }
 

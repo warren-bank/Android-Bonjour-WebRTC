@@ -10,6 +10,8 @@
 
 package org.appspot.apprtc;
 
+import com.github.warren_bank.bonjour_webrtc.R;
+
 import android.widget.SeekBar;
 import android.widget.TextView;
 import java.util.Arrays;
