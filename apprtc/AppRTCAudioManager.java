@@ -10,6 +10,8 @@
 
 package org.appspot.apprtc;
 
+import com.github.warren_bank.bonjour_webrtc.R;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;

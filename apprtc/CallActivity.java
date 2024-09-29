@@ -10,6 +10,12 @@
 
 package org.appspot.apprtc;
 
+import com.github.warren_bank.bonjour_webrtc.R;
+import com.github.warren_bank.bonjour_webrtc.security_model.RuntimePermissions;
+import com.github.warren_bank.bonjour_webrtc.service.ServerService;
+import com.github.warren_bank.bonjour_webrtc.util.OrgAppspotApprtcGlue;
+import com.github.warren_bank.bonjour_webrtc.util.Util;
+
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -123,10 +129,6 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
 
   private static final int CAPTURE_PERMISSION_REQUEST_CODE = 1;
 
-  // List of mandatory application permissions.
-  private static final String[] MANDATORY_PERMISSIONS = {"android.permission.MODIFY_AUDIO_SETTINGS",
-      "android.permission.RECORD_AUDIO", "android.permission.INTERNET"};
-
   // Peer connection statistics callback period in ms.
   private static final int STAT_CALLBACK_PERIOD = 1000;
 
@@ -150,6 +152,9 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
 
   private final ProxyVideoSink remoteProxyRenderer = new ProxyVideoSink();
   private final ProxyVideoSink localProxyVideoSink = new ProxyVideoSink();
+
+  private boolean isInboundCall;
+
   @Nullable private PeerConnectionClient peerConnectionClient;
   @Nullable
   private AppRTCClient appRtcClient;
@@ -173,6 +178,7 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
   private boolean isError;
   private boolean callControlFragmentVisible = true;
   private long callStartedTimeMs;
+  private boolean pipEnabled = true;
   private boolean micEnabled = true;
   private boolean screencaptureEnabled;
   private static Intent mediaProjectionPermissionResultData;
@@ -230,7 +236,13 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
     remoteSinks.add(remoteProxyRenderer);
 
     final Intent intent = getIntent();
-    final EglBase eglBase = EglBase.create();
+
+    final String roomId = intent.getStringExtra(EXTRA_ROOMID);
+    isInboundCall = (roomId != null) && !roomId.isEmpty() && roomId.equals(Util.getSocketServerIpAddress(CallActivity.this)) && ServerService.isStarted();
+
+    final EglBase eglBase = (isInboundCall)
+      ? ServerService.getPeerConnectionClient().getEglBase()
+      : EglBase.create();
 
     // Create video renderers.
     pipRenderer.init(eglBase.getEglBaseContext(), null);
@@ -260,88 +272,59 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
     setSwappedFeeds(true /* isSwappedFeeds */);
 
     // Check for mandatory permissions.
-    for (String permission : MANDATORY_PERMISSIONS) {
-      if (checkCallingOrSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
-        logAndToast("Permission " + permission + " is not granted");
-        setResult(RESULT_CANCELED);
+    if (!RuntimePermissions.hasMandatoryPermissions(CallActivity.this)) {
+        logAndToast("Required permission(s) have been revoked since 'Bonjour WebRTC' was started.");
         finish();
         return;
-      }
-    }
-
-    Uri roomUri = intent.getData();
-    if (roomUri == null) {
-      logAndToast(getString(R.string.missing_url));
-      Log.e(TAG, "Didn't get any URL in intent!");
-      setResult(RESULT_CANCELED);
-      finish();
-      return;
     }
 
     // Get Intent parameters.
-    String roomId = intent.getStringExtra(EXTRA_ROOMID);
     Log.d(TAG, "Room ID: " + roomId);
-    if (roomId == null || roomId.length() == 0) {
+    if (!isInboundCall && (roomId == null || roomId.length() == 0)) {
       logAndToast(getString(R.string.missing_url));
       Log.e(TAG, "Incorrect room ID in intent!");
-      setResult(RESULT_CANCELED);
       finish();
       return;
     }
 
-    boolean loopback = intent.getBooleanExtra(EXTRA_LOOPBACK, false);
-    boolean tracing = intent.getBooleanExtra(EXTRA_TRACING, false);
-
-    int videoWidth = intent.getIntExtra(EXTRA_VIDEO_WIDTH, 0);
-    int videoHeight = intent.getIntExtra(EXTRA_VIDEO_HEIGHT, 0);
-
+    boolean loopback     = intent.getBooleanExtra(EXTRA_LOOPBACK, false);
     screencaptureEnabled = intent.getBooleanExtra(EXTRA_SCREENCAPTURE, false);
-    // If capturing format is not specified for screencapture, use screen resolution.
-    if (screencaptureEnabled && videoWidth == 0 && videoHeight == 0) {
-      DisplayMetrics displayMetrics = getDisplayMetrics();
-      videoWidth = displayMetrics.widthPixels;
-      videoHeight = displayMetrics.heightPixels;
+    commandLineRun       = intent.getBooleanExtra(EXTRA_CMDLINE, false);
+    int runTimeMs        = intent.getIntExtra(EXTRA_RUNTIME, 0);
+
+    if (isInboundCall) {
+        peerConnectionClient     = ServerService.getPeerConnectionClient();
+        peerConnectionParameters = peerConnectionClient.getPeerConnectionParameters();
+        appRtcClient             = ServerService.getDirectRTCClient();
+
+        ServerService.getServerPeerConnectionEvents().setCallActivity(CallActivity.this);
+        ServerService.getServerSignalingEvents().setCallActivity(CallActivity.this);      // triggers call to: onConnectedToRoom(signalingParams)
     }
-    DataChannelParameters dataChannelParameters = null;
-    if (intent.getBooleanExtra(EXTRA_DATA_CHANNEL_ENABLED, false)) {
-      dataChannelParameters = new DataChannelParameters(intent.getBooleanExtra(EXTRA_ORDERED, true),
-          intent.getIntExtra(EXTRA_MAX_RETRANSMITS_MS, -1),
-          intent.getIntExtra(EXTRA_MAX_RETRANSMITS, -1), intent.getStringExtra(EXTRA_PROTOCOL),
-          intent.getBooleanExtra(EXTRA_NEGOTIATED, false), intent.getIntExtra(EXTRA_ID, -1));
+    else {
+        peerConnectionClient     = OrgAppspotApprtcGlue.getPeerConnectionClient(getApplicationContext(), eglBase, CallActivity.this, intent);
+        peerConnectionParameters = peerConnectionClient.getPeerConnectionParameters();
+
+        // Create connection client.
+        // Use DirectRTCClient if room name is an IP.
+        // Otherwise, show error message and finish.
+        if (loopback || !DirectRTCClient.IP_PATTERN.matcher(roomId).matches()) {
+            logAndToast(getString(R.string.error_invalid_room_name));
+            Log.e(TAG, "Room name is incorrect! Value should be an IP address on the LAN (ex: 192.168.1.100:8888). Value is: '" + roomId + "'.");
+            finish();
+            return;
+        }
+        else {
+            Log.i(TAG, "Using DirectRTCClient because room name looks like an IP.");
+            appRtcClient = new DirectRTCClient(CallActivity.this, CallActivity.this);
+        }
     }
-    peerConnectionParameters =
-        new PeerConnectionParameters(intent.getBooleanExtra(EXTRA_VIDEO_CALL, true), loopback,
-            tracing, videoWidth, videoHeight, intent.getIntExtra(EXTRA_VIDEO_FPS, 0),
-            intent.getIntExtra(EXTRA_VIDEO_BITRATE, 0), intent.getStringExtra(EXTRA_VIDEOCODEC),
-            intent.getBooleanExtra(EXTRA_HWCODEC_ENABLED, true),
-            intent.getBooleanExtra(EXTRA_FLEXFEC_ENABLED, false),
-            intent.getIntExtra(EXTRA_AUDIO_BITRATE, 0), intent.getStringExtra(EXTRA_AUDIOCODEC),
-            intent.getBooleanExtra(EXTRA_NOAUDIOPROCESSING_ENABLED, false),
-            intent.getBooleanExtra(EXTRA_AECDUMP_ENABLED, false),
-            intent.getBooleanExtra(EXTRA_SAVE_INPUT_AUDIO_TO_FILE_ENABLED, false),
-            intent.getBooleanExtra(EXTRA_OPENSLES_ENABLED, false),
-            intent.getBooleanExtra(EXTRA_DISABLE_BUILT_IN_AEC, false),
-            intent.getBooleanExtra(EXTRA_DISABLE_BUILT_IN_AGC, false),
-            intent.getBooleanExtra(EXTRA_DISABLE_BUILT_IN_NS, false),
-            intent.getBooleanExtra(EXTRA_DISABLE_WEBRTC_AGC_AND_HPF, false),
-            intent.getBooleanExtra(EXTRA_ENABLE_RTCEVENTLOG, false), dataChannelParameters);
-    commandLineRun = intent.getBooleanExtra(EXTRA_CMDLINE, false);
-    int runTimeMs = intent.getIntExtra(EXTRA_RUNTIME, 0);
 
     Log.d(TAG, "VIDEO_FILE: '" + intent.getStringExtra(EXTRA_VIDEO_FILE_AS_CAMERA) + "'");
 
-    // Create connection client. Use DirectRTCClient if room name is an IP otherwise use the
-    // standard WebSocketRTCClient.
-    if (loopback || !DirectRTCClient.IP_PATTERN.matcher(roomId).matches()) {
-      appRtcClient = new WebSocketRTCClient(this);
-    } else {
-      Log.i(TAG, "Using DirectRTCClient because room name looks like an IP.");
-      appRtcClient = new DirectRTCClient(this);
-    }
     // Create connection parameters.
     String urlParameters = intent.getStringExtra(EXTRA_URLPARAMETERS);
     roomConnectionParameters =
-        new RoomConnectionParameters(roomUri.toString(), roomId, loopback, urlParameters);
+        new RoomConnectionParameters(null, roomId, loopback, urlParameters);
 
     // Create CPU monitor
     if (CpuMonitor.isSupported()) {
@@ -367,15 +350,6 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
         }
       }, runTimeMs);
     }
-
-    // Create peer connection client.
-    peerConnectionClient = new PeerConnectionClient(
-        getApplicationContext(), eglBase, peerConnectionParameters, CallActivity.this);
-    PeerConnectionFactory.Options options = new PeerConnectionFactory.Options();
-    if (loopback) {
-      options.networkIgnoreMask = 0;
-    }
-    peerConnectionClient.createPeerConnectionFactory(options);
 
     if (screencaptureEnabled) {
       startScreenCapture();
@@ -540,6 +514,16 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
   }
 
   @Override
+  public boolean onTogglePip() {
+    if (peerConnectionClient != null) {
+      pipEnabled = !pipEnabled;
+      int visibility = (pipEnabled) ? View.VISIBLE : View.INVISIBLE;
+      pipRenderer.setVisibility(visibility);
+    }
+    return pipEnabled;
+  }
+
+  @Override
   public boolean onToggleMic() {
     if (peerConnectionClient != null) {
       micEnabled = !micEnabled;
@@ -574,9 +558,12 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
     }
     callStartedTimeMs = System.currentTimeMillis();
 
-    // Start room connection.
-    logAndToast(getString(R.string.connecting_to, roomConnectionParameters.roomUrl));
-    appRtcClient.connectToRoom(roomConnectionParameters);
+    if (!isInboundCall) {
+        logAndToast(getString(R.string.connecting_to, roomConnectionParameters.roomId));
+
+        // Start room connection.
+        appRtcClient.connect(roomConnectionParameters);
+    }
 
     // Create and audio manager that will take care of audio routing,
     // audio modes, audio device enumeration etc.
@@ -622,36 +609,35 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
     activityRunning = false;
     remoteProxyRenderer.setTarget(null);
     localProxyVideoSink.setTarget(null);
-    if (appRtcClient != null) {
-      appRtcClient.disconnectFromRoom();
-      appRtcClient = null;
+
+    if (isInboundCall) {
+        ServerService.doHangup(CallActivity.this);
     }
-    if (pipRenderer != null) {
+    else {
+      if (appRtcClient != null)
+        appRtcClient.disconnect();
+      if (peerConnectionClient != null)
+        peerConnectionClient.close();
+    }
+
+    if (pipRenderer != null)
       pipRenderer.release();
-      pipRenderer = null;
-    }
-    if (videoFileRenderer != null) {
+    if (videoFileRenderer != null)
       videoFileRenderer.release();
-      videoFileRenderer = null;
-    }
-    if (fullscreenRenderer != null) {
+    if (fullscreenRenderer != null)
       fullscreenRenderer.release();
-      fullscreenRenderer = null;
-    }
-    if (peerConnectionClient != null) {
-      peerConnectionClient.close();
-      peerConnectionClient = null;
-    }
-    if (audioManager != null) {
+    if (audioManager != null)
       audioManager.stop();
-      audioManager = null;
-    }
-    if (connected && !isError) {
-      setResult(RESULT_OK);
-    } else {
-      setResult(RESULT_CANCELED);
-    }
-    finish();
+
+    appRtcClient         = null;
+    peerConnectionClient = null;
+    pipRenderer          = null;
+    videoFileRenderer    = null;
+    fullscreenRenderer   = null;
+    audioManager         = null;
+
+    if (!isFinishing())
+      finish();
   }
 
   private void disconnectWithErrorMessage(final String errorMessage) {
@@ -802,6 +788,18 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
           // Create answer. Answer SDP will be sent to offering client in
           // PeerConnectionEvents.onLocalDescription event.
           peerConnectionClient.createAnswer();
+        }
+      }
+    });
+  }
+
+  @Override
+  public void onRemotePeerAlias(final String alias) {
+    runOnUiThread(new Runnable() {
+      @Override
+      public void run() {
+        if (callFragment != null) {
+          callFragment.updateContactName(alias);
         }
       }
     });

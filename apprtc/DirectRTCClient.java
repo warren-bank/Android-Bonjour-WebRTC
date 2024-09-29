@@ -10,6 +10,9 @@
 
 package org.appspot.apprtc;
 
+import com.github.warren_bank.bonjour_webrtc.data_model.SharedPrefs;
+
+import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import java.util.ArrayList;
@@ -30,8 +33,9 @@ import org.webrtc.SessionDescription;
  * connections.
  */
 public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChannelEvents {
+  public static final int DEFAULT_PORT = 8888;
+
   private static final String TAG = "DirectRTCClient";
-  private static final int DEFAULT_PORT = 8888;
 
   // Regex pattern used for checking if room id looks like an IP.
   static final Pattern IP_PATTERN = Pattern.compile("("
@@ -50,8 +54,9 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
       // Optional port number
       + "(:(\\d+))?");
 
-  private final ExecutorService executor;
+  private final Context         context;
   private final SignalingEvents events;
+  private final ExecutorService executor;
   @Nullable
   private TCPChannelClient tcpClient;
   private RoomConnectionParameters connectionParameters;
@@ -61,11 +66,19 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
   // All alterations of the room state should be done from inside the looper thread.
   private ConnectionState roomState;
 
-  public DirectRTCClient(SignalingEvents events) {
-    this.events = events;
+  public DirectRTCClient(Context context, SignalingEvents events) {
+    this.context = context;
+    this.events  = events;
 
     executor = Executors.newSingleThreadExecutor();
     roomState = ConnectionState.NEW;
+  }
+
+  private void execute(Runnable command) {
+    if ((executor == null) || executor.isShutdown() || executor.isTerminated())
+      return;
+
+    executor.execute(command);
   }
 
   /**
@@ -73,29 +86,40 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
    * IP address matching IP_PATTERN.
    */
   @Override
-  public void connectToRoom(RoomConnectionParameters connectionParameters) {
+  public void connect(RoomConnectionParameters connectionParameters) {
     this.connectionParameters = connectionParameters;
 
     if (connectionParameters.loopback) {
       reportError("Loopback connections aren't supported by DirectRTCClient.");
     }
 
-    executor.execute(new Runnable() {
+    execute(new Runnable() {
       @Override
       public void run() {
-        connectToRoomInternal();
+        connectInternal();
       }
     });
   }
 
   @Override
-  public void disconnectFromRoom() {
-    executor.execute(new Runnable() {
+  public void disconnect() {
+    execute(new Runnable() {
       @Override
       public void run() {
-        disconnectFromRoomInternal();
+        disconnectInternal(false);
       }
     });
+  }
+
+  public void restartServer() {
+    if ((tcpClient != null) && tcpClient.isServer()) {
+      execute(new Runnable() {
+        @Override
+        public void run() {
+          disconnectInternal(true);
+        }
+      });
+    }
   }
 
   /**
@@ -103,7 +127,7 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
    *
    * Runs on the looper thread.
    */
-  private void connectToRoomInternal() {
+  private void connectInternal() {
     this.roomState = ConnectionState.NEW;
 
     String endpoint = connectionParameters.roomId;
@@ -137,28 +161,45 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
    *
    * Runs on the looper thread.
    */
-  private void disconnectFromRoomInternal() {
-    roomState = ConnectionState.CLOSED;
+  private void disconnectInternal(boolean restartServer) {
+    if ((tcpClient != null) && tcpClient.isServer() && restartServer) {
+      if (roomState != ConnectionState.NEW) {
+        roomState = ConnectionState.NEW;
 
-    if (tcpClient != null) {
-      tcpClient.disconnect();
-      tcpClient = null;
+        tcpClient.reconnect();
+      }
     }
-    executor.shutdown();
+    else {
+      roomState = ConnectionState.CLOSED;
+      if (tcpClient != null) {
+        tcpClient.disconnect();
+        tcpClient = null;
+      }
+      if ((executor != null) && !executor.isShutdown() && !executor.isTerminated())
+        executor.shutdown();
+    }
   }
 
   @Override
   public void sendOfferSdp(final SessionDescription sdp) {
-    executor.execute(new Runnable() {
+    execute(new Runnable() {
       @Override
       public void run() {
+        JSONObject json;
+
         if (roomState != ConnectionState.CONNECTED) {
           reportError("Sending offer SDP in non connected state.");
           return;
         }
-        JSONObject json = new JSONObject();
+
+        json = new JSONObject();
         jsonPut(json, "sdp", sdp.description);
         jsonPut(json, "type", "offer");
+        sendMessage(json.toString());
+
+        json = new JSONObject();
+        jsonPut(json, "type", "peer-alias");
+        jsonPut(json, "name", SharedPrefs.getServerAlias(context));
         sendMessage(json.toString());
       }
     });
@@ -166,12 +207,19 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
 
   @Override
   public void sendAnswerSdp(final SessionDescription sdp) {
-    executor.execute(new Runnable() {
+    execute(new Runnable() {
       @Override
       public void run() {
-        JSONObject json = new JSONObject();
+        JSONObject json;
+
+        json = new JSONObject();
         jsonPut(json, "sdp", sdp.description);
         jsonPut(json, "type", "answer");
+        sendMessage(json.toString());
+
+        json = new JSONObject();
+        jsonPut(json, "type", "peer-alias");
+        jsonPut(json, "name", SharedPrefs.getServerAlias(context));
         sendMessage(json.toString());
       }
     });
@@ -179,7 +227,7 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
 
   @Override
   public void sendLocalIceCandidate(final IceCandidate candidate) {
-    executor.execute(new Runnable() {
+    execute(new Runnable() {
       @Override
       public void run() {
         JSONObject json = new JSONObject();
@@ -200,7 +248,7 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
   /** Send removed Ice candidates to the other participant. */
   @Override
   public void sendLocalIceCandidateRemovals(final IceCandidate[] candidates) {
-    executor.execute(new Runnable() {
+    execute(new Runnable() {
       @Override
       public void run() {
         JSONObject json = new JSONObject();
@@ -279,6 +327,8 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
             );
         roomState = ConnectionState.CONNECTED;
         events.onConnectedToRoom(parameters);
+      } else if (type.equals("peer-alias")) {
+        events.onRemotePeerAlias(json.getString("name"));
       } else {
         reportError("Unexpected TCP message: " + msg);
       }
@@ -301,7 +351,7 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
   // Helper functions.
   private void reportError(final String errorMessage) {
     Log.e(TAG, errorMessage);
-    executor.execute(new Runnable() {
+    execute(new Runnable() {
       @Override
       public void run() {
         if (roomState != ConnectionState.ERROR) {
@@ -313,7 +363,7 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
   }
 
   private void sendMessage(final String message) {
-    executor.execute(new Runnable() {
+    execute(new Runnable() {
       @Override
       public void run() {
         tcpClient.send(message);

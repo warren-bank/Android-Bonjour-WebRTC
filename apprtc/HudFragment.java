@@ -10,6 +10,8 @@
 
 package org.appspot.apprtc;
 
+import com.github.warren_bank.bonjour_webrtc.R;
+
 import android.app.Fragment;
 import android.os.Bundle;
 import android.util.TypedValue;
