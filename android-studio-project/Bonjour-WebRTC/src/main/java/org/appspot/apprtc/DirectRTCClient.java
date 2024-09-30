@@ -13,8 +13,8 @@ package org.appspot.apprtc;
 import com.github.warren_bank.bonjour_webrtc.data_model.SharedPrefs;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
 import android.util.Log;
+import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -24,7 +24,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.webrtc.IceCandidate;
-import org.webrtc.PeerConnection;
 import org.webrtc.SessionDescription;
 
 /**
@@ -371,7 +370,7 @@ public class DirectRTCClient implements AppRTCClient, TCPChannelClient.TCPChanne
     });
   }
 
-  // Put a |key|->|value| mapping in |json|.
+  // Put a `key`->`value` mapping in `json`.
   private static void jsonPut(JSONObject json, String key, Object value) {
     try {
       json.put(key, value);

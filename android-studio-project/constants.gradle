@@ -1,13 +1,19 @@
+//  most configs mirror:
+//      https://webrtc.googlesource.com/src/+/4ab100d4a6c3b7848ae33b4c88fdf995da2f8922/examples/aarproject/app/build.gradle
+//
+//  Java 17 is required to compile for class (version 61.0) compatibility with the pre-built WebRTC native library
+//      https://stackoverflow.com/a/76363030
+
 project.ext {
-    releaseVersionCode = Integer.parseInt("001030916", 10)  //Integer.MAX_VALUE == 2147483647
-    releaseVersion     = '001.03.09-16API'
+    releaseVersionCode = Integer.parseInt("001030921", 10)  //Integer.MAX_VALUE == 2147483647
+    releaseVersion     = '001.03.09-21API'
     javaVersion        = JavaVersion.VERSION_1_8
-    minSdkVersion      = 16
+    minSdkVersion      = 21
     targetSdkVersion   = 33
     compileSdkVersion  = 33
     buildToolsVersion  = '33.0.1'
 
-    libVersionJmDNS    = '3.5.5'
-    libVersionSupport  = '28.0.0'
-    libVersionWebRTC   = '1.0.28513@aar'
+    libVersionJmDNS       = '3.5.5'
+    libVersionWebRTC      = '123.0.0@aar'
+    libVersionXannotation = '1.8.2'
 }

@@ -3,8 +3,8 @@ package com.github.warren_bank.bonjour_webrtc.service.glue;
 import org.appspot.apprtc.DirectRTCClient;
 import org.appspot.apprtc.PeerConnectionClient;
 import org.webrtc.IceCandidate;
+import org.webrtc.RTCStatsReport;
 import org.webrtc.SessionDescription;
-import org.webrtc.StatsReport;
 
 public class ServerPeerConnectionEvents implements PeerConnectionClient.PeerConnectionEvents {
 
@@ -93,9 +93,9 @@ public class ServerPeerConnectionEvents implements PeerConnectionClient.PeerConn
     }
 
     @Override
-    public void onPeerConnectionStatsReady(final StatsReport[] reports) {
+    public void onPeerConnectionStatsReady(final RTCStatsReport report) {
         if (callActivity != null)
-            callActivity.onPeerConnectionStatsReady(reports);
+            callActivity.onPeerConnectionStatsReady(report);
     }
 
     @Override

@@ -14,7 +14,7 @@ Android app that allows device discovery on WLAN (w/ Bonjour) and video calls to
 #### Notes
 
 * minimum supported version of Android:
-  * Android 4.1 (API level 16)
+  * Android 5.0 (API level 21)
 
 #### Usage
 
@@ -45,10 +45,11 @@ Android app that allows device discovery on WLAN (w/ Bonjour) and video calls to
 
 * [jmDNS library](https://github.com/jmdns/jmdns)
   - handles all Bonjour service registration/discovery
-* [WebRTC prebuilt native libraries with JNI wrapper](https://webrtc.org/native-code/android/)
+* [WebRTC prebuilt native libraries with JNI wrapper](./notes/webrtc-android-native-library.txt)
 * WebRTC _AppRTCMobile_ example Android application
   - [official source](https://webrtc.googlesource.com/src/+/master/examples/androidapp/)
   - [unofficial build](https://github.com/warren-bank/Android-AppRTCMobile)
+  - [methodology to apply updates](https://github.com/warren-bank/Android-Bonjour-WebRTC/tree/apprtc/2019-09-06)
 
 #### Legal:
 

@@ -1,0 +1,36 @@
+https://webrtc.org/native-code/android/
+https://webrtc.github.io/webrtc-org/native-code/android/
+  no-longer maintained
+
+https://github.com/warren-bank/Android-Bonjour-WebRTC/blob/v01.03.09/android-studio-project/constants.gradle#L12
+https://github.com/warren-bank/Android-Bonjour-WebRTC/blob/v01.03.09/android-studio-project/Bonjour-WebRTC/build.gradle#L71
+  build.gradle imports version 1.0.28513@aar from a maven repo
+
+https://mvnrepository.com/artifact/org.webrtc/google-webrtc?repo=bt-google-webrtc
+  maven repo
+
+https://mvnrepository.com/artifact/org.webrtc/google-webrtc/1.0.28513
+https://dl.bintray.com/google/webrtc/org/webrtc/google-webrtc/1.0.28513/google-webrtc-1.0.28513.aar
+  [2019-07-09, 26.7 MB] version in the maven repo used by v01.03.09 of this app: 1.0.28513
+
+https://mvnrepository.com/artifact/org.webrtc/google-webrtc/1.0.32006
+https://dl.bintray.com/google/webrtc/org/webrtc/google-webrtc/1.0.32006/google-webrtc-1.0.32006.aar
+  [2020-08-27, 27.2 MB] newest version in the maven repo is currently: 1.0.32006
+
+https://groups.google.com/g/discuss-webrtc/c/oa13f4Tgb8U
+
+https://github.com/webrtc-sdk/android/releases
+  pre-built binary releases
+https://github.com/webrtc-sdk/android/releases/tag/v125.6422.05
+https://github.com/webrtc-sdk/android/releases/download/v125.6422.05/libwebrtc.aar
+  [2024-09-02, 41.7 MB] newest version in this repo is currently: 125.6422.05
+
+https://github.com/rno/webrtc
+  pre-built binary releases
+https://github.com/rno/WebRTC/releases/tag/123.0.0
+https://github.com/rno/WebRTC/releases/download/123.0.0/libwebrtc-123.0.0.aar
+  [2024-03-23, 42.3 MB] newest version in this repo is currently: 123.0.0
+https://mvnrepository.com/artifact/com.dafruits/webrtc
+https://mvnrepository.com/artifact/com.dafruits/webrtc/123.0.0
+https://repo1.maven.org/maven2/com/dafruits/webrtc/123.0.0/webrtc-123.0.0.aar
+  implementation 'com.dafruits:webrtc:123.0.0@aar'

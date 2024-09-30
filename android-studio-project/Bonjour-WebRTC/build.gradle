@@ -60,6 +60,11 @@ android {
         }
     }
 
+    dependenciesInfo {
+        includeInApk    = false  // Disables dependency metadata when building APKs.
+        includeInBundle = false  // Disables dependency metadata when building Android App Bundles.
+    }
+
     lintOptions {
         disable 'MissingTranslation'
         abortOnError true
@@ -67,9 +72,9 @@ android {
 }
 
 dependencies {
-    implementation      'org.jmdns:jmdns:'                         + project.ext.libVersionJmDNS       // (209.0 KB) https://mvnrepository.com/artifact/org.jmdns/jmdns
-    implementation      'org.webrtc:google-webrtc:'                + project.ext.libVersionWebRTC      // ( 26.7 MB) https://mvnrepository.com/artifact/org.webrtc/google-webrtc
+    implementation      'org.jmdns:jmdns:'                + project.ext.libVersionJmDNS           // (216.0 KB) https://mvnrepository.com/artifact/org.jmdns/jmdns
+    implementation      'com.dafruits:webrtc:'            + project.ext.libVersionWebRTC          // ( 42.3 MB) https://mvnrepository.com/artifact/com.dafruits/webrtc
 
-    compileOnly         'com.android.support:support-annotations:' + project.ext.libVersionSupport     // ( 22.0 KB) https://mvnrepository.com/artifact/com.android.support/support-annotations?repo=google
-    annotationProcessor 'com.android.support:support-annotations:' + project.ext.libVersionSupport
+    compileOnly         'androidx.annotation:annotation:' + project.ext.libVersionXannotation     // (  8.0 KB) https://mvnrepository.com/artifact/androidx.annotation/annotation
+    annotationProcessor 'androidx.annotation:annotation:' + project.ext.libVersionXannotation
 }
