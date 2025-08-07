@@ -1,0 +1,1 @@
+discover devices on WLAN (w/ Bonjour) and place video calls between devices
