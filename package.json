@@ -3,12 +3,12 @@
   "private": true,
   "license": "GPL-2.0",
   "devDependencies": {
-    "@warren-bank/translate-android-strings": "^1.9.2"
+    "@warren-bank/translate-android-strings": "^3.0.1"
   },
   "scripts": {
-    "translate:app":   "translate-android-strings -i \"en\" -f \"android-studio-project/Bonjour-WebRTC/src/main/res/values/strings.xml\"                    -d \"android-studio-project/Bonjour-WebRTC/src/withAllLanguageTranslations/res\" -m --na --nc --nw -b \"(?:WebRTC|Bonjour WebRTC|IP)\"",
-    "translate:lib":   "translate-android-strings -i \"en\" -f \"android-studio-project/Bonjour-WebRTC/src/main/res/values/org_appspot_apprtc_strings.xml\" -d \"android-studio-project/Bonjour-WebRTC/src/withAllLanguageTranslations/res\" -m --na --nc --nw -b \"(?:WebRTC|URL|Camera2|OpenSL ES|RtcEventLog)\"",
-    "translate:prefs": "translate-android-strings -i \"en\" -f \"android-studio-project/Bonjour-WebRTC/src/main/res/values/general_preferences.xml\"        -d \"android-studio-project/Bonjour-WebRTC/src/withAllLanguageTranslations/res\" -m --na --nc --nw",
+    "translate:app":   "translate-android-strings -s \"deepl\" -i \"en\" -f \"android-studio-project/Bonjour-WebRTC/src/main/res/values/strings.xml\"                    -d \"android-studio-project/Bonjour-WebRTC/src/withAllLanguageTranslations/res\" -m --na --nc --nw -b \"(?:WebRTC|Bonjour WebRTC|IP)\"",
+    "translate:lib":   "translate-android-strings -s \"deepl\" -i \"en\" -f \"android-studio-project/Bonjour-WebRTC/src/main/res/values/org_appspot_apprtc_strings.xml\" -d \"android-studio-project/Bonjour-WebRTC/src/withAllLanguageTranslations/res\" -m --na --nc --nw -b \"(?:WebRTC|URL|Camera2|OpenSL ES|RtcEventLog)\"",
+    "translate:prefs": "translate-android-strings -s \"deepl\" -i \"en\" -f \"android-studio-project/Bonjour-WebRTC/src/main/res/values/general_preferences.xml\"        -d \"android-studio-project/Bonjour-WebRTC/src/withAllLanguageTranslations/res\" -m --na --nc --nw",
     "translate":       "npm run translate:app && npm run translate:lib && npm run translate:prefs",
     "translate:debug": "npm run translate:app -- -o \"en\" --debug"
   }
