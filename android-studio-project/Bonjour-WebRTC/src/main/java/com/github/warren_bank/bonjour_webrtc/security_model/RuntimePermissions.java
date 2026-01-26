@@ -11,12 +11,14 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.provider.Settings;
 import java.util.ArrayList;
 
 public final class RuntimePermissions {
-    private static final int REQUEST_CODE_PERMISSIONS  = 0;
-    private static final int REQUEST_CODE_DRAWOVERLAYS = 1;
+    private static final int REQUEST_CODE_PERMISSIONS   = 0;
+    private static final int REQUEST_CODE_DRAWOVERLAYS  = 1;
+    private static final int REQUEST_CODE_MANAGESTORAGE = 2;
 
     private static final ArrayList<String> MANDATORY_PERMISSIONS;
 
@@ -27,6 +29,47 @@ public final class RuntimePermissions {
       MANDATORY_PERMISSIONS.add("android.permission.MODIFY_AUDIO_SETTINGS");
       MANDATORY_PERMISSIONS.add("android.permission.RECORD_AUDIO");
     }
+
+    // =============================================================================================
+
+    public static boolean hasMandatoryPermissions(Context context) {
+        for (String permission : MANDATORY_PERMISSIONS) {
+            if (context.checkCallingOrSelfPermission(permission) != PackageManager.PERMISSION_GRANTED)
+                return false;
+        }
+        return true;
+    }
+
+    // =============================================================================================
+
+    public static boolean isEnabled(Activity activity) {
+        return isEnabled(activity, /*skipMissingPermissions*/ false);
+    }
+
+    public static boolean isEnabled(Activity activity, boolean skipMissingPermissions) {
+        if (Build.VERSION.SDK_INT < 23)
+            return true;
+
+        final String[] missingPermissions = skipMissingPermissions
+            ? null
+            : getMissingPermissions(activity);
+
+        if ((missingPermissions != null) && (missingPermissions.length > 0)) {
+            activity.requestPermissions(missingPermissions, REQUEST_CODE_PERMISSIONS);
+            return false;
+        }
+        else if (SharedPrefs.getCallAlertEnabled(activity) && !canDrawOverlays(activity)) {
+            requestPermissionDrawOverlays(activity);
+            return false;
+        }
+        else if (!canManageExternalStorage()) {
+            requestPermissionManageExternalStorage(activity);
+            return false;
+        }
+        return true;
+    }
+
+    // =============================================================================================
 
     public static String[] getMissingPermissions(Activity activity) {
         if (Build.VERSION.SDK_INT < 23)
@@ -54,38 +97,50 @@ public final class RuntimePermissions {
         return missingPermissions.toArray(new String[missingPermissions.size()]);
     }
 
-    public static boolean isEnabled(Activity activity) {
+    // =============================================================================================
+
+    public static boolean canDrawOverlays(Context context) {
         if (Build.VERSION.SDK_INT < 23)
             return true;
 
-        final String[] missingPermissions = getMissingPermissions(activity);
-
-        if (missingPermissions.length > 0) {
-            activity.requestPermissions(missingPermissions, REQUEST_CODE_PERMISSIONS);
-            return false;
-        }
-        else {
-            if (!SharedPrefs.getCallAlertEnabled(activity) || canDrawOverlays(activity))
-                return true;
-
-            requestPermissionDrawOverlays(activity);
-            return false;
-        }
+        return Settings.canDrawOverlays(context);
     }
 
-    public static void onRequestPermissionsResult (RuntimePermissionsActivity activity, int requestCode, String[] permissions, int[] grantResults) {
+    public static void requestPermissionDrawOverlays(Activity activity) {
+        Intent permissionIntent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + activity.getPackageName()));
+        activity.startActivityForResult(permissionIntent, REQUEST_CODE_DRAWOVERLAYS);
+    }
+
+    // =============================================================================================
+
+    public static boolean canManageExternalStorage() {
+        if (Build.VERSION.SDK_INT < 30)
+            return true;
+
+        return Environment.isExternalStorageManager();
+    }
+
+    public static void requestPermissionManageExternalStorage(Activity activity) {
+        Intent permissionIntent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, Uri.parse("package:" + activity.getPackageName()));
+        activity.startActivityForResult(permissionIntent, REQUEST_CODE_MANAGESTORAGE);
+    }
+
+    // =============================================================================================
+
+    public static void onRequestPermissionsResult(RuntimePermissionsActivity activity, int requestCode, String[] permissions, int[] grantResults) {
         if (requestCode != REQUEST_CODE_PERMISSIONS)
             return;
+
+        boolean skipMissingPermissions;
 
         if (grantResults.length == 0) {
             if (permissions.length == 0) {
                 // no "dangerous" permissions are needed
-                onPermissionsGranted(activity);
+                skipMissingPermissions = true;
             }
             else {
                 // request was cancelled. show the prompts again.
-                if (isEnabled(activity))
-                    activity.onPermissionsGranted();
+                skipMissingPermissions = false;
             }
         }
         else {
@@ -102,57 +157,38 @@ public final class RuntimePermissions {
             }
 
             if (deniedPermissions.isEmpty()) {
-                onPermissionsGranted(activity);
+                skipMissingPermissions = true;
             }
             else {
                 activity.onPermissionsDenied(
                     deniedPermissions.toArray(new String[deniedPermissions.size()])
                 );
+                return;
             }
         }
-    }
 
-    // =============================================================================================
-
-    public static void onPermissionsGranted(RuntimePermissionsActivity activity) {
-        if (!SharedPrefs.getCallAlertEnabled(activity) || canDrawOverlays(activity))
+        if (isEnabled(activity, skipMissingPermissions))
             activity.onPermissionsGranted();
-        else
-            requestPermissionDrawOverlays(activity);
     }
 
     // =============================================================================================
-
-    public static boolean canDrawOverlays(Context context) {
-        if (Build.VERSION.SDK_INT < 23)
-            return true;
-
-        return Settings.canDrawOverlays(context);
-    }
-
-    public static void requestPermissionDrawOverlays(Activity activity) {
-        Intent permissionIntent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + activity.getPackageName()));
-        activity.startActivityForResult(permissionIntent, REQUEST_CODE_DRAWOVERLAYS);
-    }
 
     public static void onActivityResult(RuntimePermissionsActivity activity, int requestCode, int resultCode, Intent data) {
-        if (requestCode != REQUEST_CODE_DRAWOVERLAYS)
+        if ((requestCode != REQUEST_CODE_DRAWOVERLAYS) && (requestCode != REQUEST_CODE_MANAGESTORAGE))
             return;
 
-        if (canDrawOverlays(activity))
+        if (isEnabled(activity, /*skipMissingPermissions*/ true)) {
             activity.onPermissionsGranted();
-        else
-            activity.onPermissionsDenied(new String[]{"android.permission.SYSTEM_ALERT_WINDOW"});
-    }
-
-    // =============================================================================================
-
-    public static boolean hasMandatoryPermissions(Context context) {
-        for (String permission : MANDATORY_PERMISSIONS) {
-            if (context.checkCallingOrSelfPermission(permission) != PackageManager.PERMISSION_GRANTED)
-                return false;
+            return;
         }
-        return true;
-    }
 
+        switch(requestCode) {
+            case REQUEST_CODE_DRAWOVERLAYS :
+                activity.onPermissionsDenied(new String[]{"android.permission.SYSTEM_ALERT_WINDOW"});
+                break;
+            case REQUEST_CODE_MANAGESTORAGE :
+                activity.onPermissionsDenied(new String[]{"android.permission.MANAGE_EXTERNAL_STORAGE"});
+                break;
+        }
+    }
 }
