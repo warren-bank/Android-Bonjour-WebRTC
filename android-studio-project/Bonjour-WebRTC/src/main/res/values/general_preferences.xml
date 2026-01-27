@@ -2,23 +2,23 @@
 <resources>
     <string name="general_settings_name">General Settings</string>
 
-    <string translatable="false" name="pref_generalsettings_callalert_category_key">generalsettings_callalert_category</string>
+    <string translatable="false" name="pref_generalsettings_callalert_category_key">pref_generalsettings_callalert_category_key</string>
     <string name="pref_generalsettings_callalert_category_title">Inbound Calls.</string>
 
-    <string translatable="false" name="pref_generalsettings_callalert_enabled_key">generalsettings_callalert_enabled</string>
+    <string translatable="false" name="pref_generalsettings_callalert_enabled_key">pref_generalsettings_callalert_enabled_key</string>
     <string translatable="false" name="pref_generalsettings_callalert_enabled_default">true</string>
     <string name="pref_generalsettings_callalert_enabled_title">Show Alert.</string>
     <string name="pref_generalsettings_callalert_enabled_dlg">Enable alert dialog with options to accept or reject inbound calls.</string>
 
-    <string translatable="false" name="pref_generalsettings_callalert_timeout_key">generalsettings_callalert_timeout</string>
+    <string translatable="false" name="pref_generalsettings_callalert_timeout_key">pref_generalsettings_callalert_timeout_key</string>
     <string translatable="false" name="pref_generalsettings_callalert_timeout_default">15</string>
     <string name="pref_generalsettings_callalert_timeout_title">Alert Timeout.</string>
     <string name="pref_generalsettings_callalert_timeout_dlg">Enter duration of alert timeout (in seconds).</string>
 
-    <string translatable="false" name="pref_generalsettings_socketserver_category_key">generalsettings_socketserver_category</string>
+    <string translatable="false" name="pref_generalsettings_socketserver_category_key">pref_generalsettings_socketserver_category_key</string>
     <string name="pref_generalsettings_socketserver_category_title">Local socket server.</string>
 
-    <string translatable="false" name="pref_generalsettings_socketserver_port_key">generalsettings_socketserver_port</string>
+    <string translatable="false" name="pref_generalsettings_socketserver_port_key">pref_generalsettings_socketserver_port_key</string>
     <string translatable="false" name="pref_generalsettings_socketserver_port_default">8888</string>
     <string name="pref_generalsettings_socketserver_port_title">Port Number.</string>
     <string name="pref_generalsettings_socketserver_port_dlg">Enter number of listening port (above 1024).</string>
