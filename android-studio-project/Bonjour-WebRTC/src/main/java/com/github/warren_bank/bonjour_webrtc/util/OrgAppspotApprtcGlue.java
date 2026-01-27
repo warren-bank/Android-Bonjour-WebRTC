@@ -35,7 +35,7 @@ public final class OrgAppspotApprtcGlue {
     private static String sharedPrefGetString(SharedPreferences sharedPreferences, Context context, int attributeId, String intentName, int defaultId, boolean useFromIntent, Intent intent) {
         String defaultValue = context.getString(defaultId);
 
-        if (useFromIntent) {
+        if (useFromIntent && (intent != null)) {
             String value = intent.getStringExtra(intentName);
             return (value != null)
               ? value
@@ -50,7 +50,7 @@ public final class OrgAppspotApprtcGlue {
     private static boolean sharedPrefGetBoolean(SharedPreferences sharedPreferences, Context context, int attributeId, String intentName, int defaultId, boolean useFromIntent, Intent intent) {
         boolean defaultValue = Boolean.parseBoolean(context.getString(defaultId));
 
-        return (useFromIntent)
+        return (useFromIntent && (intent != null))
           ? intent.getBooleanExtra(intentName, defaultValue)
           : SharedPrefs.getBoolean(sharedPreferences, context, attributeId, defaultValue)
         ;
@@ -60,7 +60,7 @@ public final class OrgAppspotApprtcGlue {
         String defaultStr = context.getString(defaultId);
         int    defaultInt = Integer.parseInt(defaultStr);
 
-        if (useFromIntent) {
+        if (useFromIntent && (intent != null)) {
             return intent.getIntExtra(intentName, defaultInt);
         }
         else {
@@ -81,6 +81,10 @@ public final class OrgAppspotApprtcGlue {
     }
 
     public static Intent getCallActivityIntent(Context context, String roomId, boolean loopback, boolean commandLineRun, int runTimeMs, boolean useValuesFromIntent, Intent intentIn) {
+        if (useValuesFromIntent && (intentIn == null)) {
+            useValuesFromIntent = false;
+        }
+
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
         // roomId is random for loopback.
@@ -287,27 +291,27 @@ public final class OrgAppspotApprtcGlue {
         }
 
         if (useValuesFromIntent) {
-            if (intentOut.hasExtra(CallActivity.EXTRA_VIDEO_FILE_AS_CAMERA)) {
+            if (intentIn.hasExtra(CallActivity.EXTRA_VIDEO_FILE_AS_CAMERA)) {
                 String videoFileAsCamera =
-                        intentOut.getStringExtra(CallActivity.EXTRA_VIDEO_FILE_AS_CAMERA);
+                        intentIn.getStringExtra(CallActivity.EXTRA_VIDEO_FILE_AS_CAMERA);
                 intentOut.putExtra(CallActivity.EXTRA_VIDEO_FILE_AS_CAMERA, videoFileAsCamera);
             }
 
-            if (intentOut.hasExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE)) {
+            if (intentIn.hasExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE)) {
                 String saveRemoteVideoToFile =
-                        intentOut.getStringExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE);
+                        intentIn.getStringExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE);
                 intentOut.putExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE, saveRemoteVideoToFile);
             }
 
-            if (intentOut.hasExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_WIDTH)) {
+            if (intentIn.hasExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_WIDTH)) {
                 int videoOutWidth =
-                        intentOut.getIntExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_WIDTH, 0);
+                        intentIn.getIntExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_WIDTH, 0);
                 intentOut.putExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_WIDTH, videoOutWidth);
             }
 
-            if (intentOut.hasExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_HEIGHT)) {
+            if (intentIn.hasExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_HEIGHT)) {
                 int videoOutHeight =
-                        intentOut.getIntExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_HEIGHT, 0);
+                        intentIn.getIntExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_HEIGHT, 0);
                 intentOut.putExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_HEIGHT, videoOutHeight);
             }
         }
