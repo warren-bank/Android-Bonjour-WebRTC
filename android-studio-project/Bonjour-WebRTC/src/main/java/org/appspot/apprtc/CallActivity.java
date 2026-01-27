@@ -250,16 +250,18 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
     String saveRemoteVideoToFile = intent.getStringExtra(EXTRA_SAVE_REMOTE_VIDEO_TO_FILE);
 
     // When saveRemoteVideoToFile is set we save the video from the remote to a file.
-    if (saveRemoteVideoToFile != null) {
+    if ((saveRemoteVideoToFile != null) && !saveRemoteVideoToFile.isEmpty()) {
       int videoOutWidth = intent.getIntExtra(EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_WIDTH, 0);
       int videoOutHeight = intent.getIntExtra(EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_HEIGHT, 0);
-      try {
-        videoFileRenderer = new VideoFileRenderer(
-            saveRemoteVideoToFile, videoOutWidth, videoOutHeight, eglBase.getEglBaseContext());
-        remoteSinks.add(videoFileRenderer);
-      } catch (IOException e) {
-        throw new RuntimeException(
-            "Failed to open video file for output: " + saveRemoteVideoToFile, e);
+      if ((videoOutWidth > 0) && (videoOutHeight > 0) && ((videoOutWidth % 2) == 0) && ((videoOutHeight % 2) == 0)) {
+        try {
+          videoFileRenderer = new VideoFileRenderer(
+              saveRemoteVideoToFile, videoOutWidth, videoOutHeight, eglBase.getEglBaseContext());
+          remoteSinks.add(videoFileRenderer);
+        } catch (IOException e) {
+          throw new RuntimeException(
+              "Failed to open video file for output: " + saveRemoteVideoToFile, e);
+        }
       }
     }
     fullscreenRenderer.init(eglBase.getEglBaseContext(), null);

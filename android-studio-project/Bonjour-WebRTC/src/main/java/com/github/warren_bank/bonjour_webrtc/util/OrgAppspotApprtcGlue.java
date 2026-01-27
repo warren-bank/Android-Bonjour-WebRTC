@@ -16,6 +16,7 @@ import org.webrtc.PeerConnectionFactory;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
@@ -331,19 +332,36 @@ public final class OrgAppspotApprtcGlue {
         }
 
         if (saveRemoteVideoToFile && !intentOut.hasExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE)) {
-            // Example: "/sdcard/Bonjour-WebRTC/remote-video/19991231235959.mp4"
+            // Format:  YUV4 MPEG2
+            // Example: "/sdcard/Bonjour-WebRTC/remote-video/19991231235959.y4m"
             final File outputFile = new File(
                 getOutputVideoDirectory(),
-                ExternalStorageUtils.getOutputFilename() + ".mp4"
+                ExternalStorageUtils.getOutputFilename() + ".y4m"
             );
             intentOut.putExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE, outputFile.getAbsolutePath());
 
-            if (!intentOut.hasExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_WIDTH) && (videoWidth > 0) && ((videoWidth % 2) == 0)) {
-                intentOut.putExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_WIDTH, videoWidth);
+            int videoOutWidth  = videoWidth;
+            int videoOutHeight = videoHeight;
+
+            if ((videoOutWidth <= 0) || (videoOutHeight <= 0) || ((videoOutWidth % 2) == 1) || ((videoOutHeight % 2) == 1)) {
+              DisplayMetrics displayMetrics = getDisplayMetrics(context);
+              videoOutWidth  = displayMetrics.widthPixels;
+              videoOutHeight = displayMetrics.heightPixels;
             }
 
-            if (!intentOut.hasExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_HEIGHT) && (videoHeight > 0) && ((videoHeight % 2) == 0)) {
-                intentOut.putExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_HEIGHT, videoHeight);
+            if ((videoOutWidth <= 0) || (videoOutHeight <= 0) || ((videoOutWidth % 2) == 1) || ((videoOutHeight % 2) == 1)) {
+              // fallback
+              Resources res  = context.getResources();
+              videoOutWidth  = res.getInteger(R.integer.default_video_file_width_px);
+              videoOutHeight = res.getInteger(R.integer.default_video_file_height_px);
+            }
+
+            if (!intentOut.hasExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_WIDTH) && (videoOutWidth > 0) && ((videoOutWidth % 2) == 0)) {
+                intentOut.putExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_WIDTH, videoOutWidth);
+            }
+
+            if (!intentOut.hasExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_HEIGHT) && (videoOutHeight > 0) && ((videoOutHeight % 2) == 0)) {
+                intentOut.putExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_HEIGHT, videoOutHeight);
             }
         }
 
@@ -367,7 +385,7 @@ public final class OrgAppspotApprtcGlue {
         int videoHeight  = intent.getIntExtra(CallActivity.EXTRA_VIDEO_HEIGHT, 0);
 
         boolean screencaptureEnabled = intent.getBooleanExtra(CallActivity.EXTRA_SCREENCAPTURE, false);
-        if (screencaptureEnabled && (videoWidth == 0) && (videoHeight == 0)) {
+        if (screencaptureEnabled && ((videoWidth <= 0) || (videoHeight <= 0))) {
           DisplayMetrics displayMetrics = getDisplayMetrics(context);
           videoWidth = displayMetrics.widthPixels;
           videoHeight = displayMetrics.heightPixels;
@@ -421,8 +439,8 @@ public final class OrgAppspotApprtcGlue {
 
     private static DisplayMetrics getDisplayMetrics(Context context) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
-        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        windowManager.getDefaultDisplay().getRealMetrics(displayMetrics);
+        WindowManager windowManager = (WindowManager) context.getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
         return displayMetrics;
     }
 
