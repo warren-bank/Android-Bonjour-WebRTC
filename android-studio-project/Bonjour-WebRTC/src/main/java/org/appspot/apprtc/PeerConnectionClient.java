@@ -11,7 +11,6 @@
 package org.appspot.apprtc;
 
 import android.content.Context;
-import android.os.Environment;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
 import androidx.annotation.Nullable;
@@ -36,6 +35,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.appspot.apprtc.AppRTCClient.SignalingParameters;
 import org.appspot.apprtc.RecordedAudioToFileController;
+import org.appspot.apprtc.util.ExternalStorageUtils;
 import org.webrtc.AddIceObserver;
 import org.webrtc.AudioSource;
 import org.webrtc.AudioTrack;
@@ -390,13 +390,45 @@ public class PeerConnectionClient {
     return peerConnectionParameters.videoCallEnabled && videoCapturer != null;
   }
 
+  private File getOutputTraceDirectory() {
+    File dir = new File(
+      ExternalStorageUtils.getOutputBaseDirectory(),
+      "webrtc-trace"
+    );
+
+    return ExternalStorageUtils.initDirectory(dir);
+  }
+
+  private File getOutputAecDumpDirectory() {
+    // diagnostic audio recordings:
+    //   * data format is an encoded protobuf
+    //   * "unpack_aecdump" utility unpacks each data file in this format to produce the following audio files:
+    //       - "reverse.pcm"
+    //         the received audio from the network, bound for rendering.
+    //       - "input.pcm"
+    //         the captured audio, before audio processing.
+    //       - "ref_out.pcm"
+    //         the captured audio, after audio processing, bound for the network.
+    File dir = new File(
+      ExternalStorageUtils.getOutputBaseDirectory(),
+      "aec-dump"
+    );
+
+    return ExternalStorageUtils.initDirectory(dir);
+  }
+
   private void createPeerConnectionFactoryInternal(PeerConnectionFactory.Options options) {
     isError = false;
 
     if (peerConnectionParameters.tracing) {
+      // Example: "/sdcard/Bonjour-WebRTC/webrtc-trace/19991231235959.txt"
+      final File outputFile = new File(
+        getOutputTraceDirectory(),
+        ExternalStorageUtils.getOutputFilename() + ".txt"
+      );
       PeerConnectionFactory.startInternalTracingCapture(
-          Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
-          + "webrtc-trace.txt");
+        outputFile.getAbsolutePath()
+      );
     }
 
     // Check if ISAC is used by default.
@@ -611,11 +643,15 @@ public class PeerConnectionClient {
 
     if (peerConnectionParameters.aecDump) {
       try {
-        ParcelFileDescriptor aecDumpFileDescriptor =
-            ParcelFileDescriptor.open(new File(Environment.getExternalStorageDirectory().getPath()
-                                          + File.separator + "Download/audio.aecdump"),
-                ParcelFileDescriptor.MODE_READ_WRITE | ParcelFileDescriptor.MODE_CREATE
-                    | ParcelFileDescriptor.MODE_TRUNCATE);
+        // Example: "/sdcard/Bonjour-WebRTC/aec-dump/19991231235959_audio.aecdump"
+        final File outputFile = new File(
+          getOutputAecDumpDirectory(),
+          ExternalStorageUtils.getOutputFilename() + "_audio.aecdump"
+        );
+        ParcelFileDescriptor aecDumpFileDescriptor = ParcelFileDescriptor.open(
+          outputFile,
+          ParcelFileDescriptor.MODE_READ_WRITE | ParcelFileDescriptor.MODE_CREATE | ParcelFileDescriptor.MODE_TRUNCATE
+        );
         factory.startAecDump(aecDumpFileDescriptor.detachFd(), -1);
       } catch (IOException e) {
         Log.e(TAG, "Can not open aecdump file", e);

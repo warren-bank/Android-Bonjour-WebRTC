@@ -11,7 +11,6 @@
 package org.appspot.apprtc;
 
 import android.media.AudioFormat;
-import android.os.Environment;
 import android.util.Log;
 import androidx.annotation.Nullable;
 import java.io.File;
@@ -20,6 +19,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.concurrent.ExecutorService;
+import org.appspot.apprtc.util.ExternalStorageUtils;
 import org.webrtc.audio.JavaAudioDeviceModule;
 import org.webrtc.audio.JavaAudioDeviceModule.SamplesReadyCallback;
 
@@ -48,7 +48,7 @@ public class RecordedAudioToFileController implements SamplesReadyCallback {
    */
   public boolean start() {
     Log.d(TAG, "start");
-    if (!isExternalStorageWritable()) {
+    if (!ExternalStorageUtils.isExternalStorageWritable()) {
       Log.e(TAG, "Writing to external media is not possible");
       return false;
     }
@@ -78,29 +78,29 @@ public class RecordedAudioToFileController implements SamplesReadyCallback {
     }
   }
 
-  // Checks if external storage is available for read and write.
-  private boolean isExternalStorageWritable() {
-    String state = Environment.getExternalStorageState();
-    if (Environment.MEDIA_MOUNTED.equals(state)) {
-      return true;
-    }
-    return false;
+  private File getOutputAudioDirectory() {
+    File dir = new File(
+      ExternalStorageUtils.getOutputBaseDirectory(),
+      "input-audio"
+    );
+
+    return ExternalStorageUtils.initDirectory(dir);
   }
 
   // Utilizes audio parameters to create a file name which contains sufficient
   // information so that the file can be played using an external file player.
-  // Example: /sdcard/recorded_audio_16bits_48000Hz_mono.pcm.
   private void openRawAudioOutputFile(int sampleRate, int channelCount) {
-    final String fileName = Environment.getExternalStorageDirectory().getPath() + File.separator
-        + "recorded_audio_16bits_" + String.valueOf(sampleRate) + "Hz"
-        + ((channelCount == 1) ? "_mono" : "_stereo") + ".pcm";
-    final File outputFile = new File(fileName);
+    // Example: "/sdcard/Bonjour-WebRTC/input-audio/19991231235959_16bits_48000Hz_mono.pcm"
+    final File outputFile = new File(
+      getOutputAudioDirectory(),
+      ExternalStorageUtils.getOutputFilename() + "_16bits_" + String.valueOf(sampleRate) + "Hz" + ((channelCount == 1) ? "_mono" : "_stereo") + ".pcm"
+    );
     try {
       rawAudioFileOutputStream = new FileOutputStream(outputFile);
     } catch (FileNotFoundException e) {
       Log.e(TAG, "Failed to open audio output file: " + e.getMessage());
     }
-    Log.d(TAG, "Opened file for recording: " + fileName);
+    Log.d(TAG, "Opened file for recording: " + outputFile.getAbsolutePath());
   }
 
   // Called when new audio samples are ready.
