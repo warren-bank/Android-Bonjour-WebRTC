@@ -8,6 +8,7 @@ import org.appspot.apprtc.PeerConnectionClient;
 import org.appspot.apprtc.PeerConnectionClient.DataChannelParameters;
 import org.appspot.apprtc.PeerConnectionClient.PeerConnectionEvents;
 import org.appspot.apprtc.PeerConnectionClient.PeerConnectionParameters;
+import org.appspot.apprtc.util.ExternalStorageUtils;
 
 import org.webrtc.EglBase;
 import org.webrtc.PeerConnectionFactory;
@@ -19,6 +20,7 @@ import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
+import java.io.File;
 import java.util.Random;
 
 public final class OrgAppspotApprtcGlue {
@@ -76,6 +78,15 @@ public final class OrgAppspotApprtcGlue {
         }
     }
 
+    private static File getOutputVideoDirectory() {
+        File dir = new File(
+            ExternalStorageUtils.getOutputBaseDirectory(),
+            "remote-video"
+        );
+
+        return ExternalStorageUtils.initDirectory(dir);
+    }
+
     public static Intent getCallActivityIntent(Context context, String serverIpAddress) {
         return getCallActivityIntent(context, serverIpAddress, false, false, 0, false, null);
     }
@@ -131,6 +142,9 @@ public final class OrgAppspotApprtcGlue {
 
         boolean saveInputAudioToFile = sharedPrefGetBoolean(sharedPreferences, context, R.string.pref_enable_save_input_audio_to_file_key,
                 CallActivity.EXTRA_SAVE_INPUT_AUDIO_TO_FILE_ENABLED, R.string.pref_enable_save_input_audio_to_file_default, useValuesFromIntent, intentIn);
+
+        boolean saveRemoteVideoToFile = sharedPrefGetBoolean(sharedPreferences, context, R.string.pref_enable_save_remote_video_to_file_key,
+                /*intentName*/ null, R.string.pref_enable_save_remote_video_to_file_default, /*useValuesFromIntent*/ false, /*intentIn*/ null);
 
         // Check OpenSL ES enabled flag.
         boolean useOpenSLES = sharedPrefGetBoolean(sharedPreferences, context, R.string.pref_opensles_key,
@@ -298,9 +312,9 @@ public final class OrgAppspotApprtcGlue {
             }
 
             if (intentIn.hasExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE)) {
-                String saveRemoteVideoToFile =
+                String saveRemoteVideoToFilePath =
                         intentIn.getStringExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE);
-                intentOut.putExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE, saveRemoteVideoToFile);
+                intentOut.putExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE, saveRemoteVideoToFilePath);
             }
 
             if (intentIn.hasExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_WIDTH)) {
@@ -313,6 +327,23 @@ public final class OrgAppspotApprtcGlue {
                 int videoOutHeight =
                         intentIn.getIntExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_HEIGHT, 0);
                 intentOut.putExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_HEIGHT, videoOutHeight);
+            }
+        }
+
+        if (saveRemoteVideoToFile && !intentOut.hasExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE)) {
+            // Example: "/sdcard/Bonjour-WebRTC/remote-video/19991231235959.mp4"
+            final File outputFile = new File(
+                getOutputVideoDirectory(),
+                ExternalStorageUtils.getOutputFilename() + ".mp4"
+            );
+            intentOut.putExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE, outputFile.getAbsolutePath());
+
+            if (!intentOut.hasExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_WIDTH) && (videoWidth > 0) && ((videoWidth % 2) == 0)) {
+                intentOut.putExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_WIDTH, videoWidth);
+            }
+
+            if (!intentOut.hasExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_HEIGHT) && (videoHeight > 0) && ((videoHeight % 2) == 0)) {
+                intentOut.putExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_HEIGHT, videoHeight);
             }
         }
 

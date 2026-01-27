@@ -390,7 +390,7 @@ public class PeerConnectionClient {
     return peerConnectionParameters.videoCallEnabled && videoCapturer != null;
   }
 
-  private File getOutputTraceDirectory() {
+  private static File getOutputTraceDirectory() {
     File dir = new File(
       ExternalStorageUtils.getOutputBaseDirectory(),
       "webrtc-trace"
@@ -399,7 +399,7 @@ public class PeerConnectionClient {
     return ExternalStorageUtils.initDirectory(dir);
   }
 
-  private File getOutputAecDumpDirectory() {
+  private static File getOutputAecDumpDirectory() {
     // diagnostic audio recordings:
     //   * data format is an encoded protobuf
     //   * "unpack_aecdump" utility unpacks each data file in this format to produce the following audio files:

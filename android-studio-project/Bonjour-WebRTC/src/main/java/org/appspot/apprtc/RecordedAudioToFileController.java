@@ -78,7 +78,7 @@ public class RecordedAudioToFileController implements SamplesReadyCallback {
     }
   }
 
-  private File getOutputAudioDirectory() {
+  private static File getOutputAudioDirectory() {
     File dir = new File(
       ExternalStorageUtils.getOutputBaseDirectory(),
       "input-audio"
