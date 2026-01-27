@@ -25,7 +25,7 @@ public final class ExternalStorageUtils {
     return initDirectory(dir);
   }
 
-  public static void initDirectory(File dir) {
+  public static File initDirectory(File dir) {
     if (dir.exists() && !dir.isDirectory())
       dir.delete();
 
