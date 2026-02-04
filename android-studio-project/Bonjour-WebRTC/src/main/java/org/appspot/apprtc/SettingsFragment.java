@@ -14,6 +14,9 @@ import com.github.warren_bank.bonjour_webrtc.R;
 
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 /**
  * Settings fragment for AppRTC.
@@ -24,5 +27,16 @@ public class SettingsFragment extends PreferenceFragment {
     super.onCreate(savedInstanceState);
     // Load the preferences from an XML resource
     addPreferencesFromResource(R.xml.org_appspot_apprtc_preferences);
+  }
+
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    View view = super.onCreateView(inflater, container, savedInstanceState);
+
+    // fix for Android 15+ edge-to-edge layout enforcement
+    if (view != null)
+      view.setFitsSystemWindows(true);
+
+    return view;
   }
 }
