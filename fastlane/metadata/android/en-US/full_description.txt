@@ -1,0 +1,1 @@
+<p><i>Bonjour WebRTC</i> allows device discovery on WLAN (w/ Bonjour) and video calls to be placed between devices on WLAN (w/ WebRTC) without any external server.</p>
