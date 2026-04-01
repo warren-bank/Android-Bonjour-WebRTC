@@ -23,7 +23,7 @@ android {
     archivesBaseName += "-$versionName"
   }
 
-  flavorDimensions "languageResources"
+  flavorDimensions "languageResources", "externalStorage"
 
   productFlavors {
     withAllLanguageTranslations {
@@ -32,6 +32,18 @@ android {
     english {
       dimension "languageResources"
     }
+    noExternalStorage {
+      dimension "externalStorage"
+      buildConfigField "boolean", "USE_EXTERNAL_STORAGE", "false"
+    }
+    withExternalStorage {
+      dimension "externalStorage"
+      buildConfigField "boolean", "USE_EXTERNAL_STORAGE", "true"
+    }
+  }
+
+  buildFeatures {
+    buildConfig true
   }
 
   buildTypes {
@@ -51,10 +63,6 @@ android {
       minifyEnabled   false
       shrinkResources false
     }
-  }
-
-  buildFeatures {
-    buildConfig false
   }
 
   splits {

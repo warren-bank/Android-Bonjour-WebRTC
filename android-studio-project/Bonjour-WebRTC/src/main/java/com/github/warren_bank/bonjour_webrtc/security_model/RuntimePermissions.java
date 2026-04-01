@@ -1,5 +1,6 @@
 package com.github.warren_bank.bonjour_webrtc.security_model;
 
+import com.github.warren_bank.bonjour_webrtc.BuildConfig;
 import com.github.warren_bank.bonjour_webrtc.R;
 import com.github.warren_bank.bonjour_webrtc.data_model.SharedPrefs;
 import com.github.warren_bank.bonjour_webrtc.ui.RuntimePermissionsActivity;
@@ -41,6 +42,9 @@ public final class RuntimePermissions {
     }
 
     public static boolean hasWriteExternalStoragePermissions(Context context) {
+        if (!BuildConfig.USE_EXTERNAL_STORAGE)
+            return false;
+
         return (Build.VERSION.SDK_INT < 30)
             ? (context.checkCallingOrSelfPermission("android.permission.WRITE_EXTERNAL_STORAGE") == PackageManager.PERMISSION_GRANTED)
             : canManageExternalStorage();
@@ -59,6 +63,9 @@ public final class RuntimePermissions {
     public static boolean isEnabled(Activity activity, boolean skipMissingPermissions, boolean skipDrawOverlays, boolean skipManageExternalStorage) {
         if (Build.VERSION.SDK_INT < 23)
             return true;
+
+        if (!BuildConfig.USE_EXTERNAL_STORAGE)
+            skipManageExternalStorage = true;
 
         final String[] missingPermissions = skipMissingPermissions
             ? null
