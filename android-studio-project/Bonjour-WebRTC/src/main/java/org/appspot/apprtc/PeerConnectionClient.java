@@ -110,7 +110,6 @@ public class PeerConnectionClient {
   private static final int HD_VIDEO_WIDTH = 1280;
   private static final int HD_VIDEO_HEIGHT = 720;
   private static final int BPS_IN_KBPS = 1000;
-  private static final String RTCEVENTLOG_OUTPUT_DIR_NAME = "rtc_event_log";
 
   // Executor thread is started once in private ctor and is used for all
   // peer connection API calls to ensure new peer connection factory is
@@ -417,6 +416,15 @@ public class PeerConnectionClient {
     return ExternalStorageUtils.initDirectory(dir);
   }
 
+  private static File getOutputRtcEventLogDirectory() {
+    File dir = new File(
+      ExternalStorageUtils.getOutputBaseDirectory(),
+      "rtc-event-log"
+    );
+
+    return ExternalStorageUtils.initDirectory(dir);
+  }
+
   private void createPeerConnectionFactoryInternal(PeerConnectionFactory.Options options) {
     isError = false;
 
@@ -666,14 +674,6 @@ public class PeerConnectionClient {
     Log.d(TAG, "Peer connection created.");
   }
 
-  private File createRtcEventLogOutputFile() {
-    DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_hhmm_ss", Locale.getDefault());
-    Date date = new Date();
-    final String outputFileName = "event_log_" + dateFormat.format(date) + ".log";
-    return new File(
-        appContext.getDir(RTCEVENTLOG_OUTPUT_DIR_NAME, Context.MODE_PRIVATE), outputFileName);
-  }
-
   private void maybeCreateAndStartRtcEventLog() {
     if (appContext == null || peerConnection == null) {
       return;
@@ -682,8 +682,13 @@ public class PeerConnectionClient {
       Log.d(TAG, "RtcEventLog is disabled.");
       return;
     }
+    // Example: "/sdcard/Bonjour-WebRTC/rtc-event-log/19991231235959.log"
+    final File outputFile = new File(
+        getOutputRtcEventLogDirectory(),
+        ExternalStorageUtils.getOutputFilename() + ".log"
+    );
     rtcEventLog = new RtcEventLog(peerConnection);
-    rtcEventLog.start(createRtcEventLogOutputFile());
+    rtcEventLog.start(outputFile);
   }
 
   private void closeInternal() {

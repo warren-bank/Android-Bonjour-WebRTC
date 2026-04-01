@@ -2,6 +2,7 @@ package com.github.warren_bank.bonjour_webrtc.util;
 
 import com.github.warren_bank.bonjour_webrtc.R;
 import com.github.warren_bank.bonjour_webrtc.data_model.SharedPrefs;
+import com.github.warren_bank.bonjour_webrtc.security_model.RuntimePermissions;
 
 import org.appspot.apprtc.CallActivity;
 import org.appspot.apprtc.PeerConnectionClient;
@@ -96,6 +97,8 @@ public final class OrgAppspotApprtcGlue {
         if (useValuesFromIntent && (intentIn == null)) {
             useValuesFromIntent = false;
         }
+
+        boolean canWriteToExternalStorage = ExternalStorageUtils.isExternalStorageWritable() && RuntimePermissions.hasWriteExternalStoragePermissions(context);
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
@@ -264,6 +267,15 @@ public final class OrgAppspotApprtcGlue {
         String protocol = sharedPrefGetString(sharedPreferences, context, R.string.pref_data_protocol_key,
                 CallActivity.EXTRA_PROTOCOL, R.string.pref_data_protocol_default, useValuesFromIntent, intentIn);
 
+        // Disable features that require filesystem output when write permission is not granted
+        if (!canWriteToExternalStorage) {
+            aecDump               = false;
+            saveInputAudioToFile  = false;
+            saveRemoteVideoToFile = false;
+            tracing               = false;
+            rtcEventLogEnabled    = false;
+        }
+
         Intent intentOut = new Intent(context, CallActivity.class);
         intentOut.putExtra(CallActivity.EXTRA_ROOMID, roomId);
         intentOut.putExtra(CallActivity.EXTRA_LOOPBACK, loopback);
@@ -312,22 +324,25 @@ public final class OrgAppspotApprtcGlue {
                 intentOut.putExtra(CallActivity.EXTRA_VIDEO_FILE_AS_CAMERA, videoFileAsCamera);
             }
 
-            if (intentIn.hasExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE)) {
-                String saveRemoteVideoToFilePath =
-                        intentIn.getStringExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE);
-                intentOut.putExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE, saveRemoteVideoToFilePath);
-            }
+            // Disable features that require filesystem output when write permission is not granted
+            if (canWriteToExternalStorage) {
+                if (intentIn.hasExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE)) {
+                    String saveRemoteVideoToFilePath =
+                            intentIn.getStringExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE);
+                    intentOut.putExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE, saveRemoteVideoToFilePath);
+                }
 
-            if (intentIn.hasExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_WIDTH)) {
-                int videoOutWidth =
-                        intentIn.getIntExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_WIDTH, 0);
-                intentOut.putExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_WIDTH, videoOutWidth);
-            }
+                if (intentIn.hasExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_WIDTH)) {
+                    int videoOutWidth =
+                            intentIn.getIntExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_WIDTH, 0);
+                    intentOut.putExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_WIDTH, videoOutWidth);
+                }
 
-            if (intentIn.hasExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_HEIGHT)) {
-                int videoOutHeight =
-                        intentIn.getIntExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_HEIGHT, 0);
-                intentOut.putExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_HEIGHT, videoOutHeight);
+                if (intentIn.hasExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_HEIGHT)) {
+                    int videoOutHeight =
+                            intentIn.getIntExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_HEIGHT, 0);
+                    intentOut.putExtra(CallActivity.EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_HEIGHT, videoOutHeight);
+                }
             }
         }
 

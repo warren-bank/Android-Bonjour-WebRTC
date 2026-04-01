@@ -40,6 +40,12 @@ public final class RuntimePermissions {
         return true;
     }
 
+    public static boolean hasWriteExternalStoragePermissions(Context context) {
+        return (Build.VERSION.SDK_INT < 30)
+            ? (context.checkCallingOrSelfPermission("android.permission.WRITE_EXTERNAL_STORAGE") == PackageManager.PERMISSION_GRANTED)
+            : canManageExternalStorage();
+    }
+
     // =============================================================================================
 
     public static boolean isEnabled(Activity activity) {
@@ -47,6 +53,10 @@ public final class RuntimePermissions {
     }
 
     public static boolean isEnabled(Activity activity, boolean skipMissingPermissions) {
+        return isEnabled(activity, skipMissingPermissions, /*skipDrawOverlays*/ false, /*skipManageExternalStorage*/ false);
+    }
+
+    public static boolean isEnabled(Activity activity, boolean skipMissingPermissions, boolean skipDrawOverlays, boolean skipManageExternalStorage) {
         if (Build.VERSION.SDK_INT < 23)
             return true;
 
@@ -58,11 +68,11 @@ public final class RuntimePermissions {
             activity.requestPermissions(missingPermissions, REQUEST_CODE_PERMISSIONS);
             return false;
         }
-        else if (SharedPrefs.getCallAlertEnabled(activity) && !canDrawOverlays(activity)) {
+        else if (!skipDrawOverlays && SharedPrefs.getCallAlertEnabled(activity) && !canDrawOverlays(activity)) {
             requestPermissionDrawOverlays(activity);
             return false;
         }
-        else if (!canManageExternalStorage()) {
+        else if (!skipManageExternalStorage && !canManageExternalStorage()) {
             requestPermissionManageExternalStorage(activity);
             return false;
         }
@@ -177,7 +187,7 @@ public final class RuntimePermissions {
         if ((requestCode != REQUEST_CODE_DRAWOVERLAYS) && (requestCode != REQUEST_CODE_MANAGESTORAGE))
             return;
 
-        if (isEnabled(activity, /*skipMissingPermissions*/ true)) {
+        if (isEnabled(activity, /*skipMissingPermissions*/ true, /*skipDrawOverlays*/ false, /*skipManageExternalStorage*/ true)) {
             activity.onPermissionsGranted();
             return;
         }
