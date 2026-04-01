@@ -1,5 +1,6 @@
 package com.github.warren_bank.bonjour_webrtc.ui;
 
+import com.github.warren_bank.bonjour_webrtc.BuildConfig;
 import com.github.warren_bank.bonjour_webrtc.R;
 import com.github.warren_bank.bonjour_webrtc.data_model.ServerListItem;
 import com.github.warren_bank.bonjour_webrtc.data_model.SharedPrefs;
@@ -357,6 +358,7 @@ public class MainActivity extends RuntimePermissionsActivity {
                         // WebRTC
                         dialog.dismiss();
                         intent = new Intent(MainActivity.this, SettingsActivity.class);
+                        intent.putExtra(SettingsActivity.EXTRA_USE_EXTERNAL_STORAGE, BuildConfig.USE_EXTERNAL_STORAGE);
                         startActivity(intent);
                         break;
                     default:

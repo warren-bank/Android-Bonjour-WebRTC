@@ -13,6 +13,7 @@ package org.appspot.apprtc;
 import com.github.warren_bank.bonjour_webrtc.R;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
@@ -25,6 +26,8 @@ import org.webrtc.audio.JavaAudioDeviceModule;
  * Settings activity for AppRTC.
  */
 public class SettingsActivity extends Activity implements OnSharedPreferenceChangeListener {
+  public static final String EXTRA_USE_EXTERNAL_STORAGE = "org.appspot.apprtc.USE_EXTERNAL_STORAGE";
+
   private SettingsFragment settingsFragment;
   private String keyprefVideoCall;
   private String keyprefScreencapture;
@@ -192,6 +195,8 @@ public class SettingsActivity extends Activity implements OnSharedPreferenceChan
       disableBuiltInNSPreference.setSummary(getString(R.string.pref_built_in_ns_not_available));
       disableBuiltInNSPreference.setEnabled(false);
     }
+
+    setExternalStorageEnable();
   }
 
   @Override
@@ -314,5 +319,21 @@ public class SettingsActivity extends Activity implements OnSharedPreferenceChan
     settingsFragment.findPreference(keyprefDataProtocol).setEnabled(enabled);
     settingsFragment.findPreference(keyprefNegotiated).setEnabled(enabled);
     settingsFragment.findPreference(keyprefDataId).setEnabled(enabled);
+  }
+
+  private void setExternalStorageEnable() {
+    Intent intent = getIntent();
+    boolean USE_EXTERNAL_STORAGE = intent.getBooleanExtra(EXTRA_USE_EXTERNAL_STORAGE, true);
+    String[] keyprefs = {
+      keyprefAecDump,
+      keyprefEnableSaveInputAudioToFile,
+      keyprefEnableSaveRemoteVideoToFile,
+      keyPrefTracing,
+      keyprefEnabledRtcEventLog
+    };
+
+    for (String keypref: keyprefs) {
+      settingsFragment.findPreference(keypref).setEnabled(USE_EXTERNAL_STORAGE);
+    }
   }
 }
