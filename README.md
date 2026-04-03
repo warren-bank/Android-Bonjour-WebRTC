@@ -11,6 +11,13 @@ Android app that allows device discovery on WLAN (w/ Bonjour) and video calls to
 ![Bonjour-WebRTC](./screenshots/5-mainactivity-bonjour-discovery-list.png)
 ![Bonjour-WebRTC](./screenshots/6-callactivity.png)
 
+#### Download
+
+[<img alt="Get it on IzzyOnDroid" height="80" src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png">](https://apt.izzysoft.de/fdroid/index/apk/com.amaze.filemanager)
+
+[<img alt="Get it on GitHub" height="80" src="https://i.ibb.co/q0mdc4Z/get-it-on-github.png">](https://github.com/warren-bank/Android-Bonjour-WebRTC/releases/latest)
+
+
 #### Notes
 
 * minimum supported version of Android:
